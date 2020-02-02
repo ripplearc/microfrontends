@@ -1,2 +1,6 @@
-include ':app'
-rootProject.name='GroundVisual'
+include ':app', 'common-features'
+rootProject.name = 'GroundVisual'
+
+
+// Libraries
+project(':common-features').projectDir = file('libraries/common-features')
