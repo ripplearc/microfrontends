@@ -1,0 +1,35 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+
+	defaultConfig {
+		consumerProguardFiles 'consumer-rules.pro'
+	}
+
+	buildTypes {
+		release {
+			minifyEnabled true
+			proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+		}
+	}
+
+}
+
+deps[project.name] = [
+	implementation: [
+		deps.androidx.appCompat,
+		deps.androidx.layout
+	],
+
+	api           : [
+		deps.google.dagger,
+		project(':common-features')
+	],
+
+	kapt          : [
+		deps.google.daggerProcessor
+	]
+]
