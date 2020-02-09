@@ -7,9 +7,8 @@ import dagger.Provides
 
 @Module
 object FeaturesModule {
-	@Provides
-	@JvmStatic
-	fun provideIotTestFeature(applicationCompoent: ApplicationComponent): IotTestFeature? {
+	@[Provides JvmStatic]
+	fun provideFeatureManager(): IotTestFeature? {
 		return null
 	}
 }

@@ -9,7 +9,7 @@ import dagger.Component
 import dagger.Module
 import dagger.Provides
 import dagger.multibindings.IntoMap
-import dagger.multibindings.IntoSet
+import dagger.multibindings.StringKey
 
 //@IotRosterScope
 @Component(
@@ -31,12 +31,12 @@ interface IotRosterComponent {
 
 @Module
 object IotRosterModule {
-    @[Provides JvmStatic IntoSet]
+    @[Provides JvmStatic IntoMap StringKey("foo")]
     fun provideOneString(): String {
         return "XYZ"
     }
 
-    @[Provides IntoMap FeatureProviderKey(IotRosterFeature::class)]
+    @[Provides JvmStatic IntoMap FeatureProviderKey(IotRosterFeature::class)]
     fun provideIotRosterFeatureProvider(): FeatureProvider<*> {
         return IotRosterFeatureImpl
     }

@@ -1,5 +1,10 @@
 package com.ripplearc.heavy.common_core.model
 
-interface FeatureProvider<D: Dependencies> {
+import javax.inject.Provider
+
+interface FeatureProvider<D : Dependencies> {
     fun get(dependencies: D): Feature<D>
 }
+
+typealias FeatureProviderMap =
+        Map<Class<out Feature<*>>, Provider<FeatureProvider<*>>>
