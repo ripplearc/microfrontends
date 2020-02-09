@@ -1,11 +1,7 @@
 package com.ripplearc.heavy.common_features
 
-import android.content.Context
+import com.ripplearc.heavy.common_core.model.Feature
 
-interface IotTestFeature: Feature {
-	fun fetchStatus()
-
-	interface Dependenceis {
-		val applicationContext: Context
-	}
+interface IotTestFeature : Feature<IotTestFeature.Dependencies> {
+	interface Dependencies : CommonDependencies
 }

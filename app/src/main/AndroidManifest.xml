@@ -3,6 +3,7 @@
 	package="com.ripplearc.heavy.groundvisual">
 
 	<application
+		android:name=".GroundVisualApplication"
 		android:allowBackup="true"
 		android:icon="@mipmap/ic_launcher"
 		android:label="@string/app_name"

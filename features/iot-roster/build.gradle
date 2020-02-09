@@ -15,18 +15,18 @@ android {
 			proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
 		}
 	}
-
 }
 
 deps[project.name] = [
 	implementation: [
 		deps.androidx.appCompat,
-		deps.androidx.layout
+		deps.androidx.layout,
+		project(':common-features'),
+		project(':common-core')
 	],
 
 	api           : [
-		deps.google.dagger,
-		project(':common-features')
+		deps.google.dagger
 	],
 
 	kapt          : [
