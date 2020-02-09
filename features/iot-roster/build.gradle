@@ -5,31 +5,40 @@ apply plugin: 'kotlin-kapt'
 
 android {
 
-	defaultConfig {
-		consumerProguardFiles 'consumer-rules.pro'
-	}
+    defaultConfig {
+        consumerProguardFiles 'consumer-rules.pro'
+    }
 
-	buildTypes {
-		release {
-			minifyEnabled true
-			proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-		}
-	}
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
 }
 
 deps[project.name] = [
-	implementation: [
-		deps.androidx.appCompat,
-		deps.androidx.layout,
-		project(':common-features'),
-		project(':common-core')
-	],
+        implementation: [
+                deps.androidx.appCompat,
+                deps.androidx.layout,
+                deps.google.jetpack.lifecycle.common,
+                deps.google.jetpack.lifecycle.ext,
+                deps.google.jetpack.navigation.fragment,
+                project(':common-features'),
+                project(':common-core')
+        ],
 
-	api           : [
-		deps.google.dagger
-	],
+        api           : [
+                deps.google.dagger
+        ],
 
-	kapt          : [
-		deps.google.daggerProcessor
-	]
+        kapt          : [
+                deps.google.daggerProcessor
+        ]
 ]
+
+//dependencies {
+//    implementation 'androidx.legacy:legacy-support-v4:+'
+//    implementation 'androidx.lifecycle:lifecycle-extensions:+'
+//    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:1.+'
+//}
