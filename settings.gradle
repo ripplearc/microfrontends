@@ -1,4 +1,6 @@
-include ':app', ':iot-roster', ':common-core', 'common-features'
+include ':app',
+        ':common-core', 'common-features',
+        ':iot-roster', ':iot-test'
 rootProject.name = 'GroundVisual'
 
 
@@ -8,3 +10,4 @@ project(':common-core').projectDir = file('libraries/common-core')
 
 // Features
 project(':iot-roster').projectDir = file('features/iot-roster')
+project(':iot-test').projectDir = file('features/iot-test')

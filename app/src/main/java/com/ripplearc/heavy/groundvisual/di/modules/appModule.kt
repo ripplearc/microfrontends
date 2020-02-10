@@ -10,17 +10,8 @@ import dagger.multibindings.IntoSet
 
 @Module
 object AppModule {
-    @Provides
-    @ApplicationScope
-    @JvmStatic
+    @[Provides ApplicationScope JvmStatic]
     fun provideContext(application: GroundVisualApplication): Context = application
-
-    @Provides
-    @JvmStatic
-    @IntoSet
-    fun provideOneString(): String {
-        return "ABC"
-    }
 }
 
 

@@ -3,12 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.RosterSpinnerFragment">
+    tools:context=".ui.RequestFragment">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@android:color/holo_blue_light"
-        android:text="Load Roster From Feature Module" />
+        android:height="270dp"
+        android:background="@android:color/holo_green_light"
+        android:text="Request Text" />
 
 </FrameLayout>
