@@ -13,6 +13,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+
+    dynamicFeatures = [":iot_histogram_dynamic"]
+
+
 }
 
 deps[project.name] = [

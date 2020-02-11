@@ -21,3 +21,5 @@ gradle/wrapper/gradle-wrapper.jar
 .idea/misc.xml
 .idea/runConfigurations.xml
 .idea/vcs.xml
+app/release/app-release.apk
+app/release/output.json
