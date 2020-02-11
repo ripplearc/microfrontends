@@ -1,12 +1,14 @@
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 android {
+
     defaultConfig {
-        applicationId "com.ripplearc.heavy.groundvisual"
+        consumerProguardFiles 'consumer-rules.pro'
     }
+
     buildTypes {
         release {
             minifyEnabled true
@@ -19,15 +21,15 @@ deps[project.name] = [
         implementation: [
                 deps.androidx.appCompat,
                 deps.androidx.layout,
-                project(':iot-roster'),
-                project(':iot-test'),
-                project(':common-core'),
-                project(':common-features')
+                deps.google.jetpack.lifecycle.common,
+                deps.google.jetpack.lifecycle.ext,
+                deps.google.jetpack.navigation.fragment,
+                project(':common-features'),
+                project(':common-core')
         ],
 
         api           : [
-                deps.google.dagger,
-                project(':common-features')
+                deps.google.dagger
         ],
 
         kapt          : [

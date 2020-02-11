@@ -1,33 +1,29 @@
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 android {
     defaultConfig {
-        applicationId "com.ripplearc.heavy.groundvisual"
+        consumerProguardFiles 'consumer-rules.pro'
     }
+
     buildTypes {
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
 }
 
 deps[project.name] = [
         implementation: [
                 deps.androidx.appCompat,
-                deps.androidx.layout,
-                project(':iot-roster'),
-                project(':iot-test'),
-                project(':common-core'),
-                project(':common-features')
         ],
 
         api           : [
                 deps.google.dagger,
-                project(':common-features')
         ],
 
         kapt          : [
