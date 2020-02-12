@@ -24,14 +24,13 @@ deps[project.name] = [
         implementation: [
                 deps.androidx.appCompat,
                 deps.androidx.layout,
+                deps.google.dagger,
                 project(':iot-roster'),
                 project(':iot-test'),
-                project(':common-core'),
-                project(':common-features')
         ],
 
         api           : [
-                deps.google.dagger,
+                project(':common-core'),
                 project(':common-features')
         ],
 

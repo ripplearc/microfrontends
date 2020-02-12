@@ -23,3 +23,4 @@ gradle/wrapper/gradle-wrapper.jar
 .idea/vcs.xml
 app/release/app-release.apk
 app/release/output.json
+app/release/app-release.aab

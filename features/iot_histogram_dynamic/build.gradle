@@ -3,11 +3,18 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
-android {
+deps[project.name] = [
+	implementation: [
+		deps.androidx.appCompat,
+		deps.androidx.layout,
+		deps.google.jetpack.lifecycle.common,
+		deps.google.jetpack.lifecycle.ext,
+		deps.google.jetpack.navigation.fragment,
+		deps.google.dagger,
+		project(':app')
+	],
 
-}
-
-dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation project(':app')
-}
+	kapt          : [
+		deps.google.daggerProcessor
+	]
+]

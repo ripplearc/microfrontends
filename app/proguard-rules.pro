@@ -19,3 +19,11 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+-keep class com.ripplearc.heavy.iot_histogram_dynamic.feature.IotHistogramFeatureImpl {
+    com.ripplearc.heavy.iot_histogram_dynamic.feature.IotHistogramFeatureImpl$FeatureProvider Provider;
+}
+
+-keep class com.ripplearc.heavy.iot_histogram_dynamic.feature.IotHistogramFeatureImpl$FeatureProvider {
+    *;
+}
