@@ -3,13 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.RosterSpinnerFragment">
+    tools:context=".ui.IotHistogramFragment">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@android:color/holo_blue_light"
-        android:text="Static Feature - Roster"
+        android:background="@color/colorPrimaryDark"
+        android:height="45dp"
+        android:text="Dynamic Feature - Histogram"
         android:textColor="@android:color/white"/>
 
 </FrameLayout>

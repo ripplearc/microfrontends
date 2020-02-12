@@ -1,7 +1,7 @@
 package com.ripplearc.heavy.common_features
 
-import com.ripplearc.heavy.common_core.model.Feature
+import com.ripplearc.heavy.common_core.model.DynamicFeature
 
-interface IotHistogramFeature : Feature<IotHistogramFeature.Dependencies> {
+interface IotHistogramFeature : DynamicFeature<IotHistogramFeature.Dependencies> {
     interface Dependencies : CommonDependencies
 }

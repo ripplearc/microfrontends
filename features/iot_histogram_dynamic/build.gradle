@@ -4,17 +4,13 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 deps[project.name] = [
-	implementation: [
-		deps.androidx.appCompat,
-		deps.androidx.layout,
-		deps.google.jetpack.lifecycle.common,
-		deps.google.jetpack.lifecycle.ext,
-		deps.google.jetpack.navigation.fragment,
-		deps.google.dagger,
-		project(':app')
-	],
+        implementation: [
+                project(':app')
+        ],
 
-	kapt          : [
-		deps.google.daggerProcessor
-	]
+        kapt          : [
+                deps.google.daggerProcessor,
+				deps.google.androidCompiler,
+				deps.google.autoservice.processor
+		]
 ]

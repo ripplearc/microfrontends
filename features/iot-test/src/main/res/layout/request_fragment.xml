@@ -10,6 +10,7 @@
         android:layout_height="match_parent"
         android:height="270dp"
         android:background="@android:color/holo_green_light"
-        android:text="Request Text" />
+        android:text="Static Feature - Request"
+        android:textColor="@android:color/white"/>
 
 </FrameLayout>
