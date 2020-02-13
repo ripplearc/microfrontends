@@ -4,29 +4,45 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 android {
+    signingConfigs {
+        release {
+            storeFile file('/Applications/Android Studio.app/Contents/bin/release-key.keystore')
+            storePassword 'password'
+            keyAlias = 'groundvisual-release-key'
+            keyPassword 'password'
+        }
+    }
     defaultConfig {
         applicationId "com.ripplearc.heavy.groundvisual"
     }
     buildTypes {
         release {
             minifyEnabled true
+            signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+
+    dynamicFeatures = [":iot_histogram_dynamic"]
+
+
 }
 
 deps[project.name] = [
         implementation: [
-                deps.androidx.appCompat,
-                deps.androidx.layout,
                 project(':iot-roster'),
                 project(':iot-test'),
-                project(':common-core'),
-                project(':common-features')
         ],
 
         api           : [
+                deps.androidx.appCompat,
+                deps.androidx.layout,
                 deps.google.dagger,
+                deps.google.jetpack.lifecycle.common,
+                deps.google.jetpack.lifecycle.ext,
+                deps.google.autoservice.annotations,
+                project(':common-core'),
                 project(':common-features')
         ],
 
@@ -34,3 +50,4 @@ deps[project.name] = [
                 deps.google.daggerProcessor
         ]
 ]
+
