@@ -1,12 +1,13 @@
 include ':app',
-	':common-core', 'common-features',
-	':iot-roster', ':iot-test', ':iot_dynamic_histogram'
+        ':common-core', 'common-features', ':common-data',
+        ':iot-roster', ':iot-test', ':iot_dynamic_histogram'
 rootProject.name = 'GroundVisual'
 
 
 // Libraries
 project(':common-features').projectDir = file('libraries/common-features')
 project(':common-core').projectDir = file('libraries/common-core')
+project(':common-data').projectDir = file('libraries/common-data')
 
 // Features
 project(':iot-roster').projectDir = file('features/iot-roster')
