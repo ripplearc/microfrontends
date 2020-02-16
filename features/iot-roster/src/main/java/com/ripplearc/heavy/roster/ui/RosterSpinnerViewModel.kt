@@ -1,9 +1,9 @@
-package com.ripplearc.heavy.iot_roster.ui
+package com.ripplearc.heavy.iot.roster.ui
 
 import android.content.Context
 import android.widget.ArrayAdapter
 import androidx.lifecycle.ViewModel
-import com.ripplearc.heavy.iot_roster.R
+import com.ripplearc.heavy.iot.roster.R
 import javax.inject.Inject
 
 class RosterSpinnerViewModel @Inject constructor(context: Context) : ViewModel() {

@@ -1,4 +1,4 @@
-package com.ripplearc.heavy.iot_roster.di
+package com.ripplearc.heavy.iot.roster.di
 
 import javax.inject.Scope
 

@@ -1,4 +1,4 @@
-package com.ripplearc.heavy.iot_roster
+package com.ripplearc.heavy.iot.roster
 
 import org.junit.Test
 

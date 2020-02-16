@@ -1,4 +1,4 @@
-package com.ripplearc.heavy.iot_roster.ui
+package com.ripplearc.heavy.iot.roster.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,8 +8,8 @@ import android.widget.Spinner
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.ripplearc.heavy.common.core.model.ViewModelFactory
-import com.ripplearc.heavy.iot_roster.R
-import com.ripplearc.heavy.iot_roster.feature.iotRosterComponent
+import com.ripplearc.heavy.iot.roster.R
+import com.ripplearc.heavy.iot.roster.feature.iotRosterComponent
 import javax.inject.Inject
 
 class RosterSpinnerFragment : Fragment() {

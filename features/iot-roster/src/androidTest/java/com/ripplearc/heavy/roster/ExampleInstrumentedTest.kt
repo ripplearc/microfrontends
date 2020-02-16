@@ -1,4 +1,4 @@
-package com.ripplearc.heavy.iot_roster
+package com.ripplearc.heavy.iot.roster
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -19,6 +19,6 @@ class ExampleInstrumentedTest {
 	fun useAppContext() {
 		// Context of the app under test.
 		val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-		assertEquals("com.ripplearc.heavy.iot_roster.test", appContext.packageName)
+		assertEquals("com.ripplearc.heavy.iot.roster.test", appContext.packageName)
 	}
 }
