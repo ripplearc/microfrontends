@@ -1,6 +1,6 @@
 package com.ripplearc.heavy.iot_test.di
 
-import com.ripplearc.heavy.common_features.IotTestFeature
+import com.ripplearc.heavy.common.features.IotTestFeature
 import dagger.BindsInstance
 import dagger.Component
 

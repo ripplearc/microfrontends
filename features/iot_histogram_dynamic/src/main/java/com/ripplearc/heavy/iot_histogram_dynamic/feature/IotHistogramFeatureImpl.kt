@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.Intent
 import androidx.fragment.app.Fragment
 import com.google.auto.service.AutoService
-import com.ripplearc.heavy.common_features.IotHistogramFeature
+import com.ripplearc.heavy.common.features.IotHistogramFeature
 import com.ripplearc.heavy.iot_histogram_dynamic.di.DaggerIotHistogramComponent
 import com.ripplearc.heavy.iot_histogram_dynamic.di.IotHistogramComponent
 import com.ripplearc.heavy.iot_histogram_dynamic.ui.IotHistogramFragment

@@ -1,6 +1,6 @@
 package com.ripplearc.heavy.iot_histogram_dynamic.di
 
-import com.ripplearc.heavy.common_features.IotHistogramFeature
+import com.ripplearc.heavy.common.features.IotHistogramFeature
 import dagger.BindsInstance
 import dagger.Component
 

@@ -1,4 +1,4 @@
-package com.ripplearc.heavy.common_features
+package com.ripplearc.heavy.common.features
 
 import android.content.Context
 import android.content.Intent

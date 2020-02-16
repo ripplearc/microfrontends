@@ -1,4 +1,4 @@
-package com.ripplearc.heavy.common_features
+package com.ripplearc.heavy.common.features
 
 import com.ripplearc.heavy.common_core.model.*
 import com.ripplearc.heavy.common_core.qualifier.ApplicationScope

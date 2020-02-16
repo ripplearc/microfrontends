@@ -5,7 +5,7 @@ import android.content.Intent
 import androidx.fragment.app.Fragment
 import com.ripplearc.heavy.common_core.model.Feature
 import com.ripplearc.heavy.common_core.model.FeatureProvider
-import com.ripplearc.heavy.common_features.IotTestFeature
+import com.ripplearc.heavy.common.features.IotTestFeature
 import com.ripplearc.heavy.iot_test.di.DaggerIotTestComponent
 import com.ripplearc.heavy.iot_test.di.IotTestComponent
 import com.ripplearc.heavy.iot_test.ui.RequestFragment

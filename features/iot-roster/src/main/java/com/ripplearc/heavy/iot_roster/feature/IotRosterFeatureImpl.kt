@@ -5,7 +5,7 @@ import android.content.Intent
 import androidx.fragment.app.Fragment
 import com.ripplearc.heavy.common_core.model.Feature
 import com.ripplearc.heavy.common_core.model.FeatureProvider
-import com.ripplearc.heavy.common_features.IotRosterFeature
+import com.ripplearc.heavy.common.features.IotRosterFeature
 import com.ripplearc.heavy.iot_roster.di.DaggerIotRosterComponent
 import com.ripplearc.heavy.iot_roster.di.IotRosterComponent
 import com.ripplearc.heavy.iot_roster.ui.RosterSpinnerFragment
