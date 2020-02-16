@@ -1,6 +1,6 @@
 package com.ripplearc.heavy.iot_roster.di
 
-import com.ripplearc.heavy.common_core.model.ViewModelFactory
+import com.ripplearc.heavy.common.core.model.ViewModelFactory
 import com.ripplearc.heavy.common.features.IotRosterFeature
 import com.ripplearc.heavy.iot_roster.ui.RosterSpinnerFragment
 import com.ripplearc.heavy.iot_roster.ui.RosterSpinnerViewModel

@@ -1,6 +1,6 @@
-package com.ripplearc.heavy.common_core.qualifier
+package com.ripplearc.heavy.common.core.qualifier
 
-import com.ripplearc.heavy.common_core.model.Feature
+import com.ripplearc.heavy.common.core.model.Feature
 import dagger.MapKey
 import kotlin.reflect.KClass
 

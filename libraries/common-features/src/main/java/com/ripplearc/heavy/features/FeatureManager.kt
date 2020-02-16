@@ -1,7 +1,7 @@
 package com.ripplearc.heavy.common.features
 
-import com.ripplearc.heavy.common_core.model.*
-import com.ripplearc.heavy.common_core.qualifier.ApplicationScope
+import com.ripplearc.heavy.common.core.model.*
+import com.ripplearc.heavy.common.core.qualifier.ApplicationScope
 import java.util.*
 import javax.inject.Inject
 

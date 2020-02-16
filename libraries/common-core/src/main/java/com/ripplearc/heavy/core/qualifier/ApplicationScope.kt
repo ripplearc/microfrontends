@@ -1,4 +1,4 @@
-package com.ripplearc.heavy.common_core.qualifier
+package com.ripplearc.heavy.common.core.qualifier
 
 import javax.inject.Scope
 

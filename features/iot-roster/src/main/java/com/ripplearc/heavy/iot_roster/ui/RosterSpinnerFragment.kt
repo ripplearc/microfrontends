@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.Spinner
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
-import com.ripplearc.heavy.common_core.model.ViewModelFactory
+import com.ripplearc.heavy.common.core.model.ViewModelFactory
 import com.ripplearc.heavy.iot_roster.R
 import com.ripplearc.heavy.iot_roster.feature.iotRosterComponent
 import javax.inject.Inject

@@ -1,6 +1,6 @@
 package com.ripplearc.heavy.groundvisual.di.modules
 
-import com.ripplearc.heavy.common_core.model.FeatureProviderMap
+import com.ripplearc.heavy.common.core.model.FeatureProviderMap
 import com.ripplearc.heavy.common.features.FeatureManager
 import com.ripplearc.heavy.common.features.FeatureManagerImpl
 import com.ripplearc.heavy.iot_roster.di.IotRosterFeatureModule

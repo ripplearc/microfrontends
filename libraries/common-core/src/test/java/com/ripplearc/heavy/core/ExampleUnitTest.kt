@@ -1,4 +1,4 @@
-package com.ripplearc.heavy.common_core
+package com.ripplearc.heavy.common.core
 
 import org.junit.Test
 

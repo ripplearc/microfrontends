@@ -1,4 +1,4 @@
-package com.ripplearc.heavy.common_core.model
+package com.ripplearc.heavy.common.core.model
 
 import javax.inject.Provider
 

@@ -1,6 +1,6 @@
 package com.ripplearc.heavy.groundvisual.di
 
-import com.ripplearc.heavy.common_core.qualifier.ApplicationScope
+import com.ripplearc.heavy.common.core.qualifier.ApplicationScope
 import com.ripplearc.heavy.common.features.IotHistogramFeature
 import com.ripplearc.heavy.common.features.IotRosterFeature
 import com.ripplearc.heavy.common.features.IotTestFeature
