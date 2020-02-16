@@ -2,22 +2,23 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 android {
-	defaultConfig {
-		consumerProguardFiles 'consumer-rules.pro'
-	}
+    defaultConfig {
+        consumerProguardFiles 'consumer-rules.pro'
+    }
 
-	buildTypes {
-		release {
-			minifyEnabled true
-			proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-		}
-	}
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
 
 }
 
 deps[project.name] = [
-	implementation: [
-		deps.androidx.appCompat,
-		project(':common-core')
-	]
+        implementation: [
+                deps.androidx.appCompat,
+                deps.square.retrofit,
+                project(':common-core')
+        ]
 ]

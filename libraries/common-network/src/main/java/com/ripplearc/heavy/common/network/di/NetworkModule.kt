@@ -18,7 +18,7 @@ object NetworkModule {
             chain.request()?.let { request ->
                 request.url().newBuilder().build()?.let { url ->
                     request.newBuilder().url(url).build()
-                }.run {
+                }?.run {
                     chain.proceed(this)
                 }
             }
