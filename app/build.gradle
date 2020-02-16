@@ -24,7 +24,7 @@ android {
     }
 
 
-    dynamicFeatures = [":iot_histogram_dynamic"]
+    dynamicFeatures = [":iot_dynamic_histogram"]
 
 
 }

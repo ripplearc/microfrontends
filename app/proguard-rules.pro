@@ -20,10 +20,10 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 
--keep class com.ripplearc.heavy.iot_histogram_dynamic.feature.IotHistogramFeatureImpl {
-    com.ripplearc.heavy.iot_histogram_dynamic.feature.IotHistogramFeatureImpl$FeatureProvider Provider;
+-keep class com.ripplearc.heavy.iot.dynamic.histogram.feature.IotHistogramFeatureImpl {
+    com.ripplearc.heavy.iot.dynamic.histogram.feature.IotHistogramFeatureImpl$FeatureProvider Provider;
 }
 
--keep class com.ripplearc.heavy.iot_histogram_dynamic.feature.IotHistogramFeatureImpl$FeatureProvider {
+-keep class com.ripplearc.heavy.iot.dynamic.histogram.feature.IotHistogramFeatureImpl$FeatureProvider {
     *;
 }
