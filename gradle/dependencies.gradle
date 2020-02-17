@@ -84,11 +84,12 @@ ext {
             ],
 
             square       : [
-                    'retrofit'     : "com.squareup.retrofit2:retrofit:${versions.retrofit}",
-                    'gsonConverter': "com.squareup.retrofit2:converter-gson:${versions.retrofit}",
-                    'okhttp'       : "com.squareup.okhttp3:okhttp:3.9.0",
-                    'picasso'      : "com.squareup.picasso:picasso:2.71828",
-                    'thirdParty'   : [
+                    'retrofit'      : "com.squareup.retrofit2:retrofit:${versions.retrofit}",
+                    'gsonConverter' : "com.squareup.retrofit2:converter-gson:${versions.retrofit}",
+                    'rxjava2Adapter': "com.squareup.retrofit2:adapter-rxjava2:${versions.retrofit}",
+                    'okhttp'        : "com.squareup.okhttp3:okhttp:3.9.0",
+                    'picasso'       : "com.squareup.picasso:picasso:2.71828",
+                    'thirdParty'    : [
                             'pikasso': "com.hendraanggrian.pikasso:pikasso:0.1"
                     ]
             ],

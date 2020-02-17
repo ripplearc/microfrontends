@@ -4,12 +4,14 @@ import com.ripplearc.heavy.common.core.model.ViewModelFactory
 import com.ripplearc.heavy.common.features.IotRosterFeature
 import com.ripplearc.heavy.iot.roster.ui.RosterSpinnerFragment
 import com.ripplearc.heavy.iot.roster.ui.RosterSpinnerViewModel
+import com.ripplearc.heavy.roster.di.IotRosterModule
 import dagger.BindsInstance
 import dagger.Component
 
 @IotRosterScope
 @Component(
-    dependencies = [IotRosterFeature.Dependencies::class]
+    dependencies = [IotRosterFeature.Dependencies::class],
+    modules = [IotRosterModule::class]
 )
 interface IotRosterComponent {
 
