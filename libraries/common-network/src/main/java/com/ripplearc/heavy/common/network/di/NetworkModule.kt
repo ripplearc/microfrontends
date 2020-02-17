@@ -7,14 +7,16 @@ import dagger.Provides
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
 
 @Module
 object NetworkModule {
     @[Provides ApplicationScope JvmStatic]
-    fun provideOkHttpClient() = OkHttpClient().apply {
-        interceptors().add(Interceptor { chain ->
+    fun provideOkHttpClient() = OkHttpClient
+        .Builder()
+        .addInterceptor { chain ->
             chain.request()?.let { request ->
                 request.url().newBuilder().build()?.let { url ->
                     request.newBuilder().url(url).build()
@@ -22,15 +24,16 @@ object NetworkModule {
                     chain.proceed(this)
                 }
             }
-        })
-    }
+        }
+        .build() ?: throw Exception("Cannot instantiate OkHttpClient.")
 
     @[Provides ApplicationScope JvmStatic]
     fun provideRetrofit(client: OkHttpClient) =
         Retrofit.Builder()
             .baseUrl(NetworkConfig.baseUrl)
             .addConverterFactory(GsonConverterFactory.create())
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .client(client)
-            .build()
+            .build() ?: throw Exception("Cannot instantiate Retrofit.")
 
 }

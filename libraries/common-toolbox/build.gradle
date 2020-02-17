@@ -20,19 +20,14 @@ android {
 deps[project.name] = [
         implementation: [
                 deps.androidx.appCompat,
+                deps.miscellaneous.log.logger,
+                deps.reactivex.rxKotlin,
+                deps.reactivex.rxAndroid
         ],
 
         api           : [
-                deps.google.dagger,
-                deps.square.retrofit,
-                deps.square.gsonConverter,
-                deps.square.rxjava2Adapter,
-                deps.square.okhttp,
-
-                project(':common-core')
         ],
 
         kapt          : [
-                deps.google.daggerProcessor
         ]
 ]
