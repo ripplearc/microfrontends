@@ -3,18 +3,14 @@ package com.ripplearc.heavy.iot.roster.ui
 import android.content.Context
 import android.widget.ArrayAdapter
 import androidx.lifecycle.ViewModel
-import com.ripplearc.heavy.common.toolbox.Emoji
 import com.ripplearc.heavy.common.toolbox.SchedulerFactory
 import com.ripplearc.heavy.common.toolbox.disposedBy
-import com.ripplearc.heavy.common.toolbox.log
 import com.ripplearc.heavy.data.DeviceModel
 import com.ripplearc.heavy.iot.roster.R
 import com.ripplearc.heavy.iot.roster.di.IotRosterScope
 import com.ripplearc.heavy.roster.service.DeviceRosterService
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.subscribeBy
-import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 

@@ -12,7 +12,7 @@ interface IotHistogramComponent {
     @Component.Factory
     interface Factory {
         fun create(
-            deprecated: IotHistogramFeature.Dependencies,
+            dependencies: IotHistogramFeature.Dependencies,
             @BindsInstance IotTestFeature: IotHistogramFeature
         ): IotHistogramComponent
     }

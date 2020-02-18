@@ -36,7 +36,6 @@ class RosterSpinnerFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         iotRosterComponent.inject(this)
 
-
         view?.findViewById<Spinner>(R.id.device_roster)?.adapter = viewModel.spinnerAdapter
     }
 
