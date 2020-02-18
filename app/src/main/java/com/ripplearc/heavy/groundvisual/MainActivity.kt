@@ -2,10 +2,7 @@ package com.ripplearc.heavy.groundvisual
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.ripplearc.heavy.common_features.FeatureManager
-import com.ripplearc.heavy.common_features.IotRosterFeature
-import com.ripplearc.heavy.common_features.IotTestFeature
-import com.ripplearc.heavy.common_features.getFeature
+import com.ripplearc.heavy.common.features.*
 import javax.inject.Inject
 
 
@@ -22,6 +19,7 @@ class MainActivity : AppCompatActivity() {
 
         loadRoster()
         loadPlayground()
+        loadDynamicHistogram()
     }
 
     private fun loadRoster() {
@@ -43,12 +41,28 @@ class MainActivity : AppCompatActivity() {
 
     private fun loadPlayground() {
         val transaction = supportFragmentManager.beginTransaction()
-        val TAG_BOTTOM_FRAGMENT = "bottom"
-        val displayFragment = supportFragmentManager.findFragmentByTag(TAG_BOTTOM_FRAGMENT)
+        val TAG_MIDDLE_FRAGMENT = "middle"
+        val displayFragment = supportFragmentManager.findFragmentByTag(TAG_MIDDLE_FRAGMENT)
         val featureFragment =
             featureManager.getFeature<IotTestFeature, IotTestFeature.Dependencies>(appComponent)
                 ?.getMainEntry() ?: return
-        transaction.add(R.id.playground_fragment, featureFragment, TAG_BOTTOM_FRAGMENT)
+        transaction.add(R.id.playground_fragment, featureFragment, TAG_MIDDLE_FRAGMENT)
+        if (displayFragment != null) {
+            transaction.hide(displayFragment).commit()
+            supportFragmentManager.beginTransaction().remove(displayFragment).commit()
+        } else {
+            transaction.commit()
+        }
+    }
+
+    private fun loadDynamicHistogram() {
+        val transaction = supportFragmentManager.beginTransaction()
+        val TAG_BOTTOM_FRAGMENT = "bottom"
+        val displayFragment = supportFragmentManager.findFragmentByTag(TAG_BOTTOM_FRAGMENT)
+        val featureFragment =
+            featureManager.getFeature<IotHistogramFeature, IotHistogramFeature.Dependencies>(appComponent)
+                ?.getMainEntry() ?: return
+        transaction.add(R.id.histogram_fragment, featureFragment, TAG_BOTTOM_FRAGMENT)
         if (displayFragment != null) {
             transaction.hide(displayFragment).commit()
             supportFragmentManager.beginTransaction().remove(displayFragment).commit()

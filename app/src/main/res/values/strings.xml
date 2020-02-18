@@ -1,3 +1,4 @@
 <resources>
 	<string name="app_name">GroundVisual</string>
+	<string name="title_iot_histogram_dynamic">Iot Histogram</string>
 </resources>

@@ -11,7 +11,8 @@ ext {
             'retrofit'  : '2.3.0',
             'gms'       : '17.0.0',
             'firebase'  : "17.2.0",
-            'aws'       : "2.16.+"
+            'aws'       : "2.16.+",
+            autoservice : '1.0-rc6'
     ]
 
     deps = [
@@ -42,6 +43,7 @@ ext {
             google       : [
                     'dagger'         : "com.google.dagger:dagger:${versions.dagger}",
                     'daggerProcessor': "com.google.dagger:dagger-compiler:${versions.dagger}",
+                    'androidCompiler': "com.google.dagger:dagger-android-processor:${versions.dagger}",
                     'gson'           : "com.google.code.gson:gson:2.8.5",
                     'mapUtil'        : "com.google.maps.android:android-maps-utils:0.5",
                     'googleService'  : "com.google.gms:google-services:4.2.0",
@@ -68,6 +70,10 @@ ext {
                             'core'     : "com.google.firebase:firebase-core:${versions.firebase}",
                             'analytics': "com.google.firebase:firebase-analytics:${versions.firebase}",
                             'messaging': "com.google.firebase:firebase-messaging:20.1.0"
+                    ],
+                    autoservice      : [
+                            annotations: "com.google.auto.service:auto-service-annotations:$versions.autoservice",
+                            processor  : "com.google.auto.service:auto-service:$versions.autoservice"
                     ]
             ],
 
@@ -78,11 +84,12 @@ ext {
             ],
 
             square       : [
-                    'retrofit'     : "com.squareup.retrofit2:retrofit:${versions.retrofit}",
-                    'gsonConverter': "com.squareup.retrofit2:converter-gson:${versions.retrofit}",
-                    'okhttp'       : "com.squareup.okhttp3:okhttp:3.9.0",
-                    'picasso'      : "com.squareup.picasso:picasso:2.71828",
-                    'thirdParty'   : [
+                    'retrofit'      : "com.squareup.retrofit2:retrofit:${versions.retrofit}",
+                    'gsonConverter' : "com.squareup.retrofit2:converter-gson:${versions.retrofit}",
+                    'rxjava2Adapter': "com.squareup.retrofit2:adapter-rxjava2:${versions.retrofit}",
+                    'okhttp'        : "com.squareup.okhttp3:okhttp:3.9.0",
+                    'picasso'       : "com.squareup.picasso:picasso:2.71828",
+                    'thirdParty'    : [
                             'pikasso': "com.hendraanggrian.pikasso:pikasso:0.1"
                     ]
             ],

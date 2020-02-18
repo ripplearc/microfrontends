@@ -24,12 +24,14 @@ deps[project.name] = [
                 deps.google.jetpack.lifecycle.common,
                 deps.google.jetpack.lifecycle.ext,
                 deps.google.jetpack.navigation.fragment,
+                deps.google.dagger,
+                deps.square.retrofit,
+                deps.reactivex.rxKotlin,
+                deps.reactivex.rxAndroid,
                 project(':common-features'),
-                project(':common-core')
-        ],
-
-        api           : [
-                deps.google.dagger
+                project(':common-core'),
+                project(':common-data'),
+                project(':common-toolbox')
         ],
 
         kapt          : [

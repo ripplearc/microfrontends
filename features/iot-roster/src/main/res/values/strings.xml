@@ -1,3 +1,4 @@
 <resources>
-	<string name="app_name">iot-roster</string>
+    <string name="app_name">iot-roster</string>
+    <string name="device_roster">Device Roster</string>
 </resources>

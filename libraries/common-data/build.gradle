@@ -1,0 +1,31 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    defaultConfig {
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+        }
+    }
+
+}
+
+deps[project.name] = [
+        implementation: [
+                deps.androidx.appCompat,
+        ],
+
+        api           : [
+                deps.google.dagger,
+                deps.google.gson
+        ],
+
+        kapt          : [
+                deps.google.daggerProcessor
+        ]
+]
