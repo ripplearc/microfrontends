@@ -20,14 +20,18 @@ android {
 deps[project.name] = [
         implementation: [
                 deps.androidx.appCompat,
-                deps.miscellaneous.log.logger,
-                deps.reactivex.rxKotlin,
-                deps.reactivex.rxAndroid
         ],
 
         api           : [
+                deps.google.dagger,
+                deps.miscellaneous.log.logger,
+                deps.reactivex.rxKotlin,
+                deps.reactivex.rxAndroid,
+                deps.google.jetpack.lifecycle.reactiveStreams,
+                deps.google.jetpack.lifecycle.common
         ],
 
         kapt          : [
+                deps.google.daggerProcessor
         ]
 ]
