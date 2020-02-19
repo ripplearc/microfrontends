@@ -1,0 +1,37 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    defaultConfig {
+        consumerProguardFiles 'consumer-rules.pro'
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+deps[project.name] = [
+        implementation: [
+                deps.androidx.appCompat,
+        ],
+
+        api           : [
+                deps.google.dagger,
+                deps.miscellaneous.log.logger,
+                deps.reactivex.rxKotlin,
+                deps.reactivex.rxAndroid,
+                deps.google.jetpack.lifecycle.reactiveStreams,
+                deps.google.jetpack.lifecycle.common
+        ],
+
+        kapt          : [
+                deps.google.daggerProcessor
+        ]
+]

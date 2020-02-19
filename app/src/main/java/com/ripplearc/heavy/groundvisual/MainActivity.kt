@@ -2,7 +2,7 @@ package com.ripplearc.heavy.groundvisual
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.ripplearc.heavy.common_features.*
+import com.ripplearc.heavy.common.features.*
 import javax.inject.Inject
 
 
