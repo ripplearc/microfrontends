@@ -10,7 +10,6 @@ import javax.inject.Inject
 
 open class FeatureNavigationViewModel : ViewModel() {
 
-    private lateinit var context: Context
     private lateinit var featureManager: FeatureManager
 
     @Inject
