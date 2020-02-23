@@ -1,2 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-	package="com.ripplearc.heavy.iot.roster" />
+    package="com.ripplearc.heavy.iot.roster">
+
+    <application>
+        <activity
+            android:name="com.ripplearc.heavy.roster.ui.RosterSpinnerActivity"
+            android:label="@string/title_activity_main"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+    </application>
+
+</manifest>

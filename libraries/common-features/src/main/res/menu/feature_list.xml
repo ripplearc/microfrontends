@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/sceneIotRoster"
+        android:title="@string/iot_device_list" />
+    <item
+        android:id="@+id/sceneIotTest"
+        android:title="@string/iot_playground" />
+    <item
+        android:id="@+id/sceneIotHistogram"
+        android:title="@string/iot_playground" />
+</menu>

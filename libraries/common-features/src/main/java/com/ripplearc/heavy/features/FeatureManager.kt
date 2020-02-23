@@ -17,20 +17,17 @@ inline fun <reified T : Feature<D>, reified D : Dependencies> FeatureManager.get
 
     if (staticFeature != null) return staticFeature
 
-    val serviceIterator = ServiceLoader.load(
-        T::class.java,
-        T::class.java.classLoader
-    ).iterator()
-
-    return if (serviceIterator.hasNext()) {
-        serviceIterator.next()
-            ?.apply {
-                (this as? DynamicFeature<D>)?.inject(dependencies)
-            }
-    } else {
-        null
+    with(loadService<T>()) {
+        return if (hasNext()) {
+            next()?.apply { (this as? DynamicFeature<D>)?.inject(dependencies) }
+        } else {
+            null
+        }
     }
 }
+
+inline fun <reified T> loadService() =
+    ServiceLoader.load(T::class.java, T::class.java.classLoader).iterator()
 
 @ApplicationScope
 class FeatureManagerImpl @Inject constructor(

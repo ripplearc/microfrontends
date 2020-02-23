@@ -1,3 +1,7 @@
 <resources>
 	<string name="app_name">common-features</string>
+    <string name="iot_device_list">IoT device list</string>
+    <string name="iot_histogram">Iot Histogram</string>
+    <string name="iot_playground">Iot Playground</string>
+    <string name="blah">Iot Playground</string>
 </resources>

@@ -1,11 +1,15 @@
 package com.ripplearc.heavy.groundvisual.di
 
 import com.orhanobut.logger.AndroidLogAdapter
+import com.ripplearc.heavy.common.core.model.ViewModelFactory
 import com.ripplearc.heavy.common.core.qualifier.ApplicationScope
+import com.ripplearc.heavy.common.features.FeatureManager
 import com.ripplearc.heavy.common.features.IotHistogramFeature
 import com.ripplearc.heavy.common.features.IotRosterFeature
 import com.ripplearc.heavy.common.features.IotTestFeature
 import com.ripplearc.heavy.common.network.di.NetworkModule
+import com.ripplearc.heavy.groundvisual.FeatureLink.FeatureLinkActivity
+import com.ripplearc.heavy.groundvisual.FeatureLink.FeatureListViewModel
 import com.ripplearc.heavy.groundvisual.GroundVisualApplication
 import com.ripplearc.heavy.groundvisual.MainActivity
 import com.ripplearc.heavy.groundvisual.di.modules.AppModule
@@ -29,11 +33,13 @@ interface FeatureDependencies :
 interface ApplicationComponent : FeatureDependencies {
 
     fun inject(activity: MainActivity)
+    fun inject(activity: FeatureLinkActivity)
 
     @Component.Factory
     interface Factory {
         fun create(@BindsInstance application: GroundVisualApplication): ApplicationComponent
     }
 
-    val androidLogStrategy: AndroidLogAdapter
+    fun getFeatureListViewModel(): ViewModelFactory<FeatureListViewModel>
+    fun getAndroidLogStrategy(): AndroidLogAdapter
 }

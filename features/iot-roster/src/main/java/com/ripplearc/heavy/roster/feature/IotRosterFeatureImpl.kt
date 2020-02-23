@@ -9,6 +9,7 @@ import com.ripplearc.heavy.common.features.IotRosterFeature
 import com.ripplearc.heavy.iot.roster.di.DaggerIotRosterComponent
 import com.ripplearc.heavy.iot.roster.di.IotRosterComponent
 import com.ripplearc.heavy.iot.roster.ui.RosterSpinnerFragment
+import com.ripplearc.heavy.roster.ui.RosterSpinnerActivity
 
 internal lateinit var iotRosterComponent: IotRosterComponent
 
@@ -16,7 +17,7 @@ class IotRosterFeatureImpl : IotRosterFeature {
     override fun getMainEntry(): Fragment = RosterSpinnerFragment.newInstance()
 
     override fun getShortcutIntent(context: Context): Intent {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return Intent(context, RosterSpinnerActivity::class.java)
     }
 
     companion object : FeatureProvider<IotRosterFeature.Dependencies> {
