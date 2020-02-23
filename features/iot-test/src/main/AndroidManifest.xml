@@ -1,2 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.ripplearc.heavy.iot.test" />
+    package="com.ripplearc.heavy.iot.test">
+
+    <application>
+        <activity
+            android:name="com.ripplearc.heavy.test.ui.RequestActivity"
+            android:label="@string/title_activity_request"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+    </application>
+
+</manifest>

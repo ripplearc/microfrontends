@@ -8,5 +8,5 @@
         android:title="@string/iot_playground" />
     <item
         android:id="@+id/sceneIotHistogram"
-        android:title="@string/iot_playground" />
+        android:title="@string/iot_histogram" />
 </menu>

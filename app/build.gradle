@@ -38,6 +38,7 @@ deps[project.name] = [
         api           : [
                 deps.androidx.appCompat,
                 deps.androidx.layout,
+                deps.androidx.design,
                 deps.google.dagger,
                 deps.google.jetpack.lifecycle.common,
                 deps.google.jetpack.lifecycle.ext,

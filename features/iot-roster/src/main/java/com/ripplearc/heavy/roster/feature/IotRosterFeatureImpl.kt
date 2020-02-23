@@ -16,9 +16,8 @@ internal lateinit var iotRosterComponent: IotRosterComponent
 class IotRosterFeatureImpl : IotRosterFeature {
     override fun getMainEntry(): Fragment = RosterSpinnerFragment.newInstance()
 
-    override fun getShortcutIntent(context: Context): Intent {
-        return Intent(context, RosterSpinnerActivity::class.java)
-    }
+    override fun getShortcutIntent(context: Context): Intent =
+        Intent(context, RosterSpinnerActivity::class.java)
 
     companion object : FeatureProvider<IotRosterFeature.Dependencies> {
         override fun get(dependencies: IotRosterFeature.Dependencies): Feature<IotRosterFeature.Dependencies> =
