@@ -5,10 +5,19 @@ import com.ripplearc.heavy.common.core.qualifier.ApplicationScope
 import java.util.*
 import javax.inject.Inject
 
+/**
+ * FeatureManager stores the multibindings map for the features, and
+ * loads feature implementation.
+ */
 interface FeatureManager {
     val featureMap: FeatureProviderMap
 }
 
+/**
+ * Get the implementation of the feature. If it is static feature, get its
+ * implementation from the Dagger multi-bindings. If it is dynamic feature, get
+ * its implementation from the ServiceLoader.
+ */
 @Suppress("UNCHECKED_CAST")
 inline fun <reified T : Feature<D>, reified D : Dependencies> FeatureManager.getFeature(dependencies: D): T? {
     val staticFeature = (featureMap[T::class.java]?.get()

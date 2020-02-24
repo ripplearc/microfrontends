@@ -11,7 +11,6 @@ lateinit var appComponent: ApplicationComponent
 class GroundVisualApplication : Application() {
     override fun onCreate() {
         super.onCreate()
-        Log.d("GroundVisual", "🤞😎😅")
         inject()
         initLogger()
     }

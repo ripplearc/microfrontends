@@ -1,6 +1,5 @@
 package com.ripplearc.heavy.groundvisual.viewmodel
 
-import android.content.Context
 import androidx.lifecycle.ViewModel
 import com.ripplearc.heavy.common.core.model.Feature
 import com.ripplearc.heavy.common.features.*
@@ -8,18 +7,17 @@ import com.ripplearc.heavy.features.profile
 import com.ripplearc.heavy.groundvisual.appComponent
 import javax.inject.Inject
 
-open class FeatureNavigationViewModel : ViewModel() {
+interface FeatureNavigation {
+    fun getFeature(featureId: String): Feature<*>?
+}
 
-    private lateinit var featureManager: FeatureManager
+/**
+ * FeatureNavigationViewModel is the base Class for navigating to feature page.
+ */
+class FeatureNavigationViewModel @Inject constructor(private val featureManager: FeatureManager) :
+    FeatureNavigation, ViewModel() {
 
-    @Inject
-    fun injectMembers(
-        featureManager: FeatureManager
-    ) {
-        this.featureManager = featureManager
-    }
-
-    fun getFeature(featureId: String): Feature<*>? =
+    override fun getFeature(featureId: String): Feature<*>? =
         when (featureId) {
             IotTestFeature::class.profile.id -> {
                 featureManager.getFeature<IotTestFeature, IotTestFeature.Dependencies>(dependencies = appComponent)

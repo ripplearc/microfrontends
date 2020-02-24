@@ -17,6 +17,10 @@ import com.ripplearc.heavy.groundvisual.appComponent
 import javax.inject.Inject
 
 
+/**
+ * FeatureLinkActivity listens to the `android.intent.action.VIEW` and navigates to the
+ * specific feature page or displays the feature list.
+ */
 class FeatureLinkActivity : AppCompatActivity() {
 
     @Inject
