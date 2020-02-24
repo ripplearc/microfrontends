@@ -5,6 +5,7 @@ import android.widget.ArrayAdapter
 import androidx.lifecycle.ViewModel
 import com.ripplearc.heavy.common.toolbox.SchedulerFactory
 import com.ripplearc.heavy.common.toolbox.disposedBy
+import com.ripplearc.heavy.common.toolbox.safeSubscribeBy
 import com.ripplearc.heavy.data.DeviceModel
 import com.ripplearc.heavy.iot.roster.R
 import com.ripplearc.heavy.iot.roster.di.IotRosterScope
@@ -39,7 +40,7 @@ class RosterSpinnerViewModel @Inject constructor(
         deviceRosterService.getDeviceRoster()
             .subscribeOn(schedulerFactory.io())
             .observeOn(schedulerFactory.main())
-            .subscribeBy(onSuccess = { roster ->
+            .safeSubscribeBy(onSuccess = { roster ->
                 updateRoster(roster, adapter)
             }).disposedBy(disposables)
     }

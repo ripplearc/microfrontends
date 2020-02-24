@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.fragment.app.Fragment
 import com.google.auto.service.AutoService
 import com.ripplearc.heavy.common.features.IotHistogramFeature
+import com.ripplearc.heavy.histogram.ui.HistogramActivity
 import com.ripplearc.heavy.iot.dynamic.histogram.di.DaggerIotHistogramComponent
 import com.ripplearc.heavy.iot.dynamic.histogram.di.IotHistogramComponent
 import com.ripplearc.heavy.iot.dynamic.histogram.ui.IotHistogramFragment
@@ -15,9 +16,8 @@ internal lateinit var iotHistogramComponent: IotHistogramComponent
 class IotHistogramFeatureImpl : IotHistogramFeature {
     override fun getMainEntry(): Fragment = IotHistogramFragment.newInstance()
 
-    override fun getShortcutIntent(context: Context): Intent {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override fun getShortcutIntent(context: Context): Intent =
+        Intent(context, HistogramActivity::class.java)
 
     override fun inject(dependencies: IotHistogramFeature.Dependencies) {
         if (::iotHistogramComponent.isInitialized)

@@ -1,4 +1,6 @@
 <resources>
-	<string name="app_name">GroundVisual</string>
-	<string name="title_iot_histogram_dynamic">Iot Histogram</string>
+    <string name="app_name">GroundVisual</string>
+    <string name="title_iot_histogram_dynamic">Iot Histogram</string>
+    <string name="title_activity_feature_link">Ground Visual Feature List</string>
+    <string name="title_activity_histogram">HistogramActivity</string>
 </resources>

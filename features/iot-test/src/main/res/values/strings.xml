@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">iot-test</string>
+    <string name="title_activity_request">RequestActivity</string>
 </resources>

@@ -1,6 +1,7 @@
 package com.ripplearc.heavy.groundvisual
 
 import android.app.Application
+import android.util.Log
 import com.orhanobut.logger.Logger
 import com.ripplearc.heavy.groundvisual.di.ApplicationComponent
 import com.ripplearc.heavy.groundvisual.di.DaggerApplicationComponent
@@ -19,7 +20,7 @@ class GroundVisualApplication : Application() {
     }
 
     private fun initLogger() {
-        Logger.addLogAdapter(appComponent.androidLogStrategy)
+        Logger.addLogAdapter(appComponent.getAndroidLogStrategy())
     }
 
 
