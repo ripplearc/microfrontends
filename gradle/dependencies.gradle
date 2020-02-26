@@ -110,6 +110,9 @@ ext {
             test         : [
                     'junit'     : "junit:junit:4.12",
                     'atslRunner': 'androidx.test:runner:1.1.0'
+            ],
+            ripplearc    : [
+                   'radio' : "com.ripplearc.heavy:radio:0.1.2-SNAPSHOT",
             ]
     ]
 }
