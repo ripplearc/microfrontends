@@ -36,7 +36,10 @@ ext {
                             'rxRetrofit' : "com.jakewharton.retrofit:retrofit2-rxjava2-adapter:1.0.0",
                             'rxGoogleMap': "com.sdoward:rxgooglemaps:1.1.1@aar",
                             'replayShare': "com.jakewharton.rx2:replaying-share-kotlin:2.2.0",
-                            'relay'      : "com.jakewharton.rxrelay2:rxrelay:2.1.1"
+                            'rxRelay'    : "com.jakewharton.rxrelay2:rxrelay:2.1.1",
+                            'rxBinding'  : [
+                                    'platform': "com.jakewharton.rxbinding2:rxbinding:2.2.0"
+                            ]
                     ]
             ],
 
@@ -112,7 +115,7 @@ ext {
                     'atslRunner': 'androidx.test:runner:1.1.0'
             ],
             ripplearc    : [
-                   'radio' : "com.ripplearc.heavy:radio:0.1.2-SNAPSHOT",
+                    'radio': "com.ripplearc.heavy:radio:0.1.2-SNAPSHOT",
             ]
     ]
 }

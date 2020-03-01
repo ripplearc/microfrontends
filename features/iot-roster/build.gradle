@@ -28,6 +28,8 @@ deps[project.name] = [
                 deps.square.retrofit,
                 deps.reactivex.rxKotlin,
                 deps.reactivex.rxAndroid,
+                deps.reactivex.thirdParty.rxBinding.platform,
+                deps.reactivex.thirdParty.replayShare,
                 project(':common-features'),
                 project(':common-core'),
                 project(':common-data'),

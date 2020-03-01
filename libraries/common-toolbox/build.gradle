@@ -27,6 +27,7 @@ deps[project.name] = [
                 deps.miscellaneous.log.logger,
                 deps.reactivex.rxKotlin,
                 deps.reactivex.rxAndroid,
+                deps.reactivex.thirdParty.rxRelay,
                 deps.google.jetpack.lifecycle.reactiveStreams,
                 deps.google.jetpack.lifecycle.common
         ],

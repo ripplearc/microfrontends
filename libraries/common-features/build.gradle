@@ -19,6 +19,8 @@ deps[project.name] = [
         implementation: [
                 deps.androidx.appCompat,
                 deps.square.retrofit,
-                project(':common-core')
+                deps.google.gson,
+                project(':common-core'),
+                project(':common-toolbox')
         ]
 ]

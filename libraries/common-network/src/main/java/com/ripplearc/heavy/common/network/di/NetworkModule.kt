@@ -1,5 +1,6 @@
 package com.ripplearc.heavy.common.network.di
 
+import com.google.gson.Gson
 import com.ripplearc.heavy.common.core.qualifier.ApplicationScope
 import com.ripplearc.heavy.common.network.config.NetworkConfig
 import dagger.Module
@@ -13,6 +14,9 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 @Module
 object NetworkModule {
+    @[Provides ApplicationScope JvmStatic]
+    fun provideGson() = Gson()
+
     @[Provides ApplicationScope JvmStatic]
     fun provideOkHttpClient() = OkHttpClient
         .Builder()
