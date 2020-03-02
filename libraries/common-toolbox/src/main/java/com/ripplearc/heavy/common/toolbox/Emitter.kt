@@ -1,5 +1,6 @@
 package com.ripplearc.heavy.common.toolbox
 
+import io.reactivex.CompletableEmitter
 import io.reactivex.ObservableEmitter
 import io.reactivex.SingleEmitter
 
@@ -28,6 +29,18 @@ fun <T : Any> SingleEmitter<T>.onSafeSuccess(value: T) {
 }
 
 fun <T : Any> SingleEmitter<T>.onSafeError(error: Throwable) {
+    if (!isDisposed) {
+        onError(error)
+    }
+}
+
+fun CompletableEmitter.onSafeComplete() {
+    if (!isDisposed) {
+        onComplete()
+    }
+}
+
+fun CompletableEmitter.onSafeError(error: Throwable) {
     if (!isDisposed) {
         onError(error)
     }

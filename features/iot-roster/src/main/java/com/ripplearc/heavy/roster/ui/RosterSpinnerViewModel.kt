@@ -24,7 +24,7 @@ class RosterSpinnerViewModel @Inject constructor(
     context: Context,
     deviceRosterService: DeviceRosterService,
     private val schedulerFactory: SchedulerFactory,
-    private val rxPreference: RxPreference,
+    private val rxPreference: RxCommonPreference,
     private val gson: Gson
 ) : ViewModel() {
 

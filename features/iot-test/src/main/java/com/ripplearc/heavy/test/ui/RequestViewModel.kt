@@ -1,7 +1,29 @@
 package com.ripplearc.heavy.iot.test.ui
 
 import androidx.lifecycle.ViewModel
+import com.google.gson.Gson
+import com.ripplearc.heavy.common.toolbox.RxCommonPreference
+import com.ripplearc.heavy.common.toolbox.log
+import com.ripplearc.heavy.common.toolbox.mapNotNull
+import com.ripplearc.heavy.data.DeviceModel
+import com.ripplearc.heavy.data.SharedPreferenceKey
+import com.ripplearc.heavy.iot.test.di.IotTestScope
+import com.ripplearc.heavy.toolbelt.constants.Emoji
+import io.reactivex.Observable
+import javax.inject.Inject
 
-class RequestViewModel : ViewModel() {
-    // TODO: Implement the ViewModel
+@IotTestScope
+class RequestViewModel @Inject constructor(
+    private val rxPreference: RxCommonPreference,
+    private val gson: Gson
+) : ViewModel() {
+    val topicObservable: Observable<String> =
+        rxPreference.getObserve(SharedPreferenceKey.SelectedDevice, "")
+            .log(Emoji.Yoga)
+            .mapNotNull {
+                gson.fromJson(it, DeviceModel::class.java)
+                    ?.let {
+                        "iot/topic/${it.udid}"
+                    }
+            }
 }

@@ -24,6 +24,7 @@ deps[project.name] = [
 
         api           : [
                 deps.google.dagger,
+                deps.miscellaneous.sharePreference.tray,
                 deps.miscellaneous.log.logger,
                 deps.reactivex.rxKotlin,
                 deps.reactivex.rxAndroid,

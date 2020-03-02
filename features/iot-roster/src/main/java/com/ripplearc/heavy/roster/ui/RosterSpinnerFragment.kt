@@ -13,6 +13,7 @@ import com.ripplearc.heavy.common.core.model.ViewModelFactory
 import com.ripplearc.heavy.common.toolbox.*
 import com.ripplearc.heavy.iot.roster.R
 import com.ripplearc.heavy.iot.roster.feature.iotRosterComponent
+import kotlinx.android.synthetic.main.roster_spinner_fragment.*
 import javax.inject.Inject
 
 class RosterSpinnerFragment : Fragment() {
@@ -49,20 +50,14 @@ class RosterSpinnerFragment : Fragment() {
         viewModel.selectedDeviceObservable()
             .asLiveDataOnErrorReturnEmpty()
             .observe(this, Observer { index ->
-                view?.findViewById<Spinner>(R.id.device_roster)
-                    ?.let { spinner ->
-                        index?.let { spinner.setSelection(it) }
-                    }
+                index?.let { device_roster.setSelection(it) }
             })
     }
 
     private fun actionBind() {
-        view?.findViewById<Spinner>(R.id.device_roster)
-            ?.let { spinner ->
-                RxAdapterView.itemSelections(spinner)
-                    .bind(target = viewModel.switchDeviceRelay)
-                    .disposeOnStop(this)
-            }
+        RxAdapterView.itemSelections(device_roster)
+            .bind(target = viewModel.switchDeviceRelay)
+            .disposeOnStop(this)
 
         viewModel.switchDevice()
             .safeSubscribeBy()

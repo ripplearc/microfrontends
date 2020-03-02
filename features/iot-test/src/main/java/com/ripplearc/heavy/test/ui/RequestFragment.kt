@@ -6,16 +6,28 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
+import com.ripplearc.heavy.common.core.model.ViewModelFactory
 
 import com.ripplearc.heavy.iot.test.R
+import com.ripplearc.heavy.iot.test.feature.iotTestComponent
+import com.ripplearc.heavy.toolbelt.constants.Emoji
+import com.ripplearc.heavy.toolbelt.rx.asLiveData
+import com.ripplearc.heavy.toolbelt.rx.log
+import kotlinx.android.synthetic.main.request_fragment.*
+import javax.inject.Inject
 
 class RequestFragment : Fragment() {
 
     companion object {
         fun newInstance() = RequestFragment()
     }
+    @Inject
+    lateinit var rosterViewModelProvider: ViewModelFactory<RequestViewModel>
 
-    private lateinit var viewModel: RequestViewModel
+    private val viewModel by lazy {
+        ViewModelProviders.of(this, rosterViewModelProvider).get(RequestViewModel::class.java)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,8 +38,16 @@ class RequestFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(RequestViewModel::class.java)
-        // TODO: Use the ViewModel
+        iotTestComponent.inject(this)
+        dataBind()
     }
 
+    private fun dataBind() {
+        viewModel.topicObservable
+            .log(Emoji.CellPhone)
+            .asLiveData("No Device Selected")
+            .observe(this, Observer {
+                it?.let { topic_bar.setText(it) }
+            })
+    }
 }
