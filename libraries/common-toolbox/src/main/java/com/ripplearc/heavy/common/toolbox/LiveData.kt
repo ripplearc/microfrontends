@@ -1,17 +1,18 @@
 package com.ripplearc.heavy.common.toolbox
 
+import android.os.Handler
+import android.os.Looper
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.LiveDataReactiveStreams
 import io.reactivex.*
-import io.reactivex.android.schedulers.AndroidSchedulers
 
 
 /**
  * Convert Flowable to LiveData and handles with error with a default value.
  */
 fun <T> Flowable<T>.asLiveData(onErrorJustReturn: T): LiveData<T> =
-    observeOn(AndroidSchedulers.mainThread())
-        .onErrorReturnItem(onErrorJustReturn)
+    onErrorReturnItem(onErrorJustReturn)
         .let { noErrorStream: Flowable<T> ->
             LiveDataReactiveStreams.fromPublisher(noErrorStream)
         }
@@ -20,8 +21,7 @@ fun <T> Flowable<T>.asLiveData(onErrorJustReturn: T): LiveData<T> =
  * Convert Flowable to LiveData and handles with error by emitting nothing.
  */
 fun <T> Flowable<T>.asLiveDataAndOnErrorReturnEmpty(): LiveData<T> =
-    observeOn(AndroidSchedulers.mainThread())
-        .onErrorResumeNext(Flowable.empty())
+    onErrorResumeNext(Flowable.empty())
         .let { noErrorStream: Flowable<T> ->
             LiveDataReactiveStreams.fromPublisher(noErrorStream)
         }
@@ -33,8 +33,7 @@ fun <T> Observable<T>.asLiveData(
     onErrorJustReturn: T,
     strategy: BackpressureStrategy = BackpressureStrategy.BUFFER
 ): LiveData<T> =
-    observeOn(AndroidSchedulers.mainThread())
-        .onErrorReturnItem(onErrorJustReturn)
+    onErrorReturnItem(onErrorJustReturn)
         ?.let { noErrorStream ->
             LiveDataReactiveStreams.fromPublisher(noErrorStream.toFlowable(strategy))
         } ?: LiveDataReactiveStreams.fromPublisher(
@@ -47,8 +46,7 @@ fun <T> Observable<T>.asLiveData(
 fun <T> Observable<T>.asLiveDataOnErrorReturnEmpty(
     strategy: BackpressureStrategy = BackpressureStrategy.BUFFER
 ): LiveData<T> =
-    observeOn(AndroidSchedulers.mainThread())
-        .onErrorResumeNext(Observable.empty())
+    onErrorResumeNext(Observable.empty())
         ?.let { noErrorStream ->
             LiveDataReactiveStreams.fromPublisher(noErrorStream.toFlowable(strategy))
         } ?: LiveDataReactiveStreams.fromPublisher(
@@ -59,8 +57,7 @@ fun <T> Observable<T>.asLiveDataOnErrorReturnEmpty(
  * Convert Single to LiveData and handles with error with a default value.
  */
 fun <T> Single<T>.asLiveData(onErrorJustReturn: T): LiveData<T> =
-    observeOn(AndroidSchedulers.mainThread())
-        .onErrorReturnItem(onErrorJustReturn)
+    onErrorReturnItem(onErrorJustReturn)
         ?.let { noErrorStream ->
             LiveDataReactiveStreams.fromPublisher(noErrorStream.toFlowable())
         } ?: LiveDataReactiveStreams.fromPublisher(Single.just(onErrorJustReturn).toFlowable())
@@ -70,8 +67,7 @@ fun <T> Single<T>.asLiveData(onErrorJustReturn: T): LiveData<T> =
  * Convert Maybe to LiveData and handles with error with a default value.
  */
 fun <T> Maybe<T>.asLiveData(onErrorJustReturn: T): LiveData<T> =
-    observeOn(AndroidSchedulers.mainThread())
-        .onErrorReturnItem(onErrorJustReturn)
+    onErrorReturnItem(onErrorJustReturn)
         ?.let { noErrorStream ->
             LiveDataReactiveStreams.fromPublisher(noErrorStream.toFlowable())
         } ?: LiveDataReactiveStreams.fromPublisher(Maybe.just(onErrorJustReturn).toFlowable())
@@ -80,8 +76,28 @@ fun <T> Maybe<T>.asLiveData(onErrorJustReturn: T): LiveData<T> =
  * Convert Maybe to LiveData and handles with error by emitting OnComplete
  */
 fun Completable.asLiveData(): LiveData<Unit> =
-    observeOn(AndroidSchedulers.mainThread())
-        .onErrorComplete()
+    onErrorComplete()
         ?.let { noErrorStream ->
             LiveDataReactiveStreams.fromPublisher<Unit>(noErrorStream.toFlowable())
         } ?: LiveDataReactiveStreams.fromPublisher(Completable.complete().toFlowable())
+
+
+/**
+ * Make sure observing the LiveData is called on the main thread.
+ */
+fun <T> LiveData<T>.observeOnMain(
+    owner: LifecycleOwner,
+    observer: androidx.lifecycle.Observer<in T>
+) {
+    let { live ->
+        Runnable {
+            live.observe(owner, observer)
+        }.runOnMain()
+    }
+}
+
+fun Runnable.runOnMain() {
+    run {
+        Handler(Looper.getMainLooper()).post(this)
+    }
+}

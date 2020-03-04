@@ -7,7 +7,7 @@ ext {
 
             'dagger'    : '2.26',
             'androidx'  : '1.0.0',
-            'jetpack'   : '2.1.0',
+            'jetpack'   : '2.2.0',
             'retrofit'  : '2.3.0',
             'gms'       : '17.0.0',
             'firebase'  : "17.2.0",
@@ -43,6 +43,10 @@ ext {
                     ]
             ],
 
+            coroutines   : [
+                    'core': "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.3"
+            ],
+
             google       : [
                     'dagger'         : "com.google.dagger:dagger:${versions.dagger}",
                     'daggerProcessor': "com.google.dagger:dagger-compiler:${versions.dagger}",
@@ -60,6 +64,7 @@ ext {
                                     'common'         : "androidx.lifecycle:lifecycle-common-java8:${versions.jetpack}",
                                     'ext'            : "androidx.lifecycle:lifecycle-extensions:${versions.jetpack}",
                                     'reactiveStreams': "androidx.lifecycle:lifecycle-reactivestreams:${versions.jetpack}",
+                                    'runtime'        : "androidx.lifecycle:lifecycle-runtime-ktx:${versions.jetpack}",
                             ],
                             navigation: [
                                     'fragment': "androidx.navigation:navigation-fragment-ktx:${versions.jetpack}",

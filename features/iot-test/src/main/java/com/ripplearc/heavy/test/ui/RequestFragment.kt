@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import com.ripplearc.heavy.common.core.model.ViewModelFactory
 
 import com.ripplearc.heavy.iot.test.R
@@ -14,7 +15,10 @@ import com.ripplearc.heavy.iot.test.feature.iotTestComponent
 import com.ripplearc.heavy.toolbelt.constants.Emoji
 import com.ripplearc.heavy.toolbelt.rx.asLiveData
 import com.ripplearc.heavy.toolbelt.rx.log
+import com.ripplearc.heavy.toolbelt.rx.observeOnMain
 import kotlinx.android.synthetic.main.request_fragment.*
+import kotlinx.coroutines.ExecutorCoroutineDispatcher
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class RequestFragment : Fragment() {
@@ -22,8 +26,12 @@ class RequestFragment : Fragment() {
     companion object {
         fun newInstance() = RequestFragment()
     }
+
     @Inject
     lateinit var rosterViewModelProvider: ViewModelFactory<RequestViewModel>
+
+    @Inject
+    lateinit var coroutinesContext: ExecutorCoroutineDispatcher
 
     private val viewModel by lazy {
         ViewModelProviders.of(this, rosterViewModelProvider).get(RequestViewModel::class.java)
@@ -39,14 +47,16 @@ class RequestFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         iotTestComponent.inject(this)
-        dataBind()
+        lifecycleScope.launch(coroutinesContext) {
+            dataBind()
+        }
     }
 
     private fun dataBind() {
         viewModel.topicObservable
             .log(Emoji.CellPhone)
             .asLiveData("No Device Selected")
-            .observe(this, Observer {
+            .observeOnMain(viewLifecycleOwner, Observer {
                 it?.let { topic_bar.setText(it) }
             })
     }

@@ -24,6 +24,7 @@ deps[project.name] = [
 
                 deps.google.jetpack.lifecycle.common,
                 deps.google.jetpack.lifecycle.ext,
+                deps.google.jetpack.lifecycle.runtime,
                 deps.google.jetpack.navigation.fragment,
 
                 deps.ripplearc.radio,

@@ -7,6 +7,7 @@ import com.ripplearc.heavy.groundvisual.BuildConfig
 import com.ripplearc.heavy.groundvisual.GroundVisualApplication
 import dagger.Module
 import dagger.Provides
+import kotlinx.coroutines.newFixedThreadPoolContext
 import net.grandcentrix.tray.TrayPreferences
 
 
@@ -22,6 +23,9 @@ object AppModule {
     @[Provides ApplicationScope JvmStatic]
     fun provideRxCommonPreference(tray: TrayPreferences): RxCommonPreference =
         RxCommonPreference(tray)
+
+    @[Provides ApplicationScope JvmStatic]
+    fun provideCoroutinesThreadPoolContext() = newFixedThreadPoolContext(4, "Background")
 }
 
 

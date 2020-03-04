@@ -29,6 +29,7 @@ deps[project.name] = [
                 deps.reactivex.rxKotlin,
                 deps.reactivex.rxAndroid,
                 deps.reactivex.thirdParty.rxRelay,
+                deps.coroutines.core,
                 deps.google.jetpack.lifecycle.reactiveStreams,
                 deps.google.jetpack.lifecycle.common
         ],

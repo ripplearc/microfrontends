@@ -10,6 +10,7 @@ import com.ripplearc.heavy.test.di.RadioComponent
 import com.ripplearc.heavy.test.ui.RequestActivity
 import dagger.BindsInstance
 import dagger.Component
+import kotlinx.coroutines.ExecutorCoroutineDispatcher
 
 @IotTestScope
 @Component(
@@ -30,4 +31,6 @@ interface IotTestComponent {
     fun inject(fragment: RequestFragment)
     fun inject(activity: RequestActivity)
     fun getMapViewModel(): ViewModelFactory<RequestViewModel>
+    fun coroutinesThreadPoolContext(): ExecutorCoroutineDispatcher
+
 }

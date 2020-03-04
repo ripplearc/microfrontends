@@ -4,6 +4,7 @@ import android.content.Context
 import com.google.gson.Gson
 import com.ripplearc.heavy.common.core.model.Dependencies
 import com.ripplearc.heavy.common.toolbox.RxCommonPreference
+import kotlinx.coroutines.ExecutorCoroutineDispatcher
 import retrofit2.Retrofit
 
 
@@ -12,6 +13,7 @@ interface CommonDependencies : Dependencies {
     fun retrofit(): Retrofit
     fun gson(): Gson
     fun rxPreference(): RxCommonPreference
+    fun coroutinesThreadPoolContext(): ExecutorCoroutineDispatcher
 }
 
 interface RadioDependencies : Dependencies {

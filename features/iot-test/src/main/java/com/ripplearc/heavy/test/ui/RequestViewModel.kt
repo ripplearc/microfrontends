@@ -9,21 +9,20 @@ import com.ripplearc.heavy.data.DeviceModel
 import com.ripplearc.heavy.data.SharedPreferenceKey
 import com.ripplearc.heavy.iot.test.di.IotTestScope
 import com.ripplearc.heavy.toolbelt.constants.Emoji
+import dagger.Lazy
 import io.reactivex.Observable
 import javax.inject.Inject
 
 @IotTestScope
 class RequestViewModel @Inject constructor(
-    private val rxPreference: RxCommonPreference,
-    private val gson: Gson
+    rxPreference: Lazy<RxCommonPreference>,
+    private val gson: Lazy<Gson>
 ) : ViewModel() {
     val topicObservable: Observable<String> =
-        rxPreference.getObserve(SharedPreferenceKey.SelectedDevice, "")
+        rxPreference.get().getObserve(SharedPreferenceKey.SelectedDevice, "")
             .log(Emoji.Yoga)
             .mapNotNull {
-                gson.fromJson(it, DeviceModel::class.java)
-                    ?.let {
-                        "iot/topic/${it.udid}"
-                    }
+                gson.get().fromJson(it, DeviceModel::class.java)
+                    ?.let { model -> "iot/topic/${model.udid}" }
             }
 }

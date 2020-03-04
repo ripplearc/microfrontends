@@ -8,12 +8,15 @@ import android.widget.Spinner
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.lifecycleScope
 import com.jakewharton.rxbinding2.widget.RxAdapterView
 import com.ripplearc.heavy.common.core.model.ViewModelFactory
 import com.ripplearc.heavy.common.toolbox.*
 import com.ripplearc.heavy.iot.roster.R
 import com.ripplearc.heavy.iot.roster.feature.iotRosterComponent
 import kotlinx.android.synthetic.main.roster_spinner_fragment.*
+import kotlinx.coroutines.ExecutorCoroutineDispatcher
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class RosterSpinnerFragment : Fragment() {
@@ -24,6 +27,9 @@ class RosterSpinnerFragment : Fragment() {
 
     @Inject
     lateinit var rosterViewModelProvider: ViewModelFactory<RosterSpinnerViewModel>
+
+    @Inject
+    lateinit var coroutinesContext: ExecutorCoroutineDispatcher
 
     private val viewModel by lazy {
         ViewModelProviders.of(this, rosterViewModelProvider).get(RosterSpinnerViewModel::class.java)
@@ -39,17 +45,22 @@ class RosterSpinnerFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         iotRosterComponent.inject(this)
-
-        dataBind()
-        actionBind()
+        lifecycleScope.launch(coroutinesContext) {
+            dataBind()
+            actionBind()
+        }
     }
 
     private fun dataBind() {
-        view?.findViewById<Spinner>(R.id.device_roster)?.adapter = viewModel.spinnerAdapter
+        viewModel.spinnerAdapter.let {
+            Runnable {
+                view?.findViewById<Spinner>(R.id.device_roster)?.adapter = it
+            }.runOnMain()
+        }
 
         viewModel.selectedDeviceObservable()
             .asLiveDataOnErrorReturnEmpty()
-            .observe(this, Observer { index ->
+            .observeOnMain(viewLifecycleOwner, Observer { index ->
                 index?.let { device_roster.setSelection(it) }
             })
     }
