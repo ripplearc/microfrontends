@@ -15,14 +15,14 @@ import javax.inject.Inject
 
 @IotTestScope
 class RequestViewModel @Inject constructor(
-    rxPreference: Lazy<RxCommonPreference>,
-    private val gson: Lazy<Gson>
+    rxPreference: RxCommonPreference,
+    private val gson: Gson
 ) : ViewModel() {
     val topicObservable: Observable<String> =
-        rxPreference.get().getObserve(SharedPreferenceKey.SelectedDevice, "")
+        rxPreference.getObserve(SharedPreferenceKey.SelectedDevice, "")
             .log(Emoji.Yoga)
             .mapNotNull {
-                gson.get().fromJson(it, DeviceModel::class.java)
+                gson.fromJson(it, DeviceModel::class.java)
                     ?.let { model -> "iot/topic/${model.udid}" }
             }
 }

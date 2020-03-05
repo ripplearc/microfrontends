@@ -14,7 +14,8 @@ import javax.inject.Inject
  */
 @Reusable
 class RxCommonPreference @Inject constructor(
-    val preference: TrayPreferences
+    val preference: TrayPreferences,
+    val schedulerFactory: SchedulerFactory
 ) {
 
     /**
@@ -32,6 +33,7 @@ class RxCommonPreference @Inject constructor(
                 }
                 .startWithNotNull(defaultValue.getValue(key))
         }
+            .subscribeOn(schedulerFactory.io())
 
     inline fun <reified T : Any> T.getValue(key: String): T? =
         when (this) {
@@ -77,5 +79,8 @@ class RxCommonPreference @Inject constructor(
             }
         }
             .share()
+            .subscribeOn(schedulerFactory.io())
+            .observeOn(schedulerFactory.computation())
+
 
 }

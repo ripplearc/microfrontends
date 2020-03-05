@@ -29,8 +29,8 @@ class RosterSpinnerViewModel @Inject constructor(
     private var coroutinesContext: ExecutorCoroutineDispatcher,
     deviceRosterService: DeviceRosterService,
     private val schedulerFactory: SchedulerFactory,
-    private val rxPreference: Lazy<RxCommonPreference>,
-    private val gson: Lazy<Gson>
+    private val rxPreference: RxCommonPreference,
+    private val gson: Gson
 ) : ViewModel() {
 
     private val source = ArrayList<String>()
@@ -56,26 +56,23 @@ class RosterSpinnerViewModel @Inject constructor(
 
     private fun observeRoster(adapter: ArrayAdapter<String>) {
         deviceRoster
+            .map { list ->
+                list.map { model ->
+                    model.name.removePrefix("Manufacture: ")
+                }
+            }
+            .doOnNext { roster ->
+                with(adapter) {
+                    clear()
+                    addAll(roster)
+                }
+            }
             .observeOn(schedulerFactory.main())
-            .safeSubscribeBy(onNext = { roster ->
-                updateRoster(roster, adapter)
+            .safeSubscribeBy(onNext = {
+                adapter.notifyDataSetChanged()
             }).disposedBy(disposables)
     }
 
-    private fun updateRoster(
-        roster: List<DeviceModel>?,
-        adapter: ArrayAdapter<String>
-    ) = roster?.let {
-        with(adapter) {
-            it.map { model ->
-                model.name.removePrefix("Manufacture: ")
-            }.run {
-                clear()
-                addAll(this)
-                notifyDataSetChanged()
-            }
-        }
-    }
 
     fun switchDevice(): Completable =
         switchDeviceRelay
@@ -90,20 +87,20 @@ class RosterSpinnerViewModel @Inject constructor(
             .flatMapCompletable(::saveModelToPreference)
 
     private fun saveModelToPreference(it: DeviceModel): Completable =
-        rxPreference.get().setCompletable(
+        rxPreference.setCompletable(
             SharedPreferenceKey.SelectedDevice,
-            gson.get().toJson(it)
+            gson.toJson(it)
         )
 
     fun selectedDeviceObservable(): Observable<Int> =
-        rxPreference.get().getObserve(SharedPreferenceKey.SelectedDevice, "")
+        rxPreference.getObserve(SharedPreferenceKey.SelectedDevice, "")
             .log(Emoji.Smile)
             .switchMap(::indexOfSelectedModel)
             .log(Emoji.Broadcast)
 
     private fun indexOfSelectedModel(it: String): Observable<Int> {
         return deviceRoster.mapNotNull { models ->
-            gson.get().fromJson(it, DeviceModel::class.java)
+            gson.fromJson(it, DeviceModel::class.java)
                 ?.let { selectedModel ->
                     models.indexOfFirst {
                         selectedModel == it
