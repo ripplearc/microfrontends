@@ -10,7 +10,7 @@ ext {
             'jetpack'   : '2.2.0',
             'retrofit'  : '2.3.0',
             'gms'       : '17.0.0',
-            'firebase'  : "17.2.0",
+            'firebase'  : "17.2.2",
             'aws'       : "2.16.+",
             autoservice : '1.0-rc6'
     ]
@@ -71,9 +71,7 @@ ext {
                                     'ui'      : "androidx.navigation:navigation-ui-ktx:${versions.jetpack}"
                             ]
                     ],
-                    crashlytics      : [
-                            'crashlytics': "com.crashlytics.sdk.android:crashlytics:2.10.1"
-                    ],
+                    'crashlytics'    : "com.crashlytics.sdk.android:crashlytics:2.10.1",
                     firebase         : [
                             'core'     : "com.google.firebase:firebase-core:${versions.firebase}",
                             'analytics': "com.google.firebase:firebase-analytics:${versions.firebase}",

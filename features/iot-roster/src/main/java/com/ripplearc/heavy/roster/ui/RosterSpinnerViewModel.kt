@@ -56,20 +56,18 @@ class RosterSpinnerViewModel @Inject constructor(
 
     private fun observeRoster(adapter: ArrayAdapter<String>) {
         deviceRoster
-            .map { list ->
+            .mapNotNull { list ->
                 list.map { model ->
                     model.name.removePrefix("Manufacture: ")
                 }
             }
-            .doOnNext { roster ->
+            .observeOn(schedulerFactory.main())
+            .safeSubscribeBy(onNext = { roster ->
                 with(adapter) {
                     clear()
                     addAll(roster)
+                    notifyDataSetChanged()
                 }
-            }
-            .observeOn(schedulerFactory.main())
-            .safeSubscribeBy(onNext = {
-                adapter.notifyDataSetChanged()
             }).disposedBy(disposables)
     }
 
