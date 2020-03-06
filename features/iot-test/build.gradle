@@ -31,7 +31,7 @@ deps[project.name] = [
                 project(':common-features'),
                 project(':common-core'),
                 project(':common-data'),
-                project(':common-toolbox'),
+                project(':common-rxUtil'),
         ],
 
         api           : [

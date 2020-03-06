@@ -21,6 +21,6 @@ deps[project.name] = [
                 deps.square.retrofit,
                 deps.google.gson,
                 project(':common-core'),
-                project(':common-toolbox')
+                project(':common-rxUtil')
         ]
 ]
