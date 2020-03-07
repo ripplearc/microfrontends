@@ -3,6 +3,8 @@ package com.ripplearc.heavy.common.toolbox
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.Network
+import android.net.NetworkCapabilities
+import android.net.NetworkRequest
 import io.reactivex.Observable
 
 enum class NetworkState {
@@ -23,11 +25,15 @@ fun connectivityObservable(context: Context): Observable<NetworkState> =
                 emitter.onSafeNext(NetworkState.DISCONNECTED)
             }
         }.let { callback ->
+            val builder = NetworkRequest.Builder()
+            builder.addTransportType(NetworkCapabilities.TRANSPORT_CELLULAR)
+            builder.addTransportType(NetworkCapabilities.TRANSPORT_WIFI)
+
+            val networkRequest = builder.build()
+
             (context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager)
-                .registerDefaultNetworkCallback(callback)
-
+                .registerNetworkCallback(networkRequest, callback)
             emitter.setCancellable {
-
                 (context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager)
                     .unregisterNetworkCallback(callback)
             }
