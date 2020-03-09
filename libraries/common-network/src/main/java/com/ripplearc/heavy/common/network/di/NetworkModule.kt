@@ -1,6 +1,7 @@
 package com.ripplearc.heavy.common.network.di
 
 import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import com.ripplearc.heavy.common.core.qualifier.ApplicationScope
 import com.ripplearc.heavy.common.network.config.NetworkConfig
 import dagger.Module
@@ -10,12 +11,18 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Named
 
 
 @Module
 object NetworkModule {
+    @Named("Concise")
     @[Provides ApplicationScope JvmStatic]
-    fun provideGson() = Gson()
+    fun provideConciseGson() = Gson()
+
+    @Named("Pretty")
+    @[Provides ApplicationScope JvmStatic]
+    fun providePrettyGson() = GsonBuilder().setPrettyPrinting().create()
 
     @[Provides ApplicationScope JvmStatic]
     fun provideOkHttpClient() = OkHttpClient

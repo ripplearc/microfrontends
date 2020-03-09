@@ -1,21 +1,18 @@
-package com.ripplearc.heavy.common.toolbox
+package com.ripplearc.heavy.common.rxUtil
 
+import android.content.Context
+import android.content.SharedPreferences
 import dagger.Reusable
 import io.reactivex.Completable
 import io.reactivex.Observable
-import io.reactivex.Single
-import net.grandcentrix.tray.TrayPreferences
-import net.grandcentrix.tray.core.OnTrayPreferenceChangeListener
-import javax.inject.Inject
 
 
 /**
- * RxCommonPreference emits the preference value saved to the CommonPreference.
+ * RxPreference emits the preference value saved to the SharedPreference.
  */
 @Reusable
-class RxCommonPreference @Inject constructor(
-    val preference: TrayPreferences,
-    val schedulerFactory: SchedulerFactory
+class RxPreference constructor(
+    val preference: SharedPreferences
 ) {
 
     /**
@@ -33,7 +30,6 @@ class RxCommonPreference @Inject constructor(
                 }
                 .startWithNotNull(defaultValue.getValue(key))
         }
-            .subscribeOn(schedulerFactory.io())
 
     inline fun <reified T : Any> T.getValue(key: String): T? =
         when (this) {
@@ -53,34 +49,31 @@ class RxCommonPreference @Inject constructor(
      */
     fun <T : Any> setCompletable(key: String, value: T): Completable =
         Completable.create { emitter ->
-            val success = when (value) {
-                is Long -> preference.put(key, value)
-                is Boolean -> preference.put(key, value)
-                is String -> preference.put(key, value)
-                else -> false
+            when (value) {
+                is Long -> preference.edit().putLong(key, value).apply()
+                is Boolean -> preference.edit().putBoolean(key, value).apply()
+                is String -> preference.edit().putString(key, value).apply()
+                else -> {
+                }
             }
-            if (success)
-                emitter.onSafeComplete()
-            else
-                emitter.onSafeError(Throwable("Fail to save value to preference."))
+            emitter.onComplete()
         }
 
-    fun keyChange(preferences: TrayPreferences): Observable<String> =
+    fun keyChange(preferences: SharedPreferences): Observable<String> =
         Observable.create<String> { emitter ->
-            OnTrayPreferenceChangeListener { trays ->
-                trays.forEach {
-                    emitter.onSafeNext(it.key())
-                }
+            SharedPreferences.OnSharedPreferenceChangeListener { preference, key ->
+                emitter.onSafeNext(key)
             }.let {
-                preferences.registerOnTrayPreferenceChangeListener(it)
+                preferences.registerOnSharedPreferenceChangeListener(it)
                 emitter.setCancellable {
-                    preferences.unregisterOnTrayPreferenceChangeListener(it)
+                    preferences.unregisterOnSharedPreferenceChangeListener(it)
                 }
             }
         }
             .share()
-            .subscribeOn(schedulerFactory.io())
-            .observeOn(schedulerFactory.computation())
 
-
+    companion object {
+        fun create(context: Context): RxPreference =
+            RxPreference(context.getSharedPreferences("RxPrefs", Context.MODE_PRIVATE))
+    }
 }

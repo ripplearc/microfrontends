@@ -11,7 +11,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.lifecycle.lifecycleScope
 import com.jakewharton.rxbinding2.widget.RxAdapterView
 import com.ripplearc.heavy.common.core.model.ViewModelFactory
-import com.ripplearc.heavy.common.toolbox.*
+import com.ripplearc.heavy.common.rxUtil.*
 import com.ripplearc.heavy.iot.roster.R
 import com.ripplearc.heavy.iot.roster.feature.iotRosterComponent
 import kotlinx.android.synthetic.main.roster_spinner_fragment.*

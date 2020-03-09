@@ -1,4 +1,4 @@
-package com.ripplearc.heavy.common.toolbox
+package com.ripplearc.heavy.common.rxUtil
 
 object Emoji {
     val Smile: String

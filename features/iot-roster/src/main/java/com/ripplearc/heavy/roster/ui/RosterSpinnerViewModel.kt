@@ -6,21 +6,22 @@ import android.widget.ArrayAdapter
 import com.jakewharton.rx.replayingShare
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.Navigator
 import com.google.gson.Gson
 import com.jakewharton.rxrelay2.ReplayRelay
-import com.ripplearc.heavy.common.toolbox.*
+import com.ripplearc.heavy.common.rxUtil.*
 import com.ripplearc.heavy.data.DeviceModel
 import com.ripplearc.heavy.data.SharedPreferenceKey
 import com.ripplearc.heavy.iot.roster.R
 import com.ripplearc.heavy.iot.roster.di.IotRosterScope
 import com.ripplearc.heavy.roster.service.DeviceRosterService
-import dagger.Lazy
 import io.reactivex.Completable
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.coroutines.ExecutorCoroutineDispatcher
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import javax.inject.Named
 
 
 @IotRosterScope
@@ -30,7 +31,7 @@ class RosterSpinnerViewModel @Inject constructor(
     deviceRosterService: DeviceRosterService,
     private val schedulerFactory: SchedulerFactory,
     private val rxPreference: RxCommonPreference,
-    private val gson: Gson
+    @param:Named("Pretty") private val gson: Gson
 ) : ViewModel() {
 
     private val source = ArrayList<String>()
@@ -75,7 +76,6 @@ class RosterSpinnerViewModel @Inject constructor(
     fun switchDevice(): Completable =
         switchDeviceRelay
             .filter { it != INVALID_POSITION }
-            .log(Emoji.Busy)
             .switchMapCompletable(::saveSelectedModelToPreference)
 
     private fun saveSelectedModelToPreference(index: Int): Completable? =
@@ -92,9 +92,7 @@ class RosterSpinnerViewModel @Inject constructor(
 
     fun selectedDeviceObservable(): Observable<Int> =
         rxPreference.getObserve(SharedPreferenceKey.SelectedDevice, "")
-            .log(Emoji.Smile)
             .switchMap(::indexOfSelectedModel)
-            .log(Emoji.Broadcast)
 
     private fun indexOfSelectedModel(it: String): Observable<Int> {
         return deviceRoster.mapNotNull { models ->

@@ -6,13 +6,13 @@ import androidx.fragment.app.Fragment
 import com.ripplearc.heavy.common.core.model.Feature
 import com.ripplearc.heavy.common.core.model.FeatureProvider
 import com.ripplearc.heavy.common.features.IotTestFeature
+import com.ripplearc.heavy.data.Directory
 import com.ripplearc.heavy.iot.test.R
 import com.ripplearc.heavy.iot.test.di.DaggerIotTestComponent
 import com.ripplearc.heavy.iot.test.di.IotTestComponent
 import com.ripplearc.heavy.iot.test.ui.RequestFragment
 import com.ripplearc.heavy.test.di.DaggerRadioComponent
 import com.ripplearc.heavy.test.ui.RequestActivity
-import com.ripplearc.heavy.toolbelt.constants.Directory
 
 internal lateinit var iotTestComponent: IotTestComponent
 

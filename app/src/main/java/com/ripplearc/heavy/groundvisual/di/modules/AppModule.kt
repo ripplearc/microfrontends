@@ -2,9 +2,8 @@ package com.ripplearc.heavy.groundvisual.di.modules
 
 import android.content.Context
 import com.ripplearc.heavy.common.core.qualifier.ApplicationScope
-import com.ripplearc.heavy.common.toolbox.RxCommonPreference
-import com.ripplearc.heavy.common.toolbox.SchedulerFactory
-import com.ripplearc.heavy.groundvisual.BuildConfig
+import com.ripplearc.heavy.common.rxUtil.RxCommonPreference
+import com.ripplearc.heavy.common.rxUtil.SchedulerFactory
 import com.ripplearc.heavy.groundvisual.GroundVisualApplication
 import dagger.Module
 import dagger.Provides

@@ -4,7 +4,6 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 android {
-
     defaultConfig {
         consumerProguardFiles 'consumer-rules.pro'
     }
@@ -15,28 +14,18 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
 }
 
 deps[project.name] = [
         implementation: [
                 deps.androidx.appCompat,
-                deps.androidx.layout,
-
-                deps.google.jetpack.lifecycle.common,
-                deps.google.jetpack.lifecycle.ext,
-                deps.google.jetpack.lifecycle.runtime,
-                deps.google.jetpack.navigation.fragment,
-                deps.reactivex.thirdParty.rxBinding.platform,
-                deps.ripplearc.radio,
-                project(':common-features'),
-                project(':common-core'),
-                project(':common-data'),
-                project(':common-rxUtil'),
-                project(':common-util'),
         ],
 
         api           : [
-                deps.google.dagger
+                deps.google.dagger,
+                deps.google.jetpack.lifecycle.reactiveStreams,
+                deps.google.jetpack.lifecycle.common
         ],
 
         kapt          : [
