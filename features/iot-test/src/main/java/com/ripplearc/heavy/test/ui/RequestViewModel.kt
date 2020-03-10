@@ -10,13 +10,12 @@ import com.ripplearc.heavy.common.util.date.DateProvider
 import com.ripplearc.heavy.data.*
 import com.ripplearc.heavy.iot.test.di.IotTestScope
 import com.ripplearc.heavy.radio.messaging.MessagingJob
-import io.reactivex.rxkotlin.withLatestFrom
-import io.reactivex.rxkotlin.combineLatest
 import io.reactivex.BackpressureStrategy
 import io.reactivex.Completable
 import io.reactivex.Flowable
 import io.reactivex.Observable
 import io.reactivex.rxkotlin.Observables.combineLatest
+import io.reactivex.rxkotlin.withLatestFrom
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 import javax.inject.Named
@@ -45,12 +44,11 @@ class RequestViewModel @Inject constructor(
         combineLatest(
             rxPreference.getObserve(SharedPreferenceKey.SelectedDevice, "")
                 .mapNotNull { gson.fromJson(it, DeviceModel::class.java) },
-            Observable.interval(1, TimeUnit.SECONDS)
+            Observable.interval(0, 5, TimeUnit.SECONDS)
         )
             .mapNotNull { (model, _) ->
                 gson.toJson(makeRequestModel(model))
             }
-            .log(Emoji.BaseBall)
 
     private fun makeRequestModel(model: DeviceModel): IotRequestModel {
         return IotRequestModel(

@@ -55,37 +55,16 @@ class RequestFragment : Fragment() {
         RxView.clicks(publish_button)
             .map { topic_bar.text.toString() }
             .doOnNext(::animatePublish)
-            .bind(viewModel.publishTopicRelay)
-            .disposeOnStop(viewLifecycleOwner)
+            .liveBind(viewLifecycleOwner, viewModel.publishTopicRelay)
 
         RxTextView.textChanges(message_box)
             .map { it.toString() }
-            .bind(viewModel.messageRelay)
-            .disposeOnStop(viewLifecycleOwner)
-    }
-
-    private fun animatePublish(text: String) {
-        lifecycleScope.launch(Dispatchers.Main) {
-            topic_bar.setText("*** Publish ***")
-            delay(200)
-            topic_bar.setText("-** Publish ***")
-            delay(200)
-            topic_bar.setText("--* Publish ***")
-            delay(200)
-            topic_bar.setText("--- Publish ***")
-            delay(200)
-            topic_bar.setText("--- Publish -**")
-            delay(200)
-            topic_bar.setText("--- Publish --*")
-            delay(200)
-            topic_bar.setText("*** Publish ***")
-            delay(200)
-            topic_bar.setText(text)
-        }
+            .liveBind(viewLifecycleOwner, viewModel.messageRelay)
     }
 
     private fun dataBind() {
         viewModel.topicObservable
+            .log(Emoji.Diamond)
             .asLiveData("No Device Selected")
             .observeOnMain(viewLifecycleOwner, Observer {
                 it?.let { topic_bar.setText(it) }
@@ -105,4 +84,27 @@ class RequestFragment : Fragment() {
             .asLiveData()
             .observeOnMain(viewLifecycleOwner, Observer {})
     }
+
+    private fun animatePublish(text: String) {
+        lifecycleScope.launch(Dispatchers.Main) {
+            publish_button.isEnabled = false
+            topic_bar.setText("*** Publish ***")
+            delay(200)
+            topic_bar.setText("-** Publish ***")
+            delay(200)
+            topic_bar.setText("--* Publish ***")
+            delay(200)
+            topic_bar.setText("--- Publish ***")
+            delay(200)
+            topic_bar.setText("--- Publish -**")
+            delay(200)
+            topic_bar.setText("--- Publish --*")
+            delay(200)
+            topic_bar.setText("*** Publish ***")
+            delay(200)
+            topic_bar.setText(text)
+            publish_button.isEnabled = true
+        }
+    }
+
 }

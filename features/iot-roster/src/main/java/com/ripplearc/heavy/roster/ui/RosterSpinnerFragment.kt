@@ -67,12 +67,11 @@ class RosterSpinnerFragment : Fragment() {
 
     private fun actionBind() {
         RxAdapterView.itemSelections(device_roster)
-            .bind(target = viewModel.switchDeviceRelay)
-            .disposeOnStop(this)
+            .liveBind(viewLifecycleOwner, target = viewModel.switchDeviceRelay)
 
         viewModel.switchDevice()
-            .safeSubscribeBy()
-            .disposeOnStop(this)
+            .asLiveData()
+            .observeOnMain(viewLifecycleOwner, Observer {})
     }
 
 }
