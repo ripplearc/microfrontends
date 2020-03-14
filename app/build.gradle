@@ -52,7 +52,8 @@ deps[project.name] = [
                 project(':common-core'),
                 project(':common-features'),
                 project(':common-network'),
-                project(':common-rxUtil')
+                project(':common-rxUtil'),
+                project(':common-util')
         ],
 
         kapt          : [

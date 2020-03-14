@@ -30,7 +30,8 @@ deps[project.name] = [
                 project(':common-features'),
                 project(':common-core'),
                 project(':common-data'),
-                project(':common-rxUtil')
+                project(':common-rxUtil'),
+                project(':common-util'),
         ],
 
         kapt          : [

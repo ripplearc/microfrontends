@@ -55,7 +55,7 @@ class RequestFragment : Fragment() {
         RxView.clicks(publish_button)
             .map { topic_bar.text.toString() }
             .doOnNext(::animatePublish)
-            .liveBind(viewLifecycleOwner, viewModel.publishTopicRelay)
+            .flatLiveBind(viewLifecycleOwner, viewModel::publishTopic)
 
         RxTextView.textChanges(message_box)
             .map { it.toString() }
@@ -78,11 +78,7 @@ class RequestFragment : Fragment() {
 
         viewModel.listenToMessages()
             .asLiveData(onErrorJustReturn = "Fail to receive message.")
-            .observeOnMain(viewLifecycleOwner, Observer {})
-
-        viewModel.publishTopic()
-            .asLiveData()
-            .observeOnMain(viewLifecycleOwner, Observer {})
+            .observeOnMain(viewLifecycleOwner)
     }
 
     private fun animatePublish(text: String) {

@@ -15,7 +15,6 @@ import io.reactivex.Completable
 import io.reactivex.Flowable
 import io.reactivex.Observable
 import io.reactivex.rxkotlin.Observables.combineLatest
-import io.reactivex.rxkotlin.withLatestFrom
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 import javax.inject.Named
@@ -30,11 +29,11 @@ class RequestViewModel @Inject constructor(
     private val dateProvider: DateProvider
 ) : ViewModel() {
 
-    val publishTopicRelay: ReplayRelay<String> = ReplayRelay.create()
     val messageRelay: ReplayRelay<String> = ReplayRelay.create()
 
     val topicObservable: Observable<String> =
         rxPreference.getObserve(SharedPreferenceKey.SelectedDevice, "")
+            .distinctUntilChanged()
             .mapNotNull {
                 gson.fromJson(it, DeviceModel::class.java)
                     ?.let { model -> "iot/topic/${model.udid}" }
@@ -72,11 +71,11 @@ class RequestViewModel @Inject constructor(
                     .retry(3)
             }
 
-    fun publishTopic(): Completable =
-        publishTopicRelay
-            .withLatestFrom(messageObservable)
+    fun publishTopic(topic: String): Completable =
+        messageObservable
+            .take(1)
             .observeOn(schedulerFactory.io())
-            .flatMapCompletable { (topic: String, message: String) ->
+            .flatMapCompletable { message: String ->
                 messagingJob.publishCompletable(topic, message)
                     .observeOn(schedulerFactory.main())
                     .doOnError {

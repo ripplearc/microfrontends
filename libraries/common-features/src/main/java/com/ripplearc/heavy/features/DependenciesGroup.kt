@@ -14,7 +14,7 @@ interface CommonDependencies : Dependencies {
     fun retrofit(): Retrofit
 
     @Named("Pretty")
-    fun pretyyGson(): Gson
+    fun prettyGson(): Gson
 
     @Named("Concise")
     fun conciseGson(): Gson

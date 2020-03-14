@@ -5,6 +5,7 @@ import android.os.Looper
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.LiveDataReactiveStreams
+import androidx.lifecycle.Observer
 import io.reactivex.*
 
 
@@ -95,6 +96,9 @@ fun <T> LiveData<T>.observeOnMain(
         }.runOnMain()
     }
 }
+
+fun <T> LiveData<T>.observeOnMain(owner: LifecycleOwner) =
+    observeOnMain(owner, Observer {})
 
 fun Runnable.runOnMain() {
     run {

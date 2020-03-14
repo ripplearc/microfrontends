@@ -23,6 +23,7 @@ deps[project.name] = [
         ],
 
         api           : [
+                deps.coroutines.core,
                 deps.google.dagger,
                 deps.google.jetpack.lifecycle.reactiveStreams,
                 deps.google.jetpack.lifecycle.common
