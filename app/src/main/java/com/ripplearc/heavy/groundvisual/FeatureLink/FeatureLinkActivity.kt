@@ -6,7 +6,7 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import com.ripplearc.heavy.common.core.model.ViewModelFactory
 import com.ripplearc.heavy.common.features.IotHistogramFeature
 import com.ripplearc.heavy.common.features.IotRosterFeature
@@ -27,7 +27,7 @@ class FeatureLinkActivity : AppCompatActivity() {
     lateinit var featureListViewModelProvider: ViewModelFactory<FeatureListViewModel>
 
     private val viewModel by lazy {
-        ViewModelProviders.of(this, featureListViewModelProvider)
+        ViewModelProvider(this, featureListViewModelProvider)
             .get(FeatureListViewModel::class.java)
     }
 

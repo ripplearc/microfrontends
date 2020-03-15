@@ -1,13 +1,16 @@
 package com.ripplearc.heavy.iot.dynamic.histogram.ui
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
+import com.ripplearc.heavy.common.core.model.ViewModelFactory
 
 import com.ripplearc.heavy.iot.dynamic.histogram.R
+import com.ripplearc.heavy.iot.dynamic.histogram.feature.iotHistogramComponent
+import javax.inject.Inject
 
 class IotHistogramFragment : Fragment() {
 
@@ -15,7 +18,13 @@ class IotHistogramFragment : Fragment() {
         fun newInstance() = IotHistogramFragment()
     }
 
-    private lateinit var viewModel: IotHistogramViewModel
+    @Inject
+    lateinit var histogramViewModelProvider: ViewModelFactory<IotHistogramViewModel>
+
+    private val viewModel by lazy {
+        ViewModelProvider(this, histogramViewModelProvider)
+            .get(IotHistogramViewModel::class.java)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,7 +35,8 @@ class IotHistogramFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(IotHistogramViewModel::class.java)
+        iotHistogramComponent.inject(this)
+        viewModel
         // TODO: Use the ViewModel
     }
 

@@ -1,32 +1,23 @@
 package com.ripplearc.heavy.iot.roster.ui
 
 import android.content.Context
-import android.widget.AdapterView.INVALID_POSITION
 import android.widget.ArrayAdapter
-import com.jakewharton.rx.replayingShare
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import androidx.navigation.Navigator
 import com.google.gson.Gson
-import com.jakewharton.rxrelay2.ReplayRelay
-import com.ripplearc.heavy.common.coroutines.CoroutinesContextProvider
-import com.ripplearc.heavy.common.rxUtil.*
+import com.jakewharton.rx.replayingShare
+import com.ripplearc.heavy.common.rxUtil.RxCommonPreference
+import com.ripplearc.heavy.common.rxUtil.SchedulerFactory
+import com.ripplearc.heavy.common.rxUtil.mapNotNull
 import com.ripplearc.heavy.data.DeviceModel
 import com.ripplearc.heavy.data.SharedPreferenceKey
 import com.ripplearc.heavy.iot.roster.R
-import com.ripplearc.heavy.iot.roster.di.IotRosterScope
 import com.ripplearc.heavy.roster.service.DeviceRosterService
 import io.reactivex.Completable
 import io.reactivex.Observable
-import io.reactivex.disposables.CompositeDisposable
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.ExecutorCoroutineDispatcher
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 import javax.inject.Named
 
 
-@IotRosterScope
 class RosterSpinnerViewModel @Inject constructor(
     context: Context,
     deviceRosterService: DeviceRosterService,
@@ -47,11 +38,10 @@ class RosterSpinnerViewModel @Inject constructor(
         ArrayAdapter(context, R.layout.spinner_item, source)
             .also { adapter ->
                 adapter.setDropDownViewResource(R.layout.spinner_item)
-                observeRoster(adapter)
             }
     }
 
-    fun observeRoster(adapter: ArrayAdapter<String>) =
+    fun observeRoster() =
         deviceRoster
             .mapNotNull { list ->
                 list.map { model ->

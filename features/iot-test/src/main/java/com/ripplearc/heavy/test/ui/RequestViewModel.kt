@@ -19,7 +19,6 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 import javax.inject.Named
 
-@IotTestScope
 class RequestViewModel @Inject constructor(
     private val context: Context,
     rxPreference: RxCommonPreference,

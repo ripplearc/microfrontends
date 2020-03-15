@@ -1,22 +1,24 @@
 package com.ripplearc.heavy.iot.test.ui
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.jakewharton.rxbinding2.view.RxView
 import com.jakewharton.rxbinding2.widget.RxTextView
 import com.ripplearc.heavy.common.core.model.ViewModelFactory
 import com.ripplearc.heavy.common.rxUtil.*
-
 import com.ripplearc.heavy.iot.test.R
 import com.ripplearc.heavy.iot.test.feature.iotTestComponent
 import kotlinx.android.synthetic.main.request_fragment.*
-import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExecutorCoroutineDispatcher
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class RequestFragment : Fragment() {
@@ -32,7 +34,7 @@ class RequestFragment : Fragment() {
     lateinit var coroutinesContext: ExecutorCoroutineDispatcher
 
     private val viewModel by lazy {
-        ViewModelProviders.of(this, rosterViewModelProvider).get(RequestViewModel::class.java)
+        ViewModelProvider(this, rosterViewModelProvider).get(RequestViewModel::class.java)
     }
 
     override fun onCreateView(

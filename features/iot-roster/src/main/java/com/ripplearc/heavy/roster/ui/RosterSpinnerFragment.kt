@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import android.widget.Spinner
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.jakewharton.rxbinding2.widget.RxAdapterView
 import com.ripplearc.heavy.common.core.model.ViewModelFactory
@@ -33,7 +33,7 @@ class RosterSpinnerFragment : Fragment() {
     lateinit var coroutinesContextProvider: CoroutinesContextProvider
 
     private val viewModel by lazy {
-        ViewModelProviders.of(this, rosterViewModelProvider).get(RosterSpinnerViewModel::class.java)
+        ViewModelProvider(this, rosterViewModelProvider).get(RosterSpinnerViewModel::class.java)
     }
 
     override fun onCreateView(
@@ -59,7 +59,7 @@ class RosterSpinnerFragment : Fragment() {
             }.runOnMain()
         }
 
-        viewModel.observeRoster(viewModel.spinnerAdapter)
+        viewModel.observeRoster()
             .asLiveDataOnErrorReturnEmpty()
             .observeOnMain(viewLifecycleOwner, Observer { roster: List<String> ->
                 with(viewModel.spinnerAdapter) {

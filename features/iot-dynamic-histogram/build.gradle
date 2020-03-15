@@ -4,13 +4,13 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 deps[project.name] = [
-        implementation: [
+        implementation     : [
                 project(':app')
         ],
 
-        kapt          : [
+        kapt               : [
                 deps.google.daggerProcessor,
-				deps.google.androidCompiler,
-				deps.google.autoservice.processor
-		]
+                deps.google.androidCompiler,
+                deps.google.autoservice.processor
+        ]
 ]

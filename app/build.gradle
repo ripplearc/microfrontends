@@ -33,12 +33,14 @@ android {
 }
 
 deps[project.name] = [
-        implementation: [
+        debugImplementation: [deps.square.leakCanary],
+
+        implementation     : [
                 project(':iot-roster'),
                 project(':iot-test'),
         ],
 
-        api           : [
+        api                : [
                 deps.androidx.appCompat,
                 deps.androidx.layout,
                 deps.androidx.design,
@@ -56,7 +58,7 @@ deps[project.name] = [
                 project(':common-util')
         ],
 
-        kapt          : [
+        kapt               : [
                 deps.google.daggerProcessor
         ]
 ]

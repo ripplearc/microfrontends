@@ -30,5 +30,5 @@ interface IotRosterComponent {
 
     fun getIotRosterFeature(): IotRosterFeature
 
-    fun getMapViewModel(): ViewModelFactory<RosterSpinnerViewModel>
+    fun getRosterViewModel(): ViewModelFactory<RosterSpinnerViewModel>
 }
