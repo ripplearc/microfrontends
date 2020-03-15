@@ -4,11 +4,9 @@ import android.content.Context
 import android.widget.Toast
 import androidx.lifecycle.ViewModel
 import com.google.gson.Gson
-import com.jakewharton.rxrelay2.ReplayRelay
 import com.ripplearc.heavy.common.rxUtil.*
 import com.ripplearc.heavy.common.util.date.DateProvider
 import com.ripplearc.heavy.data.*
-import com.ripplearc.heavy.iot.test.di.IotTestScope
 import com.ripplearc.heavy.radio.messaging.MessagingJob
 import io.reactivex.BackpressureStrategy
 import io.reactivex.Completable
@@ -27,8 +25,6 @@ class RequestViewModel @Inject constructor(
     private val schedulerFactory: SchedulerFactory,
     private val dateProvider: DateProvider
 ) : ViewModel() {
-
-    val messageRelay: ReplayRelay<String> = ReplayRelay.create()
 
     val topicObservable: Observable<String> =
         rxPreference.getObserve(SharedPreferenceKey.SelectedDevice, "")

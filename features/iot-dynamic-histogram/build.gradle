@@ -2,13 +2,18 @@ apply plugin: 'com.android.dynamic-feature'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+android {
+    buildTypes {
+        release {}
+    }
 
+}
 deps[project.name] = [
-        implementation     : [
+        implementation: [
                 project(':app')
         ],
 
-        kapt               : [
+        kapt          : [
                 deps.google.daggerProcessor,
                 deps.google.androidCompiler,
                 deps.google.autoservice.processor

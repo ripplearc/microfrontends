@@ -59,9 +59,6 @@ class RequestFragment : Fragment() {
             .doOnNext(::animatePublish)
             .flatLiveBind(viewLifecycleOwner, viewModel::publishTopic)
 
-        RxTextView.textChanges(message_box)
-            .map { it.toString() }
-            .liveBind(viewLifecycleOwner, viewModel.messageRelay)
     }
 
     private fun dataBind() {
