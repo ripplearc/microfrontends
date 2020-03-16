@@ -21,6 +21,7 @@ deps[project.name] = [
         implementation: [
                 deps.androidx.appCompat,
                 deps.androidx.layout,
+                deps.androidx.recyclerView,
 
                 deps.google.jetpack.lifecycle.common,
                 deps.google.jetpack.lifecycle.ext,
