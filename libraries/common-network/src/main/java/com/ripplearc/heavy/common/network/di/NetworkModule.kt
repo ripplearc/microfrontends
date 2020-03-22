@@ -22,7 +22,9 @@ object NetworkModule {
 
     @Named("Pretty")
     @[Provides ApplicationScope JvmStatic]
-    fun providePrettyGson() = GsonBuilder().setPrettyPrinting().create()
+    fun providePrettyGson() = GsonBuilder()
+        .enableComplexMapKeySerialization()
+        .setPrettyPrinting().create()
 
     @[Provides ApplicationScope JvmStatic]
     fun provideOkHttpClient() = OkHttpClient

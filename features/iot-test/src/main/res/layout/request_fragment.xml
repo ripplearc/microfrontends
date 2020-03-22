@@ -27,8 +27,8 @@
         android:id="@+id/publish_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
         android:text="@string/publish"
-        android:paddingLeft="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -36,12 +36,20 @@
         android:id="@+id/message_box"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:height="270dp"
+        android:height="150dp"
         android:background="@android:color/holo_green_light"
         android:text="Static Feature - Request"
         android:textColor="@android:color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/topic_bar" />
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@android:color/holo_orange_light"
+        android:textColor="@android:color/white"
+        android:layout_marginTop="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/message_box" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

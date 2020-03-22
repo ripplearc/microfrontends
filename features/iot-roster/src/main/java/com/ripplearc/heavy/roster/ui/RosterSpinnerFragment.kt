@@ -17,6 +17,7 @@ import com.ripplearc.heavy.common.rxUtil.*
 import com.ripplearc.heavy.iot.roster.R
 import com.ripplearc.heavy.iot.roster.feature.iotRosterComponent
 import kotlinx.android.synthetic.main.roster_spinner_fragment.*
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -54,9 +55,9 @@ class RosterSpinnerFragment : Fragment() {
 
     private fun dataBind() {
         viewModel.spinnerAdapter.let {
-            Runnable {
+            lifecycleScope.launch(coroutinesContextProvider.main) {
                 view?.findViewById<Spinner>(R.id.device_roster)?.adapter = it
-            }.runOnMain()
+            }
         }
 
         viewModel.observeRoster()

@@ -19,7 +19,6 @@ class MainActivity : AppCompatActivity() {
 
         loadRoster()
         loadPlayground()
-        loadDynamicHistogram()
     }
 
     private fun loadRoster() {

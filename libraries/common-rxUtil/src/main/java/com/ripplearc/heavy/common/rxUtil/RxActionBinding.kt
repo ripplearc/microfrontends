@@ -47,3 +47,21 @@ inline fun <reified T> Observable<T>.flatLiveBind(
     .asLiveData()
     .observeOnMain(lifeCycleOwner, Observer {})
 
+inline fun <reified T> Observable<T>.flatLiveBindDelayError(
+    lifeCycleOwner: LifecycleOwner,
+    noinline target: (T) -> Completable
+) = this.flatMapCompletable {
+        target(it).onErrorComplete()
+    }
+    .asLiveData()
+    .observeOnMain(lifeCycleOwner, Observer {})
+
+inline fun <reified T> Observable<T>.flatLiveBindDelayError(
+    lifeCycleOwner: LifecycleOwner,
+    noinline target: () -> Completable
+) = this.flatMapCompletable {
+        target().onErrorComplete()
+    }
+    .asLiveData()
+    .observeOnMain(lifeCycleOwner, Observer {})
+

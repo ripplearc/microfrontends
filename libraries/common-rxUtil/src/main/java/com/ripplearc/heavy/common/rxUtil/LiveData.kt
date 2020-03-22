@@ -7,6 +7,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.LiveDataReactiveStreams
 import androidx.lifecycle.Observer
 import io.reactivex.*
+import kotlin.contracts.InvocationKind
+import kotlin.contracts.contract
 
 
 /**
@@ -88,7 +90,7 @@ fun Completable.asLiveData(): LiveData<Unit> =
  */
 fun <T> LiveData<T>.observeOnMain(
     owner: LifecycleOwner,
-    observer: androidx.lifecycle.Observer<in T>
+    observer: Observer<in T>
 ) {
     let { live ->
         Runnable {
@@ -100,7 +102,7 @@ fun <T> LiveData<T>.observeOnMain(
 fun <T> LiveData<T>.observeOnMain(owner: LifecycleOwner) =
     observeOnMain(owner, Observer {})
 
-fun Runnable.runOnMain() {
+private fun Runnable.runOnMain() {
     run {
         Handler(Looper.getMainLooper()).post(this)
     }

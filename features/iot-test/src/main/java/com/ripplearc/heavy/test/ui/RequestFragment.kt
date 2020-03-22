@@ -8,15 +8,16 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.jakewharton.rxbinding2.view.RxView
-import com.jakewharton.rxbinding2.widget.RxTextView
 import com.ripplearc.heavy.common.core.model.ViewModelFactory
+import com.ripplearc.heavy.common.coroutines.CoroutinesContextProvider
 import com.ripplearc.heavy.common.rxUtil.*
 import com.ripplearc.heavy.iot.test.R
 import com.ripplearc.heavy.iot.test.feature.iotTestComponent
+import com.ripplearc.heavy.test.model.MessageItem
+import com.ripplearc.heavy.test.ui.receive.MessageRecyclerViewAdapter
 import kotlinx.android.synthetic.main.request_fragment.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.ExecutorCoroutineDispatcher
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -31,7 +32,7 @@ class RequestFragment : Fragment() {
     lateinit var rosterViewModelProvider: ViewModelFactory<RequestViewModel>
 
     @Inject
-    lateinit var coroutinesContext: ExecutorCoroutineDispatcher
+    lateinit var coroutinesContextProvider: CoroutinesContextProvider
 
     private val viewModel by lazy {
         ViewModelProvider(this, rosterViewModelProvider).get(RequestViewModel::class.java)
@@ -47,7 +48,7 @@ class RequestFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         iotTestComponent.inject(this)
-        lifecycleScope.launch(coroutinesContext) {
+        lifecycleScope.launch(coroutinesContextProvider.computation) {
             actionBind()
             dataBind()
         }
@@ -57,31 +58,44 @@ class RequestFragment : Fragment() {
         RxView.clicks(publish_button)
             .map { topic_bar.text.toString() }
             .doOnNext(::animatePublish)
-            .flatLiveBind(viewLifecycleOwner, viewModel::publishTopic)
+            .flatLiveBindDelayError(viewLifecycleOwner, viewModel::publishTopic)
 
     }
 
     private fun dataBind() {
-        viewModel.topicObservable
-            .log(Emoji.Diamond)
+        viewModel.sentTopicObservable
             .asLiveData("No Device Selected")
-            .observeOnMain(viewLifecycleOwner, Observer {
-                it?.let { topic_bar.setText(it) }
+            .observeOnMain(viewLifecycleOwner, Observer { topic ->
+                topic?.let { topic_bar.setText(it) }
             })
 
-        viewModel.messageObservable
+        viewModel.sentMessageObservable
             .asLiveData("No Device Selected")
-            .observeOnMain(viewLifecycleOwner, Observer {
-                it?.let { message_box.setText(it) }
+            .observeOnMain(viewLifecycleOwner, Observer { message ->
+                message?.let { message_box.setText(it) }
             })
 
         viewModel.listenToMessages()
-            .asLiveData(onErrorJustReturn = "Fail to receive message.")
-            .observeOnMain(viewLifecycleOwner)
+            .asLiveDataAndOnErrorReturnEmpty()
+            .observeOnMain(viewLifecycleOwner, Observer { messages ->
+                messages?.let {
+                    recycler_view?.run {
+                        (adapter as? MessageRecyclerViewAdapter)?.updateMessageItems(it)
+                        layoutManager?.scrollToPosition(0)
+                    }
+                }
+            })
+
+        lifecycleScope.launch(coroutinesContextProvider.main) {
+            recycler_view?.apply {
+                layoutManager = LinearLayoutManager(this@RequestFragment.context)
+                adapter = MessageRecyclerViewAdapter(listOf(MessageItem("Test")))
+            }
+        }
     }
 
     private fun animatePublish(text: String) {
-        lifecycleScope.launch(Dispatchers.Main) {
+        lifecycleScope.launch(coroutinesContextProvider.main) {
             publish_button.isEnabled = false
             topic_bar.setText("*** Publish ***")
             delay(200)
