@@ -15,17 +15,13 @@ internal class MessageGenerator @Inject constructor(
     @param:Named("Pretty") private val gson: Gson,
     private val dateProvider: DateProvider
 ) {
-    fun makeRequestModel(device: String): String? =
+    fun makeRequestModel(device: String, topics: List<RequestType>): String? =
         gson.fromJson(device, DeviceModel::class.java)
             ?.let {
                 IotRequestModel(
                     it.udid,
                     timestamp = dateProvider.date,
-                    requests = mapOf(
-                        RequestType.CheckBatteryStatus to RequestDetail(true),
-                        RequestType.CheckLocation to RequestDetail(true),
-                        RequestType.TakePhoto to RequestDetail(true)
-                    )
+                    requests = topics.map { topic -> topic to RequestDetail(true) }.toMap()
                 )
             }?.let {
                 gson.toJson(it)

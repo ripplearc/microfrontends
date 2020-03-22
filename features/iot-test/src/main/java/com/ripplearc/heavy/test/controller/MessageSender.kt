@@ -1,6 +1,7 @@
 package com.ripplearc.heavy.test.controller
 
 import com.ripplearc.heavy.common.rxUtil.*
+import com.ripplearc.heavy.data.RequestType
 import com.ripplearc.heavy.data.SharedPreferenceKey
 import com.ripplearc.heavy.radio.messaging.MessagingJob
 import io.reactivex.Completable
@@ -22,16 +23,16 @@ internal class MessageSender @Inject constructor(
 			.distinctUntilChanged()
 			.mapNotNull(topicGenerator::sentTopic)
 
-	val sentMessageObservable: Observable<String>
-		get() = combineLatest(
+	fun sentMessageObservable(requests: List<RequestType>): Observable<String> =
+		combineLatest(
 			rxPreference.getObserve(SharedPreferenceKey.SelectedDevice, ""),
 			Observable.interval(0, 5, TimeUnit.SECONDS)
 		).mapNotNull { (model, _) ->
-			messageGenerator.makeRequestModel(model)
+			messageGenerator.makeRequestModel(model, requests)
 		}
 
-	fun publishTopic(): Completable =
-		zip(sentMessageObservable, sentTopicObservable)
+	fun publishTopic(requests: List<RequestType>): Completable =
+		zip(sentMessageObservable(requests), sentTopicObservable)
 			.take(1)
 			.observeOn(schedulerFactory.io())
 			.flatMapCompletable { (message: String, topic: String) ->
