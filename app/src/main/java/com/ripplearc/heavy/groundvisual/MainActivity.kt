@@ -4,9 +4,7 @@ import android.os.Bundle
 import androidx.annotation.IdRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.ripplearc.heavy.common.core.model.Feature
 import com.ripplearc.heavy.common.features.*
-import com.ripplearc.heavy.features.profile
 import javax.inject.Inject
 
 

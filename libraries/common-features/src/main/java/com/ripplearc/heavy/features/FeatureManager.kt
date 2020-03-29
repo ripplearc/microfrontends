@@ -38,6 +38,11 @@ inline fun <reified T : Feature<D>, reified D : Dependencies> FeatureManager.get
 inline fun <reified T> loadService() =
     ServiceLoader.load(T::class.java, T::class.java.classLoader).iterator()
 
+/**
+ * Singleton implementation of the FeatureManager
+ *
+ * @property featureMap Dagger multibinding map between the feature and feature provider
+ */
 @ApplicationScope
 class FeatureManagerImpl @Inject constructor(
     override val featureMap: FeatureProviderMap

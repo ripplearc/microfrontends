@@ -18,4 +18,6 @@ interface Feature<D> {
         val id: String,
         @IdRes val sceneId: Int
     )
+
 }
+

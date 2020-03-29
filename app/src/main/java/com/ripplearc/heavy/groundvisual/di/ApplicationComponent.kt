@@ -41,6 +41,4 @@ interface ApplicationComponent : FeatureDependencies {
         fun create(@BindsInstance application: GroundVisualApplication): ApplicationComponent
     }
 
-    fun getFeatureListViewModel(): ViewModelFactory<FeatureListViewModel>
-    fun getAndroidLogStrategy(): AndroidLogAdapter
 }

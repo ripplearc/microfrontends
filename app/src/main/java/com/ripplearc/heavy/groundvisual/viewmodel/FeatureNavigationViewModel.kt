@@ -3,7 +3,6 @@ package com.ripplearc.heavy.groundvisual.viewmodel
 import androidx.lifecycle.ViewModel
 import com.ripplearc.heavy.common.core.model.Feature
 import com.ripplearc.heavy.common.features.*
-import com.ripplearc.heavy.features.profile
 import com.ripplearc.heavy.groundvisual.appComponent
 import javax.inject.Inject
 

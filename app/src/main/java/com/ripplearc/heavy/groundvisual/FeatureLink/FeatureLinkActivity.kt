@@ -11,7 +11,7 @@ import com.ripplearc.heavy.common.core.model.ViewModelFactory
 import com.ripplearc.heavy.common.features.IotHistogramFeature
 import com.ripplearc.heavy.common.features.IotRosterFeature
 import com.ripplearc.heavy.common.features.IotTestFeature
-import com.ripplearc.heavy.features.profile
+import com.ripplearc.heavy.common.features.profile
 import com.ripplearc.heavy.groundvisual.R
 import com.ripplearc.heavy.groundvisual.appComponent
 import javax.inject.Inject
@@ -24,7 +24,7 @@ import javax.inject.Inject
 class FeatureLinkActivity : AppCompatActivity() {
 
     @Inject
-    lateinit var featureListViewModelProvider: ViewModelFactory<FeatureListViewModel>
+    internal lateinit var featureListViewModelProvider: ViewModelFactory<FeatureListViewModel>
 
     private val viewModel by lazy {
         ViewModelProvider(this, featureListViewModelProvider)
