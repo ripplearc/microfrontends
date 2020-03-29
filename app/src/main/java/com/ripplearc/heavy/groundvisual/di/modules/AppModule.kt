@@ -26,9 +26,6 @@ object AppModule {
         schedulerFactory: SchedulerFactory
     ): RxCommonPreference =
         RxCommonPreference(tray, schedulerFactory)
-
-    @[Provides ApplicationScope]
-    fun provideCoroutinesThreadPoolContext() = newFixedThreadPoolContext(4, "Background")
 }
 
 

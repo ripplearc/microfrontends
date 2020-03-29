@@ -22,7 +22,6 @@ interface CommonDependencies : Dependencies {
     @Named("Concise")
     fun conciseGson(): Gson
     fun rxPreference(): RxCommonPreference
-    fun coroutinesThreadPoolContext(): ExecutorCoroutineDispatcher
 }
 
 interface AwsDependencies : Dependencies {

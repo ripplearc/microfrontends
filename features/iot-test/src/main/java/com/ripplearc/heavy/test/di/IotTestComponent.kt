@@ -28,6 +28,5 @@ interface IotTestComponent {
     fun inject(fragment: RequestFragment)
     fun inject(activity: RequestActivity)
     fun getMapViewModel(): ViewModelFactory<RequestViewModel>
-    fun coroutinesThreadPoolContext(): ExecutorCoroutineDispatcher
 
 }

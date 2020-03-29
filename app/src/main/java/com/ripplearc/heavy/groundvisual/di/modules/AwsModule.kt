@@ -3,6 +3,7 @@ package com.ripplearc.heavy.groundvisual.di.modules
 import android.content.Context
 import com.amazonaws.mobile.client.AWSMobileClient
 import com.amazonaws.mobile.config.AWSConfiguration
+import com.amazonaws.regions.Region
 import com.amazonaws.regions.Regions
 import com.amazonaws.services.iot.AWSIotClient
 import com.ripplearc.heavy.common.core.qualifier.ApplicationScope
@@ -25,7 +26,7 @@ object AwsModule {
 	fun provideAwsIotClient(mobileClient: AWSMobileClient): AWSIotClient =
 		AWSIotClient(mobileClient)
 			.apply {
-				Regions.US_EAST_1
+				setRegion(Region.getRegion(Regions.US_EAST_1))
 			}
 
 }
