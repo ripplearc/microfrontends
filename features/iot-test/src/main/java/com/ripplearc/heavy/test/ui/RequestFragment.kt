@@ -29,7 +29,7 @@ class RequestFragment : Fragment() {
     }
 
     @Inject
-    lateinit var rosterViewModelProvider: ViewModelFactory<RequestViewModel>
+    internal lateinit var rosterViewModelProvider: ViewModelFactory<RequestViewModel>
 
     @Inject
     lateinit var coroutinesContextProvider: CoroutinesContextProvider
@@ -89,7 +89,7 @@ class RequestFragment : Fragment() {
         lifecycleScope.launch(coroutinesContextProvider.main) {
             recycler_view?.apply {
                 layoutManager = LinearLayoutManager(this@RequestFragment.context)
-                adapter = MessageRecyclerViewAdapter(listOf(MessageItem("Test")))
+                adapter = MessageRecyclerViewAdapter(emptyList())
             }
         }
     }

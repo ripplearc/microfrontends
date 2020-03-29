@@ -17,7 +17,7 @@ class SchedulerFactory @Inject constructor() {
     fun makeHandlerScheduler(): Scheduler {
         var backgroundHandler: Handler
 
-        HandlerThread("Camera Capture Request").also {
+        HandlerThread("Handler of Scheduler Factory").also {
             it.start()
             backgroundHandler = Handler(it.looper)
         }

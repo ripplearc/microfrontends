@@ -18,7 +18,7 @@ import javax.inject.Inject
 import javax.inject.Named
 
 
-class RosterSpinnerViewModel @Inject constructor(
+internal class RosterSpinnerViewModel @Inject constructor(
     context: Context,
     deviceRosterService: DeviceRosterService,
     private val schedulerFactory: SchedulerFactory,

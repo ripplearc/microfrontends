@@ -29,6 +29,4 @@ interface IotRosterComponent {
     fun inject(activity: RosterSpinnerActivity)
 
     fun getIotRosterFeature(): IotRosterFeature
-
-    fun getRosterViewModel(): ViewModelFactory<RosterSpinnerViewModel>
 }

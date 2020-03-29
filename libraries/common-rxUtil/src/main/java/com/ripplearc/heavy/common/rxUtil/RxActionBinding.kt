@@ -23,34 +23,34 @@ inline fun <reified T> Observable<T>.bind(target: Relay<T>): Disposable {
 inline fun <reified T> Observable<T>.liveBind(
     lifeCycleOwner: LifecycleOwner,
     target: Relay<T>
-) = this.asLiveDataOnErrorReturnEmpty()
+) = asLiveDataOnErrorReturnEmpty()
     .observeOnMain(lifeCycleOwner, Observer(target::accept))
 
 inline fun <reified T> Observable<T>.switchLiveBind(
     lifeCycleOwner: LifecycleOwner,
     noinline target: (T) -> Completable
-) = this.switchMapCompletable(target)
+) = switchMapCompletable(target)
     .asLiveData()
     .observeOnMain(lifeCycleOwner, Observer {})
 
 inline fun <reified T> Observable<T>.switchLiveBindDelayError(
     lifeCycleOwner: LifecycleOwner,
     noinline target: (T) -> Completable
-) = this.switchMapCompletableDelayError(target)
+) = switchMapCompletableDelayError(target)
     .asLiveData()
     .observeOnMain(lifeCycleOwner, Observer {})
 
 inline fun <reified T> Observable<T>.flatLiveBind(
     lifeCycleOwner: LifecycleOwner,
     noinline target: (T) -> Completable
-) = this.flatMapCompletable(target)
+) = flatMapCompletable(target)
     .asLiveData()
     .observeOnMain(lifeCycleOwner, Observer {})
 
 inline fun <reified T> Observable<T>.flatLiveBindDelayError(
     lifeCycleOwner: LifecycleOwner,
     noinline target: (T) -> Completable
-) = this.flatMapCompletable {
+) = flatMapCompletable {
         target(it).onErrorComplete()
     }
     .asLiveData()
@@ -59,7 +59,7 @@ inline fun <reified T> Observable<T>.flatLiveBindDelayError(
 inline fun <reified T> Observable<T>.flatLiveBindDelayError(
     lifeCycleOwner: LifecycleOwner,
     noinline target: () -> Completable
-) = this.flatMapCompletable {
+) = flatMapCompletable {
         target().onErrorComplete()
     }
     .asLiveData()

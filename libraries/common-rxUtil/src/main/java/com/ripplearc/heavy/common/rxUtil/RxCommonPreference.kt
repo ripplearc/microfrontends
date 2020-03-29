@@ -25,15 +25,21 @@ class RxCommonPreference @Inject constructor(
      */
     inline fun <reified T : Any> getObserve(key: String, defaultValue: T): Observable<T> =
         Observable.defer {
-            keyChange(preference)
-                .filter { it == key }
-                .mapNotNull { key ->
-                    defaultValue.getValue(key)
-                }
-                .startWithNotNull(defaultValue.getValue(key))
-        }
+                keyChange(preference)
+                    .filter { it == key }
+                    .mapNotNull { key ->
+                        defaultValue.getValue(key)
+                    }
+                    .startWithNotNull(defaultValue.getValue(key))
+            }
             .subscribeOn(schedulerFactory.io())
 
+    /**
+     * Get value from Preference for key
+     *
+     * @param T type of the value
+     * @param key key for the value in the Preference
+     */
     inline fun <reified T : Any> T.getValue(key: String): T? =
         when (this) {
             is Long -> preference.getLong(key, this)
@@ -64,19 +70,27 @@ class RxCommonPreference @Inject constructor(
                 emitter.onSafeError(Throwable("Fail to save value to preference."))
         }
 
+    /**
+     * Observe any changes from the TrayPreferences.
+     *
+     * @param preferences Instance of the TrayPreferences
+     * @return An observable that emits the key name that has the change.
+     */
     fun keyChange(preferences: TrayPreferences): Observable<String> =
         Observable.create<String> { emitter ->
-            OnTrayPreferenceChangeListener { trays ->
-                trays.forEach {
-                    emitter.onSafeNext(it.key())
-                }
-            }.let {
-                preferences.registerOnTrayPreferenceChangeListener(it)
-                emitter.setCancellable {
-                    preferences.unregisterOnTrayPreferenceChangeListener(it)
+                OnTrayPreferenceChangeListener { trays ->
+                    trays?.forEach {
+                        it?.let { tray ->
+                            emitter.onSafeNext(tray.key())
+                        }
+                    }
+                }.let {
+                    preferences.registerOnTrayPreferenceChangeListener(it)
+                    emitter.setCancellable {
+                        preferences.unregisterOnTrayPreferenceChangeListener(it)
+                    }
                 }
             }
-        }
             .share()
             .subscribeOn(schedulerFactory.io())
             .observeOn(schedulerFactory.computation())

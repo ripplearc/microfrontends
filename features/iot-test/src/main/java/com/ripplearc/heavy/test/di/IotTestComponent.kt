@@ -27,6 +27,5 @@ interface IotTestComponent {
     fun getIotTestFeature(): IotTestFeature
     fun inject(fragment: RequestFragment)
     fun inject(activity: RequestActivity)
-    fun getMapViewModel(): ViewModelFactory<RequestViewModel>
 
 }

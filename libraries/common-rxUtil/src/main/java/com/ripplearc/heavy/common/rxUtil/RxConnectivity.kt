@@ -12,6 +12,12 @@ enum class NetworkState {
     DISCONNECTED
 }
 
+/**
+ * An observable that emits `Connected` when the either Wifi or Cellular is available.
+ * emits `Disconnected` when both of them are lost.
+ *
+ * @param context ApplicationContext
+ */
 fun connectivityObservable(context: Context): Observable<NetworkState> =
     Observable.create { emitter ->
         object : ConnectivityManager.NetworkCallback() {
@@ -38,5 +44,4 @@ fun connectivityObservable(context: Context): Observable<NetworkState> =
                     .unregisterNetworkCallback(callback)
             }
         }
-
     }

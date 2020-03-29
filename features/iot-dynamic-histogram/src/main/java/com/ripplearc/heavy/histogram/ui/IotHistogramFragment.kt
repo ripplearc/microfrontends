@@ -36,7 +36,6 @@ class IotHistogramFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         iotHistogramComponent.inject(this)
-        viewModel
         // TODO: Use the ViewModel
     }
 

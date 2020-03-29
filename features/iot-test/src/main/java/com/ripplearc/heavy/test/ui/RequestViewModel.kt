@@ -11,7 +11,7 @@ import io.reactivex.Completable
 import io.reactivex.Observable
 import javax.inject.Inject
 
-class RequestViewModel @Inject internal constructor(
+internal class RequestViewModel @Inject internal constructor(
     private val context: Context,
     private val messageSender: MessageSender,
     private val messageListener: MessageListener,

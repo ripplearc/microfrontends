@@ -28,7 +28,7 @@ class RosterSpinnerFragment : Fragment() {
     }
 
     @Inject
-    lateinit var rosterViewModelProvider: ViewModelFactory<RosterSpinnerViewModel>
+    internal lateinit var rosterViewModelProvider: ViewModelFactory<RosterSpinnerViewModel>
 
     @Inject
     lateinit var coroutinesContextProvider: CoroutinesContextProvider
@@ -56,7 +56,7 @@ class RosterSpinnerFragment : Fragment() {
     private fun dataBind() {
         viewModel.spinnerAdapter.let {
             lifecycleScope.launch(coroutinesContextProvider.main) {
-                view?.findViewById<Spinner>(R.id.device_roster)?.adapter = it
+                device_roster?.adapter = it
             }
         }
 

@@ -5,13 +5,14 @@ import android.content.SharedPreferences
 import dagger.Reusable
 import io.reactivex.Completable
 import io.reactivex.Observable
+import javax.inject.Inject
 
 
 /**
  * RxPreference emits the preference value saved to the SharedPreference.
  */
 @Reusable
-class RxPreference constructor(
+class RxPreference @Inject constructor(
     val preference: SharedPreferences
 ) {
 

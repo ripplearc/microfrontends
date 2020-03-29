@@ -37,7 +37,6 @@ internal class MessageSender @Inject constructor(
 			.observeOn(schedulerFactory.io())
 			.flatMapCompletable { (message: String, topic: String) ->
 				messagingJob.publishCompletable(topic, message)
-
 			}
 
 }
