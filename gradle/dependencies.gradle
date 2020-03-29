@@ -5,7 +5,7 @@ ext {
             'compileSDK': 29,
             'supportVer': '29.0.0',
 
-            'dagger'    : '2.26',
+            'dagger'    : '2.27',
             'androidx'  : '1.1.0',
             'jetpack'   : '2.2.0',
             'retrofit'  : '2.3.0',
@@ -120,7 +120,7 @@ ext {
                     'atslRunner': 'androidx.test:runner:1.1.0'
             ],
             ripplearc    : [
-                    'radio': "com.ripplearc.heavy:radio:0.1.2-SNAPSHOT",
+                    'radio': "com.ripplearc.heavy:radio:0.1.3-SNAPSHOT",
             ]
     ]
 }

@@ -11,7 +11,7 @@ import dagger.Provides
 
 @Module
 object LogModule {
-    @[Provides ApplicationScope JvmStatic]
+    @[Provides ApplicationScope]
     fun provideAndroidLogAdapter(context: Context) =
         PrettyFormatStrategy.newBuilder()
             .showThreadInfo(false)

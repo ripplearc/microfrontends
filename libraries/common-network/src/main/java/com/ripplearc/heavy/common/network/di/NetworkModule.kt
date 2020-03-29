@@ -17,16 +17,16 @@ import javax.inject.Named
 @Module
 object NetworkModule {
     @Named("Concise")
-    @[Provides ApplicationScope JvmStatic]
+    @[Provides ApplicationScope]
     fun provideConciseGson() = Gson()
 
     @Named("Pretty")
-    @[Provides ApplicationScope JvmStatic]
+    @[Provides ApplicationScope]
     fun providePrettyGson() = GsonBuilder()
         .enableComplexMapKeySerialization()
         .setPrettyPrinting().create()
 
-    @[Provides ApplicationScope JvmStatic]
+    @[Provides ApplicationScope]
     fun provideOkHttpClient() = OkHttpClient
         .Builder()
         .addInterceptor { chain ->
@@ -40,7 +40,7 @@ object NetworkModule {
         }
         .build() ?: throw Exception("Cannot instantiate OkHttpClient.")
 
-    @[Provides ApplicationScope JvmStatic]
+    @[Provides ApplicationScope]
     fun provideRetrofit(client: OkHttpClient) =
         Retrofit.Builder()
             .baseUrl(NetworkConfig.baseUrl)

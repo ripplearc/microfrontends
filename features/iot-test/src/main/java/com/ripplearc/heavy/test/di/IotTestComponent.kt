@@ -2,11 +2,9 @@ package com.ripplearc.heavy.iot.test.di
 
 import com.ripplearc.heavy.common.core.model.ViewModelFactory
 import com.ripplearc.heavy.common.features.IotTestFeature
-import com.ripplearc.heavy.common.features.RadioDependencies
 import com.ripplearc.heavy.iot.test.ui.RequestFragment
 import com.ripplearc.heavy.iot.test.ui.RequestViewModel
-import com.ripplearc.heavy.radio.di.AwsModule
-import com.ripplearc.heavy.test.di.RadioComponent
+import com.ripplearc.heavy.radio.di.RadioComponent
 import com.ripplearc.heavy.test.ui.RequestActivity
 import dagger.BindsInstance
 import dagger.Component
@@ -14,7 +12,6 @@ import kotlinx.coroutines.ExecutorCoroutineDispatcher
 
 @IotTestScope
 @Component(
-    modules = [AwsModule::class],
     dependencies = [IotTestFeature.Dependencies::class, RadioComponent::class]
 )
 interface IotTestComponent {

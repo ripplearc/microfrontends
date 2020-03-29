@@ -13,19 +13,21 @@ import net.grandcentrix.tray.TrayPreferences
 
 @Module
 object AppModule {
-    @[Provides ApplicationScope JvmStatic]
+    @[Provides ApplicationScope]
     fun provideContext(application: GroundVisualApplication): Context = application
 
-    @[Provides ApplicationScope JvmStatic]
+    @[Provides ApplicationScope]
     fun provideTrayPreference(context: Context): TrayPreferences =
         TrayPreferences(context, "common", 1)
 
-    @[Provides ApplicationScope JvmStatic]
-    fun provideRxCommonPreference(tray: TrayPreferences,
-                                  schedulerFactory: SchedulerFactory): RxCommonPreference =
+    @[Provides ApplicationScope]
+    fun provideRxCommonPreference(
+        tray: TrayPreferences,
+        schedulerFactory: SchedulerFactory
+    ): RxCommonPreference =
         RxCommonPreference(tray, schedulerFactory)
 
-    @[Provides ApplicationScope JvmStatic]
+    @[Provides ApplicationScope]
     fun provideCoroutinesThreadPoolContext() = newFixedThreadPoolContext(4, "Background")
 }
 

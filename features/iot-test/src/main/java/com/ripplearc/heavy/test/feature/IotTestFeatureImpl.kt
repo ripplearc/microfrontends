@@ -11,7 +11,7 @@ import com.ripplearc.heavy.iot.test.R
 import com.ripplearc.heavy.iot.test.di.DaggerIotTestComponent
 import com.ripplearc.heavy.iot.test.di.IotTestComponent
 import com.ripplearc.heavy.iot.test.ui.RequestFragment
-import com.ripplearc.heavy.test.di.DaggerRadioComponent
+import com.ripplearc.heavy.radio.di.DaggerRadioComponent
 import com.ripplearc.heavy.test.ui.RequestActivity
 
 internal lateinit var iotTestComponent: IotTestComponent
@@ -33,7 +33,10 @@ class IotTestFeatureImpl : IotTestFeature {
                 val radioDependencies = DaggerRadioComponent
                     .factory()
                     .create(
-                        dependencies,
+                        dependencies.awsMobileClient,
+                        dependencies.awsConfiguration,
+                        dependencies.awsIotClient,
+                        dependencies.applicationContext(),
                         Directory.CREDENTIAL_DIRECTORY,
                         context.getString(R.string.key_store_name),
                         context.getString(R.string.key_store_password),

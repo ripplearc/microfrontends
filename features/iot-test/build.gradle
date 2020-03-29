@@ -28,7 +28,9 @@ deps[project.name] = [
                 deps.google.jetpack.lifecycle.runtime,
                 deps.google.jetpack.navigation.fragment,
                 deps.reactivex.thirdParty.rxBinding.platform,
+
                 deps.ripplearc.radio,
+
                 project(':common-features'),
                 project(':common-core'),
                 project(':common-data'),

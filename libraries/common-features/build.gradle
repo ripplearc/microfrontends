@@ -20,6 +20,10 @@ deps[project.name] = [
                 deps.androidx.appCompat,
                 deps.square.retrofit,
                 deps.google.gson,
+
+                deps.aws.iot,
+                deps.aws.client,
+
                 project(':common-core'),
                 project(':common-rxUtil'),
                 project(':common-util')

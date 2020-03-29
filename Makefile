@@ -18,5 +18,9 @@ iot-test:
 iot-histogram:
 	adb shell am start -W -a android.intent.action.VIEW -d "http://ripplearc.com/histogram"
 
+## clear_gradle_cache: Clear build cache of current project
+clear_gradle_cache:
+	./gradlew cleanBuildCache
+
 help: Makefile
 	sed -n "s/^##//p" $<
