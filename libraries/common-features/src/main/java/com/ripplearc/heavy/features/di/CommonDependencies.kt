@@ -3,7 +3,6 @@ package com.ripplearc.heavy.features.di
 import android.content.Context
 import com.google.gson.Gson
 import com.orhanobut.logger.AndroidLogAdapter
-import com.ripplearc.heavy.common.core.model.Dependencies
 import com.ripplearc.heavy.common.rxUtil.RxCommonPreference
 import retrofit2.Retrofit
 import javax.inject.Named

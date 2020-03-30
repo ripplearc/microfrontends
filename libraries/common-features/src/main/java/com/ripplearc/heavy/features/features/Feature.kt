@@ -1,4 +1,4 @@
-package com.ripplearc.heavy.common.core.model
+package com.ripplearc.heavy.features.features
 
 import android.content.Context
 import android.content.Intent

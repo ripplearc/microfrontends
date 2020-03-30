@@ -1,4 +1,4 @@
-package com.ripplearc.heavy.common.core.model
+package com.ripplearc.heavy.features.features
 
 interface DynamicFeature<D> : Feature<D> {
 	fun inject(dependencies: D)

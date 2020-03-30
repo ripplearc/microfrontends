@@ -3,9 +3,9 @@ package com.ripplearc.heavy.iot.test.feature
 import android.content.Context
 import android.content.Intent
 import androidx.fragment.app.Fragment
-import com.ripplearc.heavy.common.core.model.Feature
-import com.ripplearc.heavy.common.core.model.FeatureProvider
-import com.ripplearc.heavy.common.features.IotTestFeature
+import com.ripplearc.heavy.features.features.Feature
+import com.ripplearc.heavy.features.manager.FeatureProvider
+import com.ripplearc.heavy.features.features.IotTestFeature
 import com.ripplearc.heavy.data.Directory
 import com.ripplearc.heavy.iot.test.R
 import com.ripplearc.heavy.iot.test.di.DaggerIotTestComponent

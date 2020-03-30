@@ -1,7 +1,7 @@
 package com.ripplearc.heavy.iot.dynamic.histogram.di
 
 import com.ripplearc.heavy.common.core.model.ViewModelFactory
-import com.ripplearc.heavy.common.features.IotHistogramFeature
+import com.ripplearc.heavy.features.features.IotHistogramFeature
 import com.ripplearc.heavy.histogram.ui.HistogramActivity
 import com.ripplearc.heavy.iot.dynamic.histogram.ui.IotHistogramFragment
 import com.ripplearc.heavy.iot.dynamic.histogram.ui.IotHistogramViewModel

@@ -3,7 +3,6 @@ package com.ripplearc.heavy.features.di
 import com.amazonaws.mobile.client.AWSMobileClient
 import com.amazonaws.mobile.config.AWSConfiguration
 import com.amazonaws.services.iot.AWSIotClient
-import com.ripplearc.heavy.common.core.model.Dependencies
 
 
 /**

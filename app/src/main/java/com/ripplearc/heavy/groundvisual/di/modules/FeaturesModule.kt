@@ -1,9 +1,9 @@
 package com.ripplearc.heavy.groundvisual.di.modules
 
-import com.ripplearc.heavy.common.core.model.FeatureProviderMap
+import com.ripplearc.heavy.features.manager.FeatureProviderMap
 import com.ripplearc.heavy.common.core.qualifier.ApplicationScope
-import com.ripplearc.heavy.common.features.FeatureManager
-import com.ripplearc.heavy.common.features.FeatureManagerImpl
+import com.ripplearc.heavy.features.manager.FeatureManager
+import com.ripplearc.heavy.features.manager.FeatureManagerImpl
 import com.ripplearc.heavy.iot.roster.di.IotRosterFeatureModule
 import com.ripplearc.heavy.iot.test.di.IotTestFeatureModule
 import dagger.Module

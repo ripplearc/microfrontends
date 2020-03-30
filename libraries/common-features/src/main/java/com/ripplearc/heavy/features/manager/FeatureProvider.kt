@@ -1,5 +1,6 @@
-package com.ripplearc.heavy.common.core.model
+package com.ripplearc.heavy.features.manager
 
+import com.ripplearc.heavy.features.features.Feature
 import javax.inject.Provider
 
 interface FeatureProvider<D> {
