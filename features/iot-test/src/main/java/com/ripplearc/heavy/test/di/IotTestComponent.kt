@@ -11,7 +11,7 @@ import dagger.Component
 @Component(
     dependencies = [IotTestFeature.Dependencies::class, RadioComponent::class]
 )
-interface IotTestComponent {
+internal interface IotTestComponent {
     @Component.Factory
     interface Factory {
         fun create(

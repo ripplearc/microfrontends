@@ -36,7 +36,7 @@ class IotTestFeatureImpl : IotTestFeature {
                         dependencies.awsMobileClient,
                         dependencies.awsConfiguration,
                         dependencies.awsIotClient,
-                        dependencies.applicationContext(),
+                        context,
                         Directory.CREDENTIAL_DIRECTORY,
                         context.getString(R.string.key_store_name),
                         context.getString(R.string.key_store_password),

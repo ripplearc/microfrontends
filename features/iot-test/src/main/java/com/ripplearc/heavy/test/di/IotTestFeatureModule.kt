@@ -11,6 +11,6 @@ import dagger.multibindings.IntoMap
 
 @Module
 object IotTestFeatureModule {
-    @[Provides JvmStatic ApplicationScope IntoMap FeatureProviderKey(IotTestFeature::class)]
+    @[Provides ApplicationScope IntoMap FeatureProviderKey(IotTestFeature::class)]
     fun provideIotTestFeatureProvider(): FeatureProvider<*> = IotTestFeatureImpl
 }

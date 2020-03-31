@@ -10,6 +10,12 @@ import dagger.Reusable
 import javax.inject.Inject
 import javax.inject.Named
 
+/**
+ * Generate messages to be sent to devices
+ *
+ * @property gson Gson helper tool generate Json strong from models
+ * @property dateProvider
+ */
 @Reusable
 internal class MessageGenerator @Inject constructor(
     @param:Named("Pretty") private val gson: Gson,

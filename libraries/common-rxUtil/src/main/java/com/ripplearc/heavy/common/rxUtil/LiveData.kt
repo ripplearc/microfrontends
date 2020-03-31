@@ -99,6 +99,9 @@ fun <T> LiveData<T>.observeOnMain(
     }
 }
 
+/**
+ * Make sure observing the LiveData, with no action, is called on the main thread.
+ */
 fun <T> LiveData<T>.observeOnMain(owner: LifecycleOwner) =
     observeOnMain(owner, Observer {})
 

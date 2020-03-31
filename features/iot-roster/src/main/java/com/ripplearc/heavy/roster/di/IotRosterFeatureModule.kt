@@ -13,7 +13,7 @@ import dagger.multibindings.IntoMap
 @Module
 object IotRosterFeatureModule {
 
-    @[Provides JvmStatic ApplicationScope IntoMap FeatureProviderKey(IotRosterFeature::class)]
+    @[Provides ApplicationScope IntoMap FeatureProviderKey(IotRosterFeature::class)]
     fun provideIotRosterFeatureProvider(): FeatureProvider<*> {
         return IotRosterFeatureImpl
     }

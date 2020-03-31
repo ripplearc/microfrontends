@@ -9,6 +9,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ripplearc.heavy.iot.test.R
 import com.ripplearc.heavy.test.model.MessageItem
 
+/**
+ * View adapter for message recycler view.
+ *
+ * @property messages an collection of message item to be displayed.
+ */
 internal class MessageRecyclerViewAdapter constructor(private var messages: List<MessageItem>) :
     RecyclerView.Adapter<MessageRecyclerViewAdapter.ViewHolder>() {
 

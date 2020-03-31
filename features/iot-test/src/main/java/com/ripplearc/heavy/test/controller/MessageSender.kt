@@ -11,6 +11,15 @@ import io.reactivex.rxkotlin.Observables.zip
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
+/**
+ * Send message on certain topics.
+ *
+ * @property rxPreference observe selected devices
+ * @property topicGenerator generate sent topics based on selected devices
+ * @property messageGenerator generate message to be sent to devices
+ * @property messagingJob Sending messages Job
+ * @property schedulerFactory factory generating rx scheduler
+ */
 internal class MessageSender @Inject constructor(
 	private val rxPreference: RxCommonPreference,
 	private val topicGenerator: TopicGenerator,

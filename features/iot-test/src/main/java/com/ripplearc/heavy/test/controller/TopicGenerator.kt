@@ -6,6 +6,11 @@ import dagger.Reusable
 import javax.inject.Inject
 import javax.inject.Named
 
+/**
+ * Generate sent or received topics
+ *
+ * @property prettyGson parse json string to device model
+ */
 @Reusable
 internal class TopicGenerator @Inject constructor(
     @param:Named("Pretty") private val prettyGson: Gson

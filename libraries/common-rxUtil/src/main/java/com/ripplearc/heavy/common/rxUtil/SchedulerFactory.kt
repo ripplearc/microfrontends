@@ -24,18 +24,39 @@ class SchedulerFactory @Inject constructor() {
         return AndroidSchedulers.from(backgroundHandler.looper)
     }
 
+	/**
+	 * instance of IO scheduler
+	 *
+	 */
     fun io() =
         Schedulers.io()
 
+	/**
+	 * instance of Computation scheduler
+	 *
+	 */
     fun computation() =
         Schedulers.computation()
 
+	/**
+	 * instance of Main scheduler
+	 *
+	 */
     fun main(): Scheduler =
         AndroidSchedulers.mainThread()
 
+	/**
+	 * instance of Single scheduler where to carry out Single scheduler
+	 *
+	 */
     fun threadSafe() =
         Schedulers.single()
 
+	/**
+	 * instance of a scheduler running on a new scheduler, this is for task
+	 * that has to run on its own thread
+	 *
+	 */
     fun exclusive() =
         Schedulers.newThread()
 }

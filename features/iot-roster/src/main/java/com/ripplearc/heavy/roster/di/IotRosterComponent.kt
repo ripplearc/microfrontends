@@ -12,7 +12,7 @@ import dagger.Component
     dependencies = [IotRosterFeature.Dependencies::class],
     modules = [IotRosterModule::class]
 )
-interface IotRosterComponent {
+internal interface IotRosterComponent {
 
     @Component.Factory
     interface Factory {

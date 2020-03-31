@@ -2,6 +2,9 @@ package com.ripplearc.heavy.data
 
 import com.google.gson.annotations.SerializedName
 
+/**
+ * enum of request sent to the device to query status
+ */
 enum class RequestType {
     @SerializedName("check_location")
     CheckLocation,

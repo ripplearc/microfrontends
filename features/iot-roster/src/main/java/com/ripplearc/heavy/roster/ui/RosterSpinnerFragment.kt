@@ -21,7 +21,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class RosterSpinnerFragment : Fragment() {
+/**
+ * Main entry of the iot roster feature
+ */
+internal class RosterSpinnerFragment : Fragment() {
 
     companion object {
         fun newInstance() = RosterSpinnerFragment()

@@ -60,9 +60,15 @@ class RxPreference @Inject constructor(
             emitter.onComplete()
         }
 
+	/**
+	 * An Observable emits a key if the value associated with the key changes
+	 *
+	 * @param preferences an instance of the SharedPreference
+	 * @return an Observable that emits key for which the value changes
+	 */
     fun keyChange(preferences: SharedPreferences): Observable<String> =
         Observable.create<String> { emitter ->
-            SharedPreferences.OnSharedPreferenceChangeListener { preference, key ->
+            SharedPreferences.OnSharedPreferenceChangeListener { _, key ->
                 emitter.onSafeNext(key)
             }.let {
                 preferences.registerOnSharedPreferenceChangeListener(it)

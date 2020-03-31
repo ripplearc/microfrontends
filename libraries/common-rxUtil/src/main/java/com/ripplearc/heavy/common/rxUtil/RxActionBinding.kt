@@ -26,6 +26,13 @@ inline fun <reified T> Observable<T>.liveBind(
 ) = asLiveDataOnErrorReturnEmpty()
     .observeOnMain(lifeCycleOwner, Observer(target::accept))
 
+/**
+ * LiveData's switchMapCompletable
+ *
+ * @param T type of the live data
+ * @param lifeCycleOwner activity or fragment which owns the lifecycle
+ * @param target the inner completable to be switched upon a new emission from the outer observable
+ */
 inline fun <reified T> Observable<T>.switchLiveBind(
     lifeCycleOwner: LifecycleOwner,
     noinline target: (T) -> Completable
@@ -33,6 +40,13 @@ inline fun <reified T> Observable<T>.switchLiveBind(
     .asLiveData()
     .observeOnMain(lifeCycleOwner, Observer {})
 
+/**
+ * LiveData's switchMapCompletable with delay error
+ *
+ * @param T type of the live data
+ * @param lifeCycleOwner activity or fragment which owns the lifecycle
+ * @param target the inner completable to be switched upon a new emission from the outer observable
+ */
 inline fun <reified T> Observable<T>.switchLiveBindDelayError(
     lifeCycleOwner: LifecycleOwner,
     noinline target: (T) -> Completable
@@ -40,6 +54,13 @@ inline fun <reified T> Observable<T>.switchLiveBindDelayError(
     .asLiveData()
     .observeOnMain(lifeCycleOwner, Observer {})
 
+/**
+ * LiveData's flatMapCompletable
+ *
+ * @param T type of the live data
+ * @param lifeCycleOwner activity or fragment which owns the lifecycle
+ * @param target the inner completable to be merged upon a new emission from the outer observable
+ */
 inline fun <reified T> Observable<T>.flatLiveBind(
     lifeCycleOwner: LifecycleOwner,
     noinline target: (T) -> Completable
@@ -47,7 +68,14 @@ inline fun <reified T> Observable<T>.flatLiveBind(
     .asLiveData()
     .observeOnMain(lifeCycleOwner, Observer {})
 
-inline fun <reified T> Observable<T>.flatLiveBindDelayError(
+/**
+ * LiveData's flatMapCompletable and ignore error
+ *
+ * @param T type of the live data
+ * @param lifeCycleOwner activity or fragment which owns the lifecycle
+ * @param target the inner completable to be merged upon a new emission from the outer observable
+ */
+inline fun <reified T> Observable<T>.flatLiveBindIgnoreError(
     lifeCycleOwner: LifecycleOwner,
     noinline target: (T) -> Completable
 ) = flatMapCompletable {
@@ -56,6 +84,13 @@ inline fun <reified T> Observable<T>.flatLiveBindDelayError(
     .asLiveData()
     .observeOnMain(lifeCycleOwner, Observer {})
 
+/**
+ * LiveData's flatMapCompletable and ignore error
+ *
+ * @param T type of the live data
+ * @param lifeCycleOwner activity or fragment which owns the lifecycle
+ * @param target the inner completable to be merged upon a new emission from the outer observable
+ */
 inline fun <reified T> Observable<T>.flatLiveBindDelayError(
     lifeCycleOwner: LifecycleOwner,
     noinline target: () -> Completable

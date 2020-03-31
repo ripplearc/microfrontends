@@ -5,11 +5,21 @@ import com.ripplearc.heavy.common.rxUtil.*
 import com.ripplearc.heavy.data.SharedPreferenceKey
 import com.ripplearc.heavy.radio.messaging.MessagingJob
 import com.ripplearc.heavy.test.model.MessageItem
+import dagger.Reusable
 import io.reactivex.BackpressureStrategy
 import io.reactivex.Flowable
 import io.reactivex.Observable
 import javax.inject.Inject
 
+/**
+ * Listens to incoming messages.
+ *
+ * @property messagingJob Listening jobs.
+ * @param context application context
+ * @param rxPreference preference that emits changes
+ * @param topicGenerator generate listening topics from selected devices
+ */
+@Reusable
 internal class MessageListener @Inject constructor(
 	context: Context,
 	rxPreference: RxCommonPreference,

@@ -12,17 +12,22 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.jakewharton.rxbinding2.view.RxView
 import com.ripplearc.heavy.common.core.model.ViewModelFactory
 import com.ripplearc.heavy.common.coroutines.CoroutinesContextProvider
-import com.ripplearc.heavy.common.rxUtil.*
+import com.ripplearc.heavy.common.rxUtil.asLiveData
+import com.ripplearc.heavy.common.rxUtil.asLiveDataAndOnErrorReturnEmpty
+import com.ripplearc.heavy.common.rxUtil.flatLiveBindDelayError
+import com.ripplearc.heavy.common.rxUtil.observeOnMain
 import com.ripplearc.heavy.iot.test.R
 import com.ripplearc.heavy.iot.test.feature.iotTestComponent
-import com.ripplearc.heavy.test.model.MessageItem
 import com.ripplearc.heavy.test.ui.receive.MessageRecyclerViewAdapter
 import kotlinx.android.synthetic.main.request_fragment.*
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class RequestFragment : Fragment() {
+/**
+ * The main entry of iot test feature
+ */
+internal class RequestFragment : Fragment() {
 
     companion object {
         fun newInstance() = RequestFragment()
