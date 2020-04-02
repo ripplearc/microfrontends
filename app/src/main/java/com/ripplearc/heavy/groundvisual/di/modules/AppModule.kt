@@ -7,7 +7,6 @@ import com.ripplearc.heavy.common.rxUtil.SchedulerFactory
 import com.ripplearc.heavy.groundvisual.GroundVisualApplication
 import dagger.Module
 import dagger.Provides
-import kotlinx.coroutines.newFixedThreadPoolContext
 import net.grandcentrix.tray.TrayPreferences
 
 

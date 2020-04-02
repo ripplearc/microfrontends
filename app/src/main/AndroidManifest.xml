@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".FeatureLink.FeatureLinkActivity"
+            android:name=".featureLink.FeatureLinkActivity"
             android:label="@string/title_activity_feature_link"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>

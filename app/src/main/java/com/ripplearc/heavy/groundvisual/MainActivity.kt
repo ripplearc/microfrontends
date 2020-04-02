@@ -4,12 +4,12 @@ import android.os.Bundle
 import androidx.annotation.IdRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.ripplearc.heavy.features.features.IotHistogramFeature
-import com.ripplearc.heavy.features.features.IotRosterFeature
-import com.ripplearc.heavy.features.features.IotTestFeature
-import com.ripplearc.heavy.features.features.profile
-import com.ripplearc.heavy.features.manager.FeatureManager
-import com.ripplearc.heavy.features.manager.getFeature
+import com.ripplearc.heavy.common.features.platform.IotHistogramFeature
+import com.ripplearc.heavy.common.features.platform.IotRosterFeature
+import com.ripplearc.heavy.common.features.platform.IotTestFeature
+import com.ripplearc.heavy.common.features.platform.profile
+import com.ripplearc.heavy.common.features.manager.FeatureManager
+import com.ripplearc.heavy.common.features.manager.getFeature
 import javax.inject.Inject
 
 

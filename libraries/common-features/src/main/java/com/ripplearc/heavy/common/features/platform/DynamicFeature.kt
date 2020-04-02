@@ -1,4 +1,4 @@
-package com.ripplearc.heavy.features.features
+package com.ripplearc.heavy.common.features.platform
 
 /**
  * Feature on demand to be loaded from the Google Play

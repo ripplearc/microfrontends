@@ -1,3 +1,3 @@
-package com.ripplearc.heavy.features.di
+package com.ripplearc.heavy.common.features.di
 
 interface Dependencies

@@ -1,6 +1,6 @@
-package com.ripplearc.heavy.features.di
+package com.ripplearc.heavy.common.features.di
 
-import com.ripplearc.heavy.features.features.Feature
+import com.ripplearc.heavy.common.features.platform.Feature
 import dagger.MapKey
 import kotlin.reflect.KClass
 

@@ -1,6 +1,6 @@
 package com.ripplearc.heavy.iot.roster.di
 
-import com.ripplearc.heavy.features.features.IotRosterFeature
+import com.ripplearc.heavy.common.features.platform.IotRosterFeature
 import com.ripplearc.heavy.iot.roster.ui.RosterSpinnerFragment
 import com.ripplearc.heavy.roster.di.IotRosterModule
 import com.ripplearc.heavy.roster.ui.RosterSpinnerActivity
@@ -17,8 +17,8 @@ internal interface IotRosterComponent {
     @Component.Factory
     interface Factory {
         fun create(
-            dependencies: IotRosterFeature.Dependencies,
-            @BindsInstance iotRosterFeature: IotRosterFeature
+			dependencies: IotRosterFeature.Dependencies,
+			@BindsInstance iotRosterFeature: IotRosterFeature
         ): IotRosterComponent
     }
 

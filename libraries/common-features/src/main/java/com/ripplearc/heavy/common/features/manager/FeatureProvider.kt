@@ -1,6 +1,6 @@
-package com.ripplearc.heavy.features.manager
+package com.ripplearc.heavy.common.features.manager
 
-import com.ripplearc.heavy.features.features.Feature
+import com.ripplearc.heavy.common.features.platform.Feature
 import javax.inject.Provider
 
 /**

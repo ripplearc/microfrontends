@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.Intent
 import androidx.fragment.app.Fragment
 import com.google.auto.service.AutoService
-import com.ripplearc.heavy.features.features.IotHistogramFeature
+import com.ripplearc.heavy.common.features.platform.IotHistogramFeature
 import com.ripplearc.heavy.histogram.ui.HistogramActivity
 import com.ripplearc.heavy.iot.dynamic.histogram.di.DaggerIotHistogramComponent
 import com.ripplearc.heavy.iot.dynamic.histogram.di.IotHistogramComponent
@@ -14,7 +14,7 @@ internal lateinit var iotHistogramComponent: IotHistogramComponent
 
 @AutoService(IotHistogramFeature::class)
 class IotHistogramFeatureImpl :
-    IotHistogramFeature {
+	IotHistogramFeature {
     override fun getMainEntry(): Fragment = IotHistogramFragment.newInstance()
 
     override fun getShortcutIntent(context: Context): Intent =

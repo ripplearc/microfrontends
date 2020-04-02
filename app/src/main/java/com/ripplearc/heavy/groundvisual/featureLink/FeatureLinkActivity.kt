@@ -1,4 +1,4 @@
-package com.ripplearc.heavy.groundvisual.FeatureLink
+package com.ripplearc.heavy.groundvisual.featureLink
 
 import android.net.Uri
 import android.os.Bundle
@@ -8,10 +8,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.ViewModelProvider
 import com.ripplearc.heavy.common.core.model.ViewModelFactory
-import com.ripplearc.heavy.features.features.IotHistogramFeature
-import com.ripplearc.heavy.features.features.IotRosterFeature
-import com.ripplearc.heavy.features.features.IotTestFeature
-import com.ripplearc.heavy.features.features.profile
+import com.ripplearc.heavy.common.features.platform.IotHistogramFeature
+import com.ripplearc.heavy.common.features.platform.IotRosterFeature
+import com.ripplearc.heavy.common.features.platform.IotTestFeature
+import com.ripplearc.heavy.common.features.platform.profile
 import com.ripplearc.heavy.groundvisual.R
 import com.ripplearc.heavy.groundvisual.appComponent
 import javax.inject.Inject

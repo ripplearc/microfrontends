@@ -1,9 +1,9 @@
-package com.ripplearc.heavy.features.manager
+package com.ripplearc.heavy.common.features.manager
 
 import com.ripplearc.heavy.common.core.qualifier.ApplicationScope
-import com.ripplearc.heavy.features.di.Dependencies
-import com.ripplearc.heavy.features.features.DynamicFeature
-import com.ripplearc.heavy.features.features.Feature
+import com.ripplearc.heavy.common.features.di.Dependencies
+import com.ripplearc.heavy.common.features.platform.DynamicFeature
+import com.ripplearc.heavy.common.features.platform.Feature
 import java.util.*
 import javax.inject.Inject
 

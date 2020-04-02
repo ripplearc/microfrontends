@@ -1,4 +1,4 @@
-package com.ripplearc.heavy.groundvisual.FeatureLink
+package com.ripplearc.heavy.groundvisual.featureLink
 
 import androidx.lifecycle.ViewModel
 import com.ripplearc.heavy.groundvisual.viewmodel.FeatureNavigation

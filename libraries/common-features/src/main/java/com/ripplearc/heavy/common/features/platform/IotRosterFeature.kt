@@ -1,7 +1,7 @@
-package com.ripplearc.heavy.features.features
+package com.ripplearc.heavy.common.features.platform
 
 import com.ripplearc.heavy.common.features.R
-import com.ripplearc.heavy.features.di.CommonDependencies
+import com.ripplearc.heavy.common.features.di.CommonDependencies
 import kotlin.reflect.KClass
 
 /**
