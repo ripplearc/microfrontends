@@ -1,7 +1,6 @@
 package com.ripplearc.heavy.groundvisual
 
 import android.app.Application
-import android.util.Log
 import com.orhanobut.logger.Logger
 import com.ripplearc.heavy.groundvisual.di.ApplicationComponent
 import com.ripplearc.heavy.groundvisual.di.DaggerApplicationComponent
