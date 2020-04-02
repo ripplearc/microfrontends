@@ -1,11 +1,9 @@
 package com.ripplearc.heavy.iot.roster.ui
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Spinner
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -17,7 +15,6 @@ import com.ripplearc.heavy.common.rxUtil.*
 import com.ripplearc.heavy.iot.roster.R
 import com.ripplearc.heavy.iot.roster.feature.iotRosterComponent
 import kotlinx.android.synthetic.main.roster_spinner_fragment.*
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
