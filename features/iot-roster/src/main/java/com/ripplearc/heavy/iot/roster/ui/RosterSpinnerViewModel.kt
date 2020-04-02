@@ -8,8 +8,8 @@ import com.jakewharton.rx.replayingShare
 import com.ripplearc.heavy.common.rxUtil.RxCommonPreference
 import com.ripplearc.heavy.common.rxUtil.SchedulerFactory
 import com.ripplearc.heavy.common.rxUtil.mapNotNull
-import com.ripplearc.heavy.data.DeviceModel
-import com.ripplearc.heavy.data.SharedPreferenceKey
+import com.ripplearc.heavy.common.data.DeviceModel
+import com.ripplearc.heavy.common.data.SharedPreferenceKey
 import com.ripplearc.heavy.iot.roster.R
 import com.ripplearc.heavy.roster.service.DeviceRosterService
 import io.reactivex.Completable

@@ -2,7 +2,7 @@ package com.ripplearc.heavy.test.controller
 
 import android.content.Context
 import com.ripplearc.heavy.common.rxUtil.*
-import com.ripplearc.heavy.data.SharedPreferenceKey
+import com.ripplearc.heavy.common.data.SharedPreferenceKey
 import com.ripplearc.heavy.radio.messaging.MessagingJob
 import com.ripplearc.heavy.test.model.MessageItem
 import dagger.Reusable

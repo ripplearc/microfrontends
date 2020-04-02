@@ -1,6 +1,6 @@
 package com.ripplearc.heavy.roster.service
 
-import com.ripplearc.heavy.data.DeviceModel
+import com.ripplearc.heavy.common.data.DeviceModel
 import io.reactivex.Observable
 import retrofit2.http.GET
 

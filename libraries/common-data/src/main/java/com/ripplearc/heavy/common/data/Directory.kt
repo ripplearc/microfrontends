@@ -1,4 +1,4 @@
-package com.ripplearc.heavy.data
+package com.ripplearc.heavy.common.data
 
 object Directory {
     val CREDENTIAL_DIRECTORY

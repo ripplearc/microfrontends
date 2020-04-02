@@ -1,8 +1,8 @@
 package com.ripplearc.heavy.test.controller
 
 import com.ripplearc.heavy.common.rxUtil.*
-import com.ripplearc.heavy.data.RequestType
-import com.ripplearc.heavy.data.SharedPreferenceKey
+import com.ripplearc.heavy.common.data.RequestType
+import com.ripplearc.heavy.common.data.SharedPreferenceKey
 import com.ripplearc.heavy.radio.messaging.MessagingJob
 import io.reactivex.Completable
 import io.reactivex.Observable

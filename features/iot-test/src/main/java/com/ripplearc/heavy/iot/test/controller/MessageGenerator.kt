@@ -2,10 +2,10 @@ package com.ripplearc.heavy.test.controller
 
 import com.google.gson.Gson
 import com.ripplearc.heavy.common.util.date.DateProvider
-import com.ripplearc.heavy.data.DeviceModel
-import com.ripplearc.heavy.data.IotRequestModel
-import com.ripplearc.heavy.data.RequestDetail
-import com.ripplearc.heavy.data.RequestType
+import com.ripplearc.heavy.common.data.DeviceModel
+import com.ripplearc.heavy.common.data.IotRequestModel
+import com.ripplearc.heavy.common.data.RequestDetail
+import com.ripplearc.heavy.common.data.RequestType
 import dagger.Reusable
 import javax.inject.Inject
 import javax.inject.Named

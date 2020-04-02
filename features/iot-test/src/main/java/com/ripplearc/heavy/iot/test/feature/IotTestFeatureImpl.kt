@@ -6,7 +6,7 @@ import androidx.fragment.app.Fragment
 import com.ripplearc.heavy.features.features.Feature
 import com.ripplearc.heavy.features.manager.FeatureProvider
 import com.ripplearc.heavy.features.features.IotTestFeature
-import com.ripplearc.heavy.data.Directory
+import com.ripplearc.heavy.common.data.Directory
 import com.ripplearc.heavy.iot.test.R
 import com.ripplearc.heavy.iot.test.di.DaggerIotTestComponent
 import com.ripplearc.heavy.iot.test.di.IotTestComponent

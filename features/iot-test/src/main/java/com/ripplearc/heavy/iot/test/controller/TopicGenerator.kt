@@ -1,7 +1,7 @@
 package com.ripplearc.heavy.test.controller
 
 import com.google.gson.Gson
-import com.ripplearc.heavy.data.DeviceModel
+import com.ripplearc.heavy.common.data.DeviceModel
 import dagger.Reusable
 import javax.inject.Inject
 import javax.inject.Named

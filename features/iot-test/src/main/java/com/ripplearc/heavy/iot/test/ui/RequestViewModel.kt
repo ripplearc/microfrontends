@@ -4,7 +4,7 @@ import android.content.Context
 import android.widget.Toast
 import androidx.lifecycle.ViewModel
 import com.ripplearc.heavy.common.rxUtil.SchedulerFactory
-import com.ripplearc.heavy.data.RequestType
+import com.ripplearc.heavy.common.data.RequestType
 import com.ripplearc.heavy.test.controller.MessageListener
 import com.ripplearc.heavy.test.controller.MessageSender
 import io.reactivex.Completable
