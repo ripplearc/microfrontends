@@ -1,9 +1,13 @@
 package com.ripplearc.heavy.groundvisual.viewmodel
 
 import androidx.lifecycle.ViewModel
-import com.ripplearc.heavy.common.core.model.Feature
-import com.ripplearc.heavy.common.features.*
-import com.ripplearc.heavy.features.profile
+import com.ripplearc.heavy.features.features.Feature
+import com.ripplearc.heavy.features.features.IotHistogramFeature
+import com.ripplearc.heavy.features.features.IotRosterFeature
+import com.ripplearc.heavy.features.features.IotTestFeature
+import com.ripplearc.heavy.features.features.profile
+import com.ripplearc.heavy.features.manager.FeatureManager
+import com.ripplearc.heavy.features.manager.getFeature
 import com.ripplearc.heavy.groundvisual.appComponent
 import javax.inject.Inject
 

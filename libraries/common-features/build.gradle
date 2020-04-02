@@ -19,6 +19,13 @@ deps[project.name] = [
         implementation: [
                 deps.androidx.appCompat,
                 deps.square.retrofit,
-                project(':common-core')
+                deps.google.gson,
+
+                deps.aws.iot,
+                deps.aws.client,
+
+                project(':common-core'),
+                project(':common-rxUtil'),
+                project(':common-util')
         ]
 ]

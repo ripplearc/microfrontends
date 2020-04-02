@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">iot-test</string>
     <string name="title_activity_request">RequestActivity</string>
+    <string name="key_store_name">iot_keystore</string>
+    <string name="key_store_password">password</string>
+    <string name="certificate_id">default</string>
+    <string name="iot_policy_name">LabIotAlmightyPolicy</string>
+    <string name="publish">Publish</string>
+    <string name="default_topic">iot/topic/398ufihdgn0084ru6oijh4qerv78h3j3</string>
 </resources>

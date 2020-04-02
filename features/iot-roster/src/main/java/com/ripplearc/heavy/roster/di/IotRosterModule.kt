@@ -9,7 +9,7 @@ import retrofit2.Retrofit
 @Module
 object IotRosterModule {
 
-    @[Provides JvmStatic IotRosterScope]
+    @[Provides IotRosterScope]
     fun provideDeviceRosterService(retrofit: Retrofit): DeviceRosterService =
         retrofit.create(DeviceRosterService::class.java)
 }

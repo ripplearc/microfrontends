@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "376021694525",
+    "firebase_url": "https://groundvisual-v2.firebaseio.com",
+    "project_id": "groundvisual-v2",
+    "storage_bucket": "groundvisual-v2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:376021694525:android:d5d7abfc0bf57825839254",
+        "android_client_info": {
+          "package_name": "com.ripplearc.heavy.groundvisual"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "376021694525-5isr4326kf2h3985ndcuin511nb4l6ds.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCl93Y3o5oKERvypA2pJF9US4-TDDD67TI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "376021694525-5isr4326kf2h3985ndcuin511nb4l6ds.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

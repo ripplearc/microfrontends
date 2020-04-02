@@ -20,6 +20,9 @@ android {
             minifyEnabled true
             signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            ndk {
+                abiFilters "arm64-v8a"
+            }
         }
     }
 
@@ -30,26 +33,37 @@ android {
 }
 
 deps[project.name] = [
-        implementation: [
+        debugImplementation: [deps.square.leakCanary],
+
+        implementation     : [
                 project(':iot-roster'),
                 project(':iot-test'),
         ],
 
-        api           : [
+        api                : [
                 deps.androidx.appCompat,
                 deps.androidx.layout,
                 deps.androidx.design,
+
                 deps.google.dagger,
                 deps.google.jetpack.lifecycle.common,
                 deps.google.jetpack.lifecycle.ext,
                 deps.google.autoservice.annotations,
+                deps.google.firebase.analytics,
+                deps.google.crashlytics,
+
+                deps.aws.iot,
+                deps.aws.client,
                 deps.miscellaneous.log.logger,
+
                 project(':common-core'),
                 project(':common-features'),
-                project(':common-network')
+                project(':common-network'),
+                project(':common-rxUtil'),
+                project(':common-util')
         ],
 
-        kapt          : [
+        kapt               : [
                 deps.google.daggerProcessor
         ]
 ]

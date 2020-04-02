@@ -21,11 +21,21 @@ deps[project.name] = [
         implementation: [
                 deps.androidx.appCompat,
                 deps.androidx.layout,
+                deps.androidx.recyclerView,
+
                 deps.google.jetpack.lifecycle.common,
                 deps.google.jetpack.lifecycle.ext,
+                deps.google.jetpack.lifecycle.runtime,
                 deps.google.jetpack.navigation.fragment,
+                deps.reactivex.thirdParty.rxBinding.platform,
+
+                deps.ripplearc.radio,
+
                 project(':common-features'),
-                project(':common-core')
+                project(':common-core'),
+                project(':common-data'),
+                project(':common-rxUtil'),
+                project(':common-util'),
         ],
 
         api           : [

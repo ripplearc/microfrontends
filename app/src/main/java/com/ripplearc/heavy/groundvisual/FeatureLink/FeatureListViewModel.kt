@@ -10,5 +10,5 @@ import javax.inject.Inject
  * It navigates the feature page based on the `android.intent.action.VIEW` or allows the
  * use to select the feature page from the menu.
  */
-class FeatureListViewModel @Inject constructor(private val navigationViewModel: FeatureNavigationViewModel) :
+internal class FeatureListViewModel @Inject constructor(private val navigationViewModel: FeatureNavigationViewModel) :
     FeatureNavigation by navigationViewModel, ViewModel()

@@ -1,5 +1,7 @@
 package com.ripplearc.heavy.common.network.di
 
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import com.ripplearc.heavy.common.core.qualifier.ApplicationScope
 import com.ripplearc.heavy.common.network.config.NetworkConfig
 import dagger.Module
@@ -9,11 +11,22 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Named
 
 
 @Module
 object NetworkModule {
-    @[Provides ApplicationScope JvmStatic]
+    @Named("Concise")
+    @[Provides ApplicationScope]
+    fun provideConciseGson() = Gson()
+
+    @Named("Pretty")
+    @[Provides ApplicationScope]
+    fun providePrettyGson() = GsonBuilder()
+        .enableComplexMapKeySerialization()
+        .setPrettyPrinting().create()
+
+    @[Provides ApplicationScope]
     fun provideOkHttpClient() = OkHttpClient
         .Builder()
         .addInterceptor { chain ->
@@ -27,7 +40,7 @@ object NetworkModule {
         }
         .build() ?: throw Exception("Cannot instantiate OkHttpClient.")
 
-    @[Provides ApplicationScope JvmStatic]
+    @[Provides ApplicationScope]
     fun provideRetrofit(client: OkHttpClient) =
         Retrofit.Builder()
             .baseUrl(NetworkConfig.baseUrl)

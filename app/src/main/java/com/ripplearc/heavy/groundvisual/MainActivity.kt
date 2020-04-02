@@ -1,8 +1,15 @@
 package com.ripplearc.heavy.groundvisual
 
 import android.os.Bundle
+import androidx.annotation.IdRes
 import androidx.appcompat.app.AppCompatActivity
-import com.ripplearc.heavy.common.features.*
+import androidx.fragment.app.Fragment
+import com.ripplearc.heavy.features.features.IotHistogramFeature
+import com.ripplearc.heavy.features.features.IotRosterFeature
+import com.ripplearc.heavy.features.features.IotTestFeature
+import com.ripplearc.heavy.features.features.profile
+import com.ripplearc.heavy.features.manager.FeatureManager
+import com.ripplearc.heavy.features.manager.getFeature
 import javax.inject.Inject
 
 
@@ -22,16 +29,24 @@ class MainActivity : AppCompatActivity() {
         loadDynamicHistogram()
     }
 
-    private fun loadRoster() {
-        with(supportFragmentManager.beginTransaction()) {
-            val TAG_TOP_FRAGMENT = "top"
-            val displayFragment = supportFragmentManager.findFragmentByTag(TAG_TOP_FRAGMENT)
-            val featureFragment =
-                featureManager.getFeature<IotRosterFeature, IotRosterFeature.Dependencies>(
-                    appComponent
-                )?.getMainEntry() ?: return
+    private fun loadRoster() =
+        featureManager.getFeature<IotRosterFeature, IotRosterFeature.Dependencies>(appComponent)
+            ?.getMainEntry()?.load(IotRosterFeature::class.profile.id, R.id.roster_fragment)
 
-            add(R.id.roster_fragment, featureFragment, TAG_TOP_FRAGMENT)
+    private fun loadPlayground() =
+        featureManager.getFeature<IotTestFeature, IotTestFeature.Dependencies>(appComponent)
+            ?.getMainEntry()?.load(IotTestFeature::class.profile.id, R.id.playground_fragment)
+
+    private fun loadDynamicHistogram() =
+        featureManager.getFeature<IotHistogramFeature, IotHistogramFeature.Dependencies>(
+            appComponent
+        )?.getMainEntry()?.load(IotHistogramFeature::class.profile.id, R.id.histogram_fragment)
+
+    private fun Fragment.load(tag: String, @IdRes containerId: Int) =
+        with(supportFragmentManager.beginTransaction()) {
+            val displayFragment = supportFragmentManager.findFragmentByTag(tag)
+
+            this.add(containerId, this@load, tag)
             if (displayFragment != null) {
                 hide(displayFragment).commit()
                 supportFragmentManager.beginTransaction().remove(displayFragment).commit()
@@ -39,39 +54,5 @@ class MainActivity : AppCompatActivity() {
                 commit()
             }
         }
-    }
 
-    private fun loadPlayground() {
-        val transaction = supportFragmentManager.beginTransaction()
-        val TAG_MIDDLE_FRAGMENT = "middle"
-        val displayFragment = supportFragmentManager.findFragmentByTag(TAG_MIDDLE_FRAGMENT)
-        val featureFragment =
-            featureManager.getFeature<IotTestFeature, IotTestFeature.Dependencies>(appComponent)
-                ?.getMainEntry() ?: return
-        transaction.add(R.id.playground_fragment, featureFragment, TAG_MIDDLE_FRAGMENT)
-        if (displayFragment != null) {
-            transaction.hide(displayFragment).commit()
-            supportFragmentManager.beginTransaction().remove(displayFragment).commit()
-        } else {
-            transaction.commit()
-        }
-    }
-
-    private fun loadDynamicHistogram() {
-        val transaction = supportFragmentManager.beginTransaction()
-        val TAG_BOTTOM_FRAGMENT = "bottom"
-        val displayFragment = supportFragmentManager.findFragmentByTag(TAG_BOTTOM_FRAGMENT)
-        val featureFragment =
-            featureManager.getFeature<IotHistogramFeature, IotHistogramFeature.Dependencies>(
-                appComponent
-            )
-                ?.getMainEntry() ?: return
-        transaction.add(R.id.histogram_fragment, featureFragment, TAG_BOTTOM_FRAGMENT)
-        if (displayFragment != null) {
-            transaction.hide(displayFragment).commit()
-            supportFragmentManager.beginTransaction().remove(displayFragment).commit()
-        } else {
-            transaction.commit()
-        }
-    }
 }

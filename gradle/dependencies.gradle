@@ -5,12 +5,12 @@ ext {
             'compileSDK': 29,
             'supportVer': '29.0.0',
 
-            'dagger'    : '2.26',
-            'androidx'  : '1.0.0',
-            'jetpack'   : '2.1.0',
+            'dagger'    : '2.27',
+            'androidx'  : '1.1.0',
+            'jetpack'   : '2.2.0',
             'retrofit'  : '2.3.0',
             'gms'       : '17.0.0',
-            'firebase'  : "17.2.0",
+            'firebase'  : "17.2.2",
             'aws'       : "2.16.+",
             autoservice : '1.0-rc6'
     ]
@@ -20,7 +20,8 @@ ext {
                     'appCompat': "androidx.appcompat:appcompat:${versions.androidx}",
                     'support'  : "androidx.legacy:legacy-support-v4:${versions.androidx}",
                     'design'   : "com.google.android.material:material:${versions.androidx}",
-                    'layout'   : "androidx.constraintlayout:constraintlayout:1.1.3"
+                    'layout'   : "androidx.constraintlayout:constraintlayout:1.1.3",
+                    'recyclerView' : "androidx.recyclerview:recyclerview:${versions.androidx}"
             ],
 
             kotlin       : [
@@ -36,8 +37,15 @@ ext {
                             'rxRetrofit' : "com.jakewharton.retrofit:retrofit2-rxjava2-adapter:1.0.0",
                             'rxGoogleMap': "com.sdoward:rxgooglemaps:1.1.1@aar",
                             'replayShare': "com.jakewharton.rx2:replaying-share-kotlin:2.2.0",
-                            'relay'      : "com.jakewharton.rxrelay2:rxrelay:2.1.1"
+                            'rxRelay'    : "com.jakewharton.rxrelay2:rxrelay:2.1.1",
+                            'rxBinding'  : [
+                                    'platform': "com.jakewharton.rxbinding2:rxbinding:2.2.0"
+                            ]
                     ]
+            ],
+
+            coroutines   : [
+                    'core': "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.3"
             ],
 
             google       : [
@@ -57,15 +65,14 @@ ext {
                                     'common'         : "androidx.lifecycle:lifecycle-common-java8:${versions.jetpack}",
                                     'ext'            : "androidx.lifecycle:lifecycle-extensions:${versions.jetpack}",
                                     'reactiveStreams': "androidx.lifecycle:lifecycle-reactivestreams:${versions.jetpack}",
+                                    'runtime'        : "androidx.lifecycle:lifecycle-runtime-ktx:${versions.jetpack}",
                             ],
                             navigation: [
                                     'fragment': "androidx.navigation:navigation-fragment-ktx:${versions.jetpack}",
                                     'ui'      : "androidx.navigation:navigation-ui-ktx:${versions.jetpack}"
                             ]
                     ],
-                    crashlytics      : [
-                            'crashlytics': "com.crashlytics.sdk.android:crashlytics:2.10.1"
-                    ],
+                    'crashlytics'    : "com.crashlytics.sdk.android:crashlytics:2.10.1",
                     firebase         : [
                             'core'     : "com.google.firebase:firebase-core:${versions.firebase}",
                             'analytics': "com.google.firebase:firebase-analytics:${versions.firebase}",
@@ -89,6 +96,7 @@ ext {
                     'rxjava2Adapter': "com.squareup.retrofit2:adapter-rxjava2:${versions.retrofit}",
                     'okhttp'        : "com.squareup.okhttp3:okhttp:3.9.0",
                     'picasso'       : "com.squareup.picasso:picasso:2.71828",
+                    'leakCanary'    : "com.squareup.leakcanary:leakcanary-android:2.2",
                     'thirdParty'    : [
                             'pikasso': "com.hendraanggrian.pikasso:pikasso:0.1"
                     ]
@@ -110,6 +118,9 @@ ext {
             test         : [
                     'junit'     : "junit:junit:4.12",
                     'atslRunner': 'androidx.test:runner:1.1.0'
+            ],
+            ripplearc    : [
+                    'radio': "com.ripplearc.heavy:radio:0.1.3-SNAPSHOT",
             ]
     ]
 }

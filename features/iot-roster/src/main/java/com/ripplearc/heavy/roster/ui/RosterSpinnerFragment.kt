@@ -1,28 +1,43 @@
 package com.ripplearc.heavy.iot.roster.ui
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Spinner
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import com.jakewharton.rxbinding2.widget.RxAdapterView
 import com.ripplearc.heavy.common.core.model.ViewModelFactory
+import com.ripplearc.heavy.common.coroutines.CoroutinesContextProvider
+import com.ripplearc.heavy.common.rxUtil.*
 import com.ripplearc.heavy.iot.roster.R
 import com.ripplearc.heavy.iot.roster.feature.iotRosterComponent
+import kotlinx.android.synthetic.main.roster_spinner_fragment.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class RosterSpinnerFragment : Fragment() {
+/**
+ * Main entry of the iot roster feature
+ */
+internal class RosterSpinnerFragment : Fragment() {
 
     companion object {
         fun newInstance() = RosterSpinnerFragment()
     }
 
     @Inject
-    lateinit var rosterViewModelProvider: ViewModelFactory<RosterSpinnerViewModel>
+    internal lateinit var rosterViewModelProvider: ViewModelFactory<RosterSpinnerViewModel>
+
+    @Inject
+    lateinit var coroutinesContextProvider: CoroutinesContextProvider
 
     private val viewModel by lazy {
-        ViewModelProviders.of(this, rosterViewModelProvider).get(RosterSpinnerViewModel::class.java)
+        ViewModelProvider(this, rosterViewModelProvider).get(RosterSpinnerViewModel::class.java)
     }
 
     override fun onCreateView(
@@ -35,8 +50,40 @@ class RosterSpinnerFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         iotRosterComponent.inject(this)
+        lifecycleScope.launch(coroutinesContextProvider.computation) {
+            dataBind()
+            actionBind()
+        }
+    }
 
-        view?.findViewById<Spinner>(R.id.device_roster)?.adapter = viewModel.spinnerAdapter
+    private fun dataBind() {
+        viewModel.spinnerAdapter.let {
+            lifecycleScope.launch(coroutinesContextProvider.main) {
+                device_roster?.adapter = it
+            }
+        }
+
+        viewModel.observeRoster()
+            .asLiveDataOnErrorReturnEmpty()
+            .observeOnMain(viewLifecycleOwner, Observer { roster: List<String> ->
+                with(viewModel.spinnerAdapter) {
+                    clear()
+                    addAll(roster)
+                    notifyDataSetChanged()
+                }
+            })
+
+        viewModel.selectedDeviceObservable()
+            .asLiveDataOnErrorReturnEmpty()
+            .observeOnMain(viewLifecycleOwner, Observer { index ->
+                index?.let { device_roster.setSelection(it) }
+            })
+    }
+
+    private fun actionBind() {
+        RxAdapterView.itemSelections(device_roster)
+            .skipInitialValue()
+            .switchLiveBind(viewLifecycleOwner, viewModel::saveSelectedModelToPreference)
     }
 
 }
