@@ -7,4 +7,12 @@
     <string name="iot_policy_name">LabIotAlmightyPolicy</string>
     <string name="publish">Publish</string>
     <string name="default_topic">iot/topic/398ufihdgn0084ru6oijh4qerv78h3j3</string>
+    <string name="activity_type_rotate">Rotate</string>
+	<string name="activity_type_dig">Dig</string>
+	<string name="activity_type_move">Move</string>
+	<string name="activity_type_idle">Idle</string>
+	<string name="activity_type_static">Static</string>
+	<string name="no_record_data_message">Off</string>
+	<string name="end_recording_data">End</string>
+	<string name="start_recording_data">Start</string>
 </resources>
