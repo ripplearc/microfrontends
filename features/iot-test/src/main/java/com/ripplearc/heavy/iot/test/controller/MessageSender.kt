@@ -35,13 +35,14 @@ internal class MessageSender @Inject constructor(
 	fun sentMessageObservable(requests: List<RequestType>): Observable<String> =
 		combineLatest(
 			rxPreference.getObserve(SharedPreferenceKey.SelectedDevice, ""),
-			Observable.interval(0, 5, TimeUnit.SECONDS)
-		).mapNotNull { (model, _) ->
-			messageGenerator.makeRequestModel(model, requests)
+			Observable.interval(0, 10, TimeUnit.SECONDS)
+				.scan(false) { lastValue, _ -> !lastValue }
+		).mapNotNull { (model, toggle) ->
+			messageGenerator.makeRequestModel(model, requests, toggle)
 		}
 
-	fun publishTopic(requests: List<RequestType>): Completable =
-		zip(sentMessageObservable(requests), sentTopicObservable)
+	fun publishTopic(requests: Observable<String>): Completable =
+		zip(requests, sentTopicObservable)
 			.take(1)
 			.observeOn(schedulerFactory.io())
 			.flatMapCompletable { (message: String, topic: String) ->

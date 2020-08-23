@@ -10,6 +10,7 @@ import com.ripplearc.heavy.test.controller.MessageSender
 import io.reactivex.Completable
 import io.reactivex.Observable
 import javax.inject.Inject
+import com.jakewharton.rx.replayingShare
 
 internal class RequestViewModel @Inject internal constructor(
     private val context: Context,
@@ -20,19 +21,20 @@ internal class RequestViewModel @Inject internal constructor(
 
     private val requests = listOf(
         RequestType.CheckBatteryStatus,
-        RequestType.CheckLocation
+        RequestType.CheckLocation,
+		RequestType.ToggleCollectSensorData
     )
 
     val sentTopicObservable: Observable<String> =
         messageSender.sentTopicObservable
 
     val sentMessageObservable: Observable<String> =
-        messageSender.sentMessageObservable(requests)
+        messageSender.sentMessageObservable(requests).replayingShare()
 
     internal fun listenToMessages() = messageListener.listen()
 
     fun publishTopic(): Completable =
-        messageSender.publishTopic(requests)
+        messageSender.publishTopic(sentMessageObservable)
             .observeOn(schedulerFactory.main())
             .doOnError {
                 Toast.makeText(context, it.localizedMessage, Toast.LENGTH_LONG).show()

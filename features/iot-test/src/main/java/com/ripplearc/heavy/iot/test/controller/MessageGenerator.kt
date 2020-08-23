@@ -1,5 +1,6 @@
 package com.ripplearc.heavy.test.controller
 
+import android.app.DownloadManager
 import com.google.gson.Gson
 import com.ripplearc.heavy.common.util.date.DateProvider
 import com.ripplearc.heavy.common.data.DeviceModel
@@ -18,18 +19,27 @@ import javax.inject.Named
  */
 @Reusable
 internal class MessageGenerator @Inject constructor(
-    @param:Named("Pretty") private val gson: Gson,
-    private val dateProvider: DateProvider
+	@param:Named("Pretty") private val gson: Gson,
+	private val dateProvider: DateProvider
 ) {
-    fun makeRequestModel(device: String, topics: List<RequestType>): String? =
-        gson.fromJson(device, DeviceModel::class.java)
-            ?.let {
-                IotRequestModel(
-                    it.udid,
-                    timestamp = dateProvider.date,
-                    requests = topics.map { topic -> topic to RequestDetail(true) }.toMap()
-                )
-            }?.let {
-                gson.toJson(it)
-            }
+	fun makeRequestModel(device: String, topics: List<RequestType>, toggle: Boolean): String? =
+		gson.fromJson(device, DeviceModel::class.java)
+			?.let {
+				IotRequestModel(
+					it.udid,
+					timestamp = dateProvider.date,
+					requests = topics.map { topic ->
+						when (topic) {
+							RequestType.ToggleCollectSensorData -> topic to RequestDetail(
+								null,
+								toggle,
+								activity = "Digging"
+							)
+							else -> topic to RequestDetail(true, null, null)
+						}
+					}.toMap()
+				)
+			}?.let {
+				gson.toJson(it)
+			}
 }

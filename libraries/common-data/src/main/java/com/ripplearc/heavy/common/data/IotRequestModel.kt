@@ -1,5 +1,6 @@
 package com.ripplearc.heavy.common.data
 
+import com.google.gson.annotations.SerializedName
 import java.util.*
 
 /**
@@ -7,7 +8,11 @@ import java.util.*
  *
  * @property current whether query for the realtime value or not
  */
-data class RequestDetail(val current: Boolean)
+data class RequestDetail(
+	val current: Boolean?,
+	val toggle: Boolean?,
+	val activity: String?
+)
 
 /**
  * Data model sent to the device to query status.
@@ -17,7 +22,7 @@ data class RequestDetail(val current: Boolean)
  * @property requests set of requests with specific requirement for each request
  */
 data class IotRequestModel(
-    val udid: String,
-    val timestamp: Date,
-    val requests: Map<RequestType, RequestDetail>
+	val udid: String,
+	val timestamp: Date,
+	val requests: Map<RequestType, RequestDetail>
 )

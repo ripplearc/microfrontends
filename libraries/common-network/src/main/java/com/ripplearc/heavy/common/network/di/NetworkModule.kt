@@ -24,6 +24,7 @@ object NetworkModule {
     @[Provides ApplicationScope]
     fun providePrettyGson() = GsonBuilder()
         .enableComplexMapKeySerialization()
+		.setDateFormat("yyyy-MM-dd'T'HH:mm:ssZ")
         .setPrettyPrinting().create()
 
     @[Provides ApplicationScope]
