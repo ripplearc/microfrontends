@@ -43,7 +43,7 @@
 		app:layout_constraintTop_toBottomOf="@id/topic_bar" />
 
 	<RadioGroup
-		android:id="@+id/toggle_data_collection_request"
+		android:id="@+id/toggleRecordDataRequest"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:orientation="horizontal"
@@ -73,11 +73,11 @@
 	</RadioGroup>
 
 	<RadioGroup
-		android:id="@+id/activity_type"
+		android:id="@+id/toggleRecordingActivityType"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:orientation="horizontal"
-		app:layout_constraintTop_toBottomOf="@+id/toggle_data_collection_request">
+		app:layout_constraintTop_toBottomOf="@+id/toggleRecordDataRequest">
 
 		<RadioButton
 			android:id="@+id/staticButton"
@@ -124,6 +124,6 @@
 		android:background="@android:color/holo_orange_light"
 		android:textColor="@android:color/white"
 		app:layout_constraintBottom_toBottomOf="parent"
-		app:layout_constraintTop_toBottomOf="@id/activity_type" />
+		app:layout_constraintTop_toBottomOf="@id/toggleRecordingActivityType" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

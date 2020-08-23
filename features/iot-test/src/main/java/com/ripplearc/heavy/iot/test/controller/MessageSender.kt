@@ -3,6 +3,7 @@ package com.ripplearc.heavy.test.controller
 import com.ripplearc.heavy.common.rxUtil.*
 import com.ripplearc.heavy.common.data.RequestType
 import com.ripplearc.heavy.common.data.SharedPreferenceKey
+import com.ripplearc.heavy.iot.test.model.RecordingActivityType
 import com.ripplearc.heavy.radio.messaging.MessagingJob
 import io.reactivex.Completable
 import io.reactivex.Observable
@@ -32,13 +33,21 @@ internal class MessageSender @Inject constructor(
 			.distinctUntilChanged()
 			.mapNotNull(topicGenerator::sentTopic)
 
-	fun sentMessageObservable(requests: List<RequestType>): Observable<String> =
+	fun sentMessageObservable(
+		requests: List<RequestType>,
+		shouldStartRecording: Boolean,
+		recordingActivityType: RecordingActivityType
+	): Observable<String> =
 		combineLatest(
 			rxPreference.getObserve(SharedPreferenceKey.SelectedDevice, ""),
 			Observable.interval(0, 10, TimeUnit.SECONDS)
-				.scan(false) { lastValue, _ -> !lastValue }
-		).mapNotNull { (model, toggle) ->
-			messageGenerator.makeRequestModel(model, requests, toggle)
+		).mapNotNull { (model, _) ->
+			messageGenerator.makeRequestModel(
+				model,
+				requests,
+				shouldStartRecording,
+				recordingActivityType
+			)
 		}
 
 	fun publishTopic(requests: Observable<String>): Completable =
