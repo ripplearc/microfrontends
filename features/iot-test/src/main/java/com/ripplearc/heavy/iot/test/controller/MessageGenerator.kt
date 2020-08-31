@@ -1,11 +1,13 @@
 package com.ripplearc.heavy.test.controller
 
+import android.app.DownloadManager
 import com.google.gson.Gson
 import com.ripplearc.heavy.common.util.date.DateProvider
 import com.ripplearc.heavy.common.data.DeviceModel
 import com.ripplearc.heavy.common.data.IotRequestModel
 import com.ripplearc.heavy.common.data.RequestDetail
 import com.ripplearc.heavy.common.data.RequestType
+import com.ripplearc.heavy.iot.test.model.RecordingActivityType
 import dagger.Reusable
 import javax.inject.Inject
 import javax.inject.Named
@@ -18,18 +20,39 @@ import javax.inject.Named
  */
 @Reusable
 internal class MessageGenerator @Inject constructor(
-    @param:Named("Pretty") private val gson: Gson,
-    private val dateProvider: DateProvider
+	@param:Named("Pretty") private val gson: Gson,
+	private val dateProvider: DateProvider
 ) {
-    fun makeRequestModel(device: String, topics: List<RequestType>): String? =
-        gson.fromJson(device, DeviceModel::class.java)
-            ?.let {
-                IotRequestModel(
-                    it.udid,
-                    timestamp = dateProvider.date,
-                    requests = topics.map { topic -> topic to RequestDetail(true) }.toMap()
-                )
-            }?.let {
-                gson.toJson(it)
-            }
+	fun makeRequestModel(
+		device: String,
+		topics: List<RequestType>,
+		toggle: Boolean,
+		recordingActivityType: RecordingActivityType
+	): String? =
+		gson.fromJson(device, DeviceModel::class.java)
+			?.let {
+				IotRequestModel(
+					it.udid,
+					timestamp = dateProvider.date,
+					requests = makeRequestDetails(topics, toggle, recordingActivityType)
+				)
+			}?.let {
+				gson.toJson(it)
+			}
+
+	private fun makeRequestDetails(
+		topics: List<RequestType>,
+		toggle: Boolean,
+		recordingActivityType: RecordingActivityType
+	): Map<RequestType, RequestDetail> =
+		topics.map { topic ->
+			when (topic) {
+				RequestType.ToggleCollectSensorData -> topic to RequestDetail(
+					null,
+					toggle,
+					activity = recordingActivityType.toString()
+				)
+				else -> topic to RequestDetail(true, null, null)
+			}
+		}.toMap()
 }

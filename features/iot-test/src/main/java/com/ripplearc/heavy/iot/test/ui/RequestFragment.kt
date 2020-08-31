@@ -9,16 +9,17 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.jakewharton.rx.replayingShare
 import com.jakewharton.rxbinding2.view.RxView
 import com.ripplearc.heavy.common.core.model.ViewModelFactory
 import com.ripplearc.heavy.common.coroutines.CoroutinesContextProvider
-import com.ripplearc.heavy.common.rxUtil.asLiveData
-import com.ripplearc.heavy.common.rxUtil.asLiveDataAndOnErrorReturnEmpty
-import com.ripplearc.heavy.common.rxUtil.flatLiveBindDelayError
-import com.ripplearc.heavy.common.rxUtil.observeOnMain
+import com.ripplearc.heavy.common.rxUtil.*
 import com.ripplearc.heavy.iot.test.R
 import com.ripplearc.heavy.iot.test.feature.iotTestComponent
+import com.ripplearc.heavy.iot.test.model.RecordingActivityType
 import com.ripplearc.heavy.test.ui.receive.MessageRecyclerViewAdapter
+import com.ripplearc.heavy.toolbelt.rx.checkedObserve
+import io.reactivex.Observable
 import kotlinx.android.synthetic.main.request_fragment.*
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -29,96 +30,124 @@ import javax.inject.Inject
  */
 internal class RequestFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = RequestFragment()
-    }
+	companion object {
+		fun newInstance() = RequestFragment()
+	}
 
-    @Inject
-    internal lateinit var rosterViewModelProvider: ViewModelFactory<RequestViewModel>
+	@Inject
+	internal lateinit var rosterViewModelProvider: ViewModelFactory<RequestViewModel>
 
-    @Inject
-    lateinit var coroutinesContextProvider: CoroutinesContextProvider
+	@Inject
+	lateinit var coroutinesContextProvider: CoroutinesContextProvider
 
-    private val viewModel by lazy {
-        ViewModelProvider(this, rosterViewModelProvider).get(RequestViewModel::class.java)
-    }
+	private val viewModel by lazy {
+		ViewModelProvider(this, rosterViewModelProvider).get(RequestViewModel::class.java)
+	}
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.request_fragment, container, false)
-    }
+	override fun onCreateView(
+		inflater: LayoutInflater, container: ViewGroup?,
+		savedInstanceState: Bundle?
+	): View? {
+		return inflater.inflate(R.layout.request_fragment, container, false)
+	}
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        iotTestComponent.inject(this)
-        lifecycleScope.launch(coroutinesContextProvider.computation) {
-            actionBind()
-            dataBind()
-        }
-    }
+	override fun onActivityCreated(savedInstanceState: Bundle?) {
+		super.onActivityCreated(savedInstanceState)
+		iotTestComponent.inject(this)
+		lifecycleScope.launch(coroutinesContextProvider.computation) {
+			actionBind()
+			dataBind()
+		}
+	}
 
-    private fun actionBind() {
-        RxView.clicks(publish_button)
-            .map { topic_bar.text.toString() }
-            .doOnNext(::animatePublish)
-            .flatLiveBindDelayError(viewLifecycleOwner, viewModel::publishTopic)
+	private fun actionBind() {
+		RxView.clicks(publish_button)
+			.map { topic_bar.text.toString() }
+			.doOnNext(::animatePublish)
+			.flatLiveBindDelayError(viewLifecycleOwner, viewModel::publishTopic)
 
-    }
+		toggleRecordDataRequest
+			.checkedObserve
+			.startWith(toggleRecordDataRequest.checkedRadioButtonId)
+			.replayingShare()
+			.apply { relayToggleEvents() }
 
-    private fun dataBind() {
-        viewModel.sentTopicObservable
-            .asLiveData("No Device Selected")
-            .observeOnMain(viewLifecycleOwner, Observer { topic ->
-                topic?.let { topic_bar.setText(it) }
-            })
+		toggleRecordingActivityType
+			.checkedObserve
+			.startWith(toggleRecordingActivityType.checkedRadioButtonId)
+			.map(::mapToActivityType)
+			.liveBind(viewLifecycleOwner, viewModel.recordingActivityTypeRelay)
+	}
 
-        viewModel.sentMessageObservable
-            .asLiveData("No Device Selected")
-            .observeOnMain(viewLifecycleOwner, Observer { message ->
-                message?.let { message_box.setText(it) }
-            })
+	private fun mapToActivityType(it: Int): RecordingActivityType =
+		when (it) {
+			staticButton.id -> RecordingActivityType.Static
+			idleButton.id -> RecordingActivityType.Idling
+			moveButton.id -> RecordingActivityType.Moving
+			digButton.id -> RecordingActivityType.Digging
+			else -> RecordingActivityType.Rotating
+		}
 
-        viewModel.listenToMessages()
-            .asLiveDataAndOnErrorReturnEmpty()
-            .observeOnMain(viewLifecycleOwner, Observer { messages ->
-                messages?.let {
-                    recycler_view?.run {
-                        (adapter as? MessageRecyclerViewAdapter)?.updateMessageItems(it)
-                        layoutManager?.scrollToPosition(0)
-                    }
-                }
-            })
+	private fun Observable<Int>.relayToggleEvents() {
+		map { it == startButton.id }
+			.liveBind(viewLifecycleOwner, viewModel.shouldStartRecordingRelay)
 
-        lifecycleScope.launch(coroutinesContextProvider.main) {
-            recycler_view?.apply {
-                layoutManager = LinearLayoutManager(this@RequestFragment.context)
-                adapter = MessageRecyclerViewAdapter(emptyList())
-            }
-        }
-    }
+		map { it != offButton.id }
+			.liveBind(viewLifecycleOwner, viewModel.shouldSendRecordingMessageRelay)
+	}
 
-    private fun animatePublish(text: String) {
-        lifecycleScope.launch(coroutinesContextProvider.main) {
-            publish_button.isEnabled = false
-            topic_bar.setText("*** Publish ***")
-            delay(200)
-            topic_bar.setText("-** Publish ***")
-            delay(200)
-            topic_bar.setText("--* Publish ***")
-            delay(200)
-            topic_bar.setText("--- Publish ***")
-            delay(200)
-            topic_bar.setText("--- Publish -**")
-            delay(200)
-            topic_bar.setText("--- Publish --*")
-            delay(200)
-            topic_bar.setText("*** Publish ***")
-            delay(200)
-            topic_bar.setText(text)
-            publish_button.isEnabled = true
-        }
-    }
+	private fun dataBind() {
+		viewModel.sentTopicObservable
+			.asLiveData("No Device Selected")
+			.observeOnMain(viewLifecycleOwner, Observer { topic ->
+				topic?.let { topic_bar.setText(it) }
+			})
+
+		viewModel.sentMessageObservable
+			.asLiveData("No Device Selected")
+			.observeOnMain(viewLifecycleOwner, Observer { message ->
+				message?.let { message_box.setText(it) }
+			})
+
+		viewModel.listenToMessages()
+			.asLiveDataAndOnErrorReturnEmpty()
+			.observeOnMain(viewLifecycleOwner, Observer { messages ->
+				messages?.let {
+					recycler_view?.run {
+						(adapter as? MessageRecyclerViewAdapter)?.updateMessageItems(it)
+						layoutManager?.scrollToPosition(0)
+					}
+				}
+			})
+
+		lifecycleScope.launch(coroutinesContextProvider.main) {
+			recycler_view?.apply {
+				layoutManager = LinearLayoutManager(this@RequestFragment.context)
+				adapter = MessageRecyclerViewAdapter(emptyList())
+			}
+		}
+	}
+
+	private fun animatePublish(text: String) {
+		lifecycleScope.launch(coroutinesContextProvider.main) {
+			publish_button.isEnabled = false
+			topic_bar.setText("*** Publish ***")
+			delay(200)
+			topic_bar.setText("-** Publish ***")
+			delay(200)
+			topic_bar.setText("--* Publish ***")
+			delay(200)
+			topic_bar.setText("--- Publish ***")
+			delay(200)
+			topic_bar.setText("--- Publish -**")
+			delay(200)
+			topic_bar.setText("--- Publish --*")
+			delay(200)
+			topic_bar.setText("*** Publish ***")
+			delay(200)
+			topic_bar.setText(text)
+			publish_button.isEnabled = true
+		}
+	}
 
 }

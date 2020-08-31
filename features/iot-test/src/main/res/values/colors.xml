@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="toggle_record">#e75748</color>
+	<color name="activity_type">#0080ff</color>
+</resources>

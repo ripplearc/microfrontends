@@ -13,5 +13,8 @@ enum class RequestType {
     CheckBatteryStatus,
 
     @SerializedName("take_photo")
-    TakePhoto
+    TakePhoto,
+
+	@SerializedName("toggle_collect_sensor_data")
+	ToggleCollectSensorData
 }

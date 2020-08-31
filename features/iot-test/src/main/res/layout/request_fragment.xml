@@ -1,55 +1,129 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@android:color/holo_green_dark"
-    android:paddingLeft="20dp"
-    android:paddingTop="10dp"
-    android:paddingRight="20dp"
-    android:paddingBottom="20dp"
-    tools:context=".ui.RequestFragment">
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="@android:color/holo_green_dark"
+	android:paddingLeft="20dp"
+	android:paddingTop="10dp"
+	android:paddingRight="20dp"
+	android:paddingBottom="20dp"
+	tools:context=".ui.RequestFragment">
 
-    <EditText
-        android:id="@+id/topic_bar"
-        android:layout_width="0dp"
-        android:layout_height="58dp"
-        android:inputType="textMultiLine"
-        android:text="@string/default_topic"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toStartOf="@+id/publish_button"
-        app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+	<EditText
+		android:id="@+id/topic_bar"
+		android:layout_width="0dp"
+		android:layout_height="58dp"
+		android:inputType="textMultiLine"
+		android:text="@string/default_topic"
+		android:textSize="16sp"
+		app:layout_constraintEnd_toStartOf="@+id/publish_button"
+		app:layout_constraintHorizontal_chainStyle="packed"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/publish_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:text="@string/publish"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+	<Button
+		android:id="@+id/publish_button"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginStart="10dp"
+		android:text="@string/publish"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/message_box"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:height="150dp"
-        android:background="@android:color/holo_green_light"
-        android:text="Static Feature - Request"
-        android:textColor="@android:color/white"
-        app:layout_constraintTop_toBottomOf="@id/topic_bar" />
+	<EditText
+		android:id="@+id/message_box"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:height="150dp"
+		android:background="@android:color/holo_green_light"
+		android:text="Static Feature - Request"
+		android:textColor="@android:color/white"
+		app:layout_constraintTop_toBottomOf="@id/topic_bar" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:background="@android:color/holo_orange_light"
-        android:textColor="@android:color/white"
-        android:layout_marginTop="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/message_box" />
+	<RadioGroup
+		android:id="@+id/toggleRecordDataRequest"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal"
+		app:layout_constraintTop_toBottomOf="@id/message_box">
+
+		<RadioButton
+			android:id="@+id/startButton"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:buttonTint="@color/toggle_record"
+			android:checked="true"
+			android:text="@string/start_recording_data" />
+
+		<RadioButton
+			android:id="@+id/endButton"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:buttonTint="@color/toggle_record"
+			android:text="@string/end_recording_data" />
+
+		<RadioButton
+			android:id="@+id/offButton"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:buttonTint="@color/toggle_record"
+			android:text="@string/no_record_data_message" />
+	</RadioGroup>
+
+	<RadioGroup
+		android:id="@+id/toggleRecordingActivityType"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal"
+		app:layout_constraintTop_toBottomOf="@+id/toggleRecordDataRequest">
+
+		<RadioButton
+			android:id="@+id/staticButton"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:buttonTint="@color/activity_type"
+			android:checked="true"
+			android:text="@string/activity_type_static" />
+
+		<RadioButton
+			android:id="@+id/idleButton"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:buttonTint="@color/activity_type"
+			android:text="@string/activity_type_idle" />
+
+		<RadioButton
+			android:id="@+id/moveButton"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:buttonTint="@color/activity_type"
+			android:text="@string/activity_type_move" />
+
+		<RadioButton
+			android:id="@+id/digButton"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:buttonTint="@color/activity_type"
+			android:text="@string/activity_type_dig" />
+
+		<RadioButton
+			android:id="@+id/rotateButton"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:buttonTint="@color/activity_type"
+			android:text="@string/activity_type_rotate" />
+	</RadioGroup>
+
+	<androidx.recyclerview.widget.RecyclerView
+		android:id="@+id/recycler_view"
+		android:layout_width="match_parent"
+		android:layout_height="0dp"
+		android:layout_marginTop="10dp"
+		android:background="@android:color/holo_orange_light"
+		android:textColor="@android:color/white"
+		app:layout_constraintBottom_toBottomOf="parent"
+		app:layout_constraintTop_toBottomOf="@id/toggleRecordingActivityType" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
