@@ -14,6 +14,8 @@ buildscript {
 		classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
 		classpath 'com.google.gms:google-services:4.3.3'
 		classpath 'com.google.firebase:firebase-crashlytics-gradle:2.0.0-beta02'
+		classpath "org.jetbrains.dokka:dokka-gradle-plugin:0.10.1"
+		classpath 'io.realm:realm-gradle-plugin:6.0.1'
 	}
 }
 
@@ -21,8 +23,6 @@ allprojects {
 	repositories {
 		google()
 		jcenter()
-		maven { url 'http://localhost:8081/repository/maven-releases' }
-		maven { url 'http://localhost:8081/repository/maven-snapshots' }
 	}
 }
 

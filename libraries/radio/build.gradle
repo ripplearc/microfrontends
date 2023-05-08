@@ -1,0 +1,65 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'maven'
+apply plugin: 'org.jetbrains.dokka'
+
+
+android {
+    compileSdkVersion versions.compileSDK
+
+    defaultConfig {
+        minSdkVersion versions.minSDK
+        targetSdkVersion versions.compileSDK
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    dokka {
+        outputFormat = 'html'
+        outputDirectory = "$buildDir/javadoc"
+    }
+
+}
+
+dependencies {
+
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+
+    implementation deps.androidx.appCompat
+    implementation deps.kotlin.stdlib
+
+    implementation deps.google.dagger
+    implementation deps.google.firebase.core
+    implementation deps.google.firebase.messaging
+    implementation project(path: ':toolbelt')
+    kapt deps.google.daggerProcessor
+
+    implementation deps.reactivex.rxKotlin
+    implementation deps.reactivex.rxAndroid
+    implementation deps.reactivex.thirdParty.rxBroadcast
+    implementation deps.reactivex.thirdParty.replayShare
+
+    implementation deps.aws.iot
+    implementation deps.aws.client
+    implementation deps.aws.pinpoint
+
+    implementation deps.miscellaneous.log.logger
+
+    project(':toolbelt')
+}

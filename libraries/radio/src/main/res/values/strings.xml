@@ -1,0 +1,7 @@
+<resources>
+	<string name="app_name">radio</string>
+    <string name="iot_endpoint">a3010c4acs6b6b-ats.iot.us-east-1.amazonaws.com</string>
+    <string name="mqtt_lastwill_topic">pm/lwt/topic</string>
+    <string name="mqtt_lastwill_message">Someone murdered me</string>
+    <string name="service_radio">Radio</string>
+</resources>

@@ -28,14 +28,19 @@ deps[project.name] = [
                 deps.google.jetpack.lifecycle.runtime,
                 deps.google.jetpack.navigation.fragment,
                 deps.reactivex.thirdParty.rxBinding.platform,
+                deps.reactivex.thirdParty.replayShare,
 
-                deps.ripplearc.radio,
+                deps.aws.iot,
+                deps.aws.client,
+                deps.aws.pinpoint,
 
                 project(':common-features'),
                 project(':common-core'),
                 project(':common-data'),
                 project(':common-rxUtil'),
                 project(':common-util'),
+                project(':radio'),
+                project(':toolbelt'),
         ],
 
         api           : [

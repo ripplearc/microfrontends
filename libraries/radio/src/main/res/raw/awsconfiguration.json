@@ -1,0 +1,36 @@
+{
+  "Version": "1.0",
+  "IdentityManager": {
+    "Default": {}
+  },
+  "CredentialsProvider": {
+    "CognitoIdentity": {
+      "Default": {
+        "PoolId": "us-east-1:090a42fb-fb3f-4492-b376-c0594e328510",
+        "Region": "us-east-1"
+      }
+    }
+  },
+  "PinpointAnalytics": {
+    "Default": {
+      "AppId": "eeb7bc41638549d38a9ca97217073f9e",
+      "Region": "us-east-1"
+    }
+  },
+  "PinpointTargeting": {
+    "Default": {
+      "Region": "us-east-1"
+    }
+  },
+  "DynamoDBObjectMapper": {
+    "Default": {
+      "Region": "us-east-1"
+    }
+  },
+  "S3TransferUtility": {
+    "Default": {
+      "Bucket": "REPLACE_ME",
+      "Region": "us-east-1"
+    }
+  }
+}
